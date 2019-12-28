@@ -11,6 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+
+Auth::routes();
+
+Route::get('/logout', 'Auth\LoginController@logout');
+
+Route::get('/', 'DashboardController@index')->name('dashboard');

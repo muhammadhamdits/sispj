@@ -28,9 +28,7 @@
 		@yield('navbar')
 		@yield('sidebar')
 		<!-- MAIN -->
-		<div class="main">
-			@yield('main')
-		</div>
+		@yield('main')
 		<!-- END MAIN -->
 		<div class="clearfix"></div>
 		<footer>
