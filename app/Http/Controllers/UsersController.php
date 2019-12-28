@@ -20,18 +20,25 @@ class UsersController extends Controller
 
     public function create()
     {
-
+        return view('data_master/user/add');
     }
 
-    public function store()
+    public function store(Request $requset)
     {
-
+        $user = User::create([
+            'name' => $requset->name,
+            'username' => $requset->username,
+            'password' => bcrypt($requset->password),
+            'role' => $requset->role,
+        ]);
+        $user->save();
+        return redirect()->route('admin.user.index');
     }
     
     public function show($id)
     {
         $user = User::findOrFail($id);
-        dd($user);
+        return view('data_master/user/show', ['user' => $user]);
     }
 
     public function edit($id)
@@ -48,6 +55,7 @@ class UsersController extends Controller
 
     public function destroy($id)
     {
-
+        $user = User::findOrFail($id);
+        
     }
 }

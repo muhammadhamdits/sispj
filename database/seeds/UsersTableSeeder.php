@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin',
             'username' => 'admin',
             'password' => bcrypt('admin'),
+            'role' => 0,
         ]);
 
         $user->save();

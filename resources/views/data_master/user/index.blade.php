@@ -16,10 +16,10 @@
                 </ul>
             </div>
             <div class="tab-content">
-                <!-- Konten tab organisasi -->
-                <div class="tab-pane fade in active" id="tab-user">
-                    <div class="row">
-                        <a class="btn btn-success update-pro" href="{{ route('admin.user.create') }}" title="Tambah user" target="_blank"><i class="fa fa-plus"></i> <span> Add Data</span></a>
+                <!-- Konten tab user -->
+                <div class="tab-pane fade in active row" id="tab-user">
+                    <div class="text-right">
+                        <a class="btn btn-success update-pro" href="{{ route('admin.user.create') }}" title="Tambah user"><i class="fa fa-plus"></i> <span> Add Data</span></a>
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -39,8 +39,8 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->username }}</td>
                                     <td>
-                                        <a href="{{ route('admin.user.show', $user->id) }}" target="_blank" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a>
-                                        <a href="{{ route('admin.user.edit', $user->id) }}" target="_blank" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+                                        <a href="{{ route('admin.user.show', $user->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a>
+                                        <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
                                         <form style="display: inline" method="POST" action="{{ route('admin.user.destroy', $user->id) }}">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
