@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Periode;
 
 class UsersController extends Controller
 {
@@ -15,7 +16,8 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('data_master/user/index', ['users' => $users]);
+        $periode = Periode::where('status', 1)->first();
+        return view('data_master/user/index', ['users' => $users, 'periode' => $periode]);
     }
 
     public function create()

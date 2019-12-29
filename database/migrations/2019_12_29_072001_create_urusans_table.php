@@ -15,6 +15,7 @@ class CreateUrusansTable extends Migration
     {
         Schema::create('urusans', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('kode')->unique();
             $table->string('nama');
             $table->bigInteger('organisasi_id')->unsigned()->index();
             $table->foreign('organisasi_id')->references('id')->on('organisasis');

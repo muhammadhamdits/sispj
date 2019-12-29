@@ -15,6 +15,7 @@ class CreateProgramsTable extends Migration
     {
         Schema::create('programs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('kode')->unique();
             $table->string('nama');
             $table->bigInteger('urusan_id')->unsigned()->index();
             $table->foreign('urusan_id')->references('id')->on('urusans');

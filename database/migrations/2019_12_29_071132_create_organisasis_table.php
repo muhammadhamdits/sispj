@@ -15,6 +15,7 @@ class CreateOrganisasisTable extends Migration
     {
         Schema::create('organisasis', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('kode')->unique();
             $table->string('nama');
             $table->bigInteger('periode_id')->unsigned()->index();
             $table->foreign('periode_id')->references('id')->on('periodes');

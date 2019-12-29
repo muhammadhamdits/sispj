@@ -16,7 +16,8 @@ class CreatePeriodesTable extends Migration
         Schema::create('periodes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('tahun');
-            $table->integer('status'); // 0 = Sebelum perubahan; 1 = Setelah perubahan;
+            $table->integer('jenis'); // 0 = Sebelum perubahan; 1 = Setelah perubahan;
+            $table->integer('status'); // 0 = Tidak aktif; 1 = Aktif;
             $table->timestamps();
         });
     }

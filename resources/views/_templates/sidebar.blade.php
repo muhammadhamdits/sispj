@@ -8,7 +8,7 @@
                     <a href="#subPages" data-toggle="collapse" class="{{ Request::segment(1) ==  'admin' ? 'active' : 'collapse' }}"><i class="lnr lnr-file-empty"></i> <span>Data Master</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subPages" class="{{ Request::segment(1) ==  'admin' ? 'active' : 'collapse' }}">
                         <ul class="nav">
-                            <li><a href="page-profile.html" class="{{ Request::segment(2) ==  'organisasi' ? 'active' : '' }}">Data Organisasi</a></li>
+                            <li><a href="{{ route('admin.organisasi.index') }}" class="{{ Request::segment(2) ==  'organisasi' ? 'active' : '' }}">Data Organisasi</a></li>
                             <li><a href="page-login.html" class="{{ Request::segment(2) ==  'uraian' ? 'active' : '' }}">Data Uraian</a></li>
                             <li><a href="{{ route('admin.user.index') }}" class="{{ Request::segment(2) ==  'user' ? 'active' : '' }}">Data user</a></li>
                         </ul>

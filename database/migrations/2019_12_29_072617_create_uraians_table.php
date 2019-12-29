@@ -15,6 +15,7 @@ class CreateUraiansTable extends Migration
     {
         Schema::create('uraians', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('rekening')->unique();
             $table->string('nama');
             $table->timestamps();
         });

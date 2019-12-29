@@ -5,160 +5,54 @@
     <!-- OVERVIEW -->
     <div class="panel panel-headline">
         <div class="panel-heading">
-            <h3 class="panel-title">Kelola data master</h3>
-            <p class="panel-subtitle">Period: Oct 14, 2016 - Oct 21, 2016</p>
+            <h3 class="panel-title">Kelola data organisasi</h3>
+            <p class="panel-subtitle">Periode: <b>{{ $periode->tahun }} - {{ $periode->jenis == 0 ? 'Sebelum perubahan' : 'Setelah perubahan' }}</b></p>
         </div>
         <div class="panel-body">
             <!-- TABBED CONTENT -->
             <div class="custom-tabs-line tabs-line-bottom left-aligned">
                 <ul class="nav" role="tablist">
                     <li class="active"><a href="#tab-organisasi" role="tab" data-toggle="tab">Organisasi</a></li>
-                    <li><a href="#tab-urusan" role="tab" data-toggle="tab">Urusan</a></li>
-                    <li><a href="#tab-program" role="tab" data-toggle="tab">Program</a></li>
-                    <li><a href="#tab-kegiatan" role="tab" data-toggle="tab">Kegiatan</a></li>
-                    <li><a href="#tab-periode" role="tab" data-toggle="tab">Periode</a></li>
+                    <li class=""><a href="#tab-urusan" role="tab" data-toggle="tab">Urusan</a></li>
+                    <li class=""><a href="#tab-program" role="tab" data-toggle="tab">Program</a></li>
+                    <li class=""><a href="#tab-kegiatan" role="tab" data-toggle="tab">Kegiatan</a></li>
+                    <li class=""><a href="#tab-periode" role="tab" data-toggle="tab">Periode</a></li>
                 </ul>
             </div>
             <div class="tab-content">
                 <!-- Konten tab organisasi -->
-                <div class="tab-pane fade in active" id="tab-organisasi">
-                    <div class="row">
-                        <a class="btn btn-success update-pro" href="" title="Tambah data organisasi" target="_blank"><i class="fa fa-plus"></i> <span> Add Data</span></a>
+                <div class="tab-pane fade in active row" id="tab-organisasi">
+                    <div class="text-right">
+                        <a class="btn btn-success update-pro" href="{{ route('admin.organisasi.create') }}" title="Tambah data organisasi"><i class="fa fa-plus"></i> <span> Add Data</span></a>
                     </div>
                     <br>
                     <div class="table-responsive">
-                        <table class="table project-table">
+                        <table class="table project-table text-center">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Progress</th>
-                                    <th>Leader</th>
-                                    <th>Status</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Kode</th>
+                                    <th class="text-center">Nama</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($organisasis as $organisasi)
                                 <tr>
-                                    <td><a href="#">Spot Media</a></td>
-                                    <td>aaa</td>
-                                    <td>aaa</td>
-                                    <td><span class="label label-success">ACTIVE</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- Konten tab urusan -->
-                <div class="tab-pane fade in" id="tab-urusan">
-                    <div class="table-responsive">
-                        <table class="table project-table">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Progress</th>
-                                    <th>Leader</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><a href="#">Spot Media</a></td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $organisasi->kode }}</td>
+                                    <td>{{ $organisasi->nama }}</td>
                                     <td>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                                <span>60% Complete</span>
-                                            </div>
-                                        </div>
+                                        <a href="{{ route('admin.organisasi.show', $organisasi->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a>
+                                        <a href="{{ route('admin.organisasi.edit', $organisasi->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+                                        <form style="display: inline" method="POST" action="{{ route('admin.organisasi.destroy', $organisasi->id) }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" onclick="confirm('Yakin?')" class="btn btn-danger btn-xs" value="Delete user"><i class="fa fa-trash"></i> Delete</button>
+                                        </form>
                                     </td>
-                                    <td><img src="assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                    <td><span class="label label-success">ACTIVE</span></td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- Konten tab program -->
-                <div class="tab-pane fade in" id="tab-program">
-                    <div class="table-responsive">
-                        <table class="table project-table">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Progress</th>
-                                    <th>Leader</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><a href="#">Spot Media</a></td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                                <span>60% Complete</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><img src="assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                    <td><span class="label label-success">ACTIVE</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- Konten tab kegiatan -->
-                <div class="tab-pane fade in" id="tab-kegiatan">
-                    <div class="table-responsive">
-                        <table class="table project-table">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Progress</th>
-                                    <th>Leader</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><a href="#">Spot Media</a></td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                                <span>60% Complete</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><img src="assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                    <td><span class="label label-success">ACTIVE</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- Konten tab periode -->
-                <div class="tab-pane fade in" id="tab-periode">
-                    <div class="table-responsive">
-                        <table class="table project-table">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Progress</th>
-                                    <th>Leader</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><a href="#">Spot Media</a></td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                                <span>60% Complete</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td><img src="assets/img/user2.png" alt="Avatar" class="avatar img-circle"> <a href="#">Michael</a></td>
-                                    <td><span class="label label-success">ACTIVE</span></td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

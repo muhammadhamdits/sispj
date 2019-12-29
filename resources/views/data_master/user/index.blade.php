@@ -5,8 +5,8 @@
     <!-- OVERVIEW -->
     <div class="panel panel-headline">
         <div class="panel-heading">
-            <h3 class="panel-title">Kelola data master</h3>
-            <p class="panel-subtitle">Period: Oct 14, 2016 - Oct 21, 2016</p>
+            <h3 class="panel-title">Kelola data user</h3>
+            <p class="panel-subtitle">Periode: <b>{{ $periode->tahun }} - {{ $periode->jenis == 0 ? 'Sebelum perubahan' : 'Setelah perubahan' }}</b></p>
         </div>
         <div class="panel-body">
             <!-- TABBED CONTENT -->
