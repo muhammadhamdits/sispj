@@ -44,7 +44,7 @@
                                         <form style="display: inline" method="POST" action="{{ route('admin.user.destroy', $user->id) }}">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type="submit" class="btn btn-danger btn-xs" value="Delete user"><i class="fa fa-trash"></i> Delete</button>
+                                            <button type="submit" onclick="confirm('Yakin?')" class="btn btn-danger btn-xs" value="Delete user"><i class="fa fa-trash"></i> Delete</button>
                                         </form>
                                     </td>
                                 </tr>

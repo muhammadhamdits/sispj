@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="{{ url('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" href="{{ url('assets/vendor/linearicons/style.css') }}">
 	<link rel="stylesheet" href="{{ url('assets/vendor/chartist/css/chartist-custom.css') }}">
+	<link rel="stylesheet" href="{{ url('assets/vendor/toastr/toastr.min.css') }}">
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="{{ url('assets/css/main.css') }}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
@@ -33,7 +34,7 @@
 		<div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">
-				<p class="copyright">Copyright &copy2019 <a href="#">Hamdillafenadin</a></p>
+				<p class="copyright">Copyright &copy2019 <a href="#">Integer'8</a></p>
 			</div>
 		</footer>
 	</div>
@@ -44,6 +45,7 @@
 	<script src="{{ url('assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 	<script src="{{ url('assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
 	<script src="{{ url('assets/vendor/chartist/js/chartist.min.js') }}"></script>
+	<script src="{{ url('assets/vendor/toastr/toastr.min.js') }}"></script>
 	<script src="{{ url('assets/scripts/klorofil-common.js') }}"></script>
 </body>
 
