@@ -23,13 +23,13 @@ class UsersController extends Controller
         return view('data_master/user/add');
     }
 
-    public function store(Request $requset)
+    public function store(Request $request)
     {
         $user = User::create([
-            'name' => $requset->name,
-            'username' => $requset->username,
-            'password' => bcrypt($requset->password),
-            'role' => $requset->role,
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => bcrypt($request->password),
+            'role' => $request->role,
         ]);
         $user->save();
         return redirect()->route('admin.user.index');
@@ -44,12 +44,22 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        dd($user);
+        return view('data_master/user/edit', ['user' => $user]);
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
-
+        $user = User::findOrFail($id);
+        if($request->password == null){
+            $user->update([
+                'name'      => $request->name,
+                'username'  => $request->username,
+                'role'      => $request->role
+            ]);
+        }else{
+            $user->update($request->all());
+        }
+        return redirect()->route('admin.user.index');
     }
 
 
