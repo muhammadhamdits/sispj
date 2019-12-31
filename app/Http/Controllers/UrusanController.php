@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Urusan;
+use App\Organisasi;
 use Illuminate\Http\Request;
 
 class UrusanController extends Controller
@@ -14,7 +15,16 @@ class UrusanController extends Controller
      */
     public function index()
     {
-        //
+        $organisasis = Organisasi::join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
+                                ->where('periodes.status', 1)
+                                ->get();
+        $urusan = Urusan::join('organisasis','urusans.organisasi_id','=','organisasis.id')
+                           ->join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
+                           ->select('organisasis.nama as organisasi','urusans.nama','organisasi_id')
+                                ->where('periodes.status', 1)
+                                ->get();
+        $periode = Periode::where('status', 1)->first();
+        return view('data_master/organisasi/index', ['urusan' => $urusan, 'periode' => $periode, 'organisasis' => $organisasis]);
     }
 
     /**
@@ -24,7 +34,10 @@ class UrusanController extends Controller
      */
     public function create()
     {
-        //
+        $organisasis = Organisasi::join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
+                                ->where('periodes.status', 1)
+                                ->get();
+         return view('data_master/organisasi/urusan/add',['organisasis' => $organisasis]);
     }
 
     /**
@@ -35,7 +48,13 @@ class UrusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $urusans = Urusan::create([
+            'kode' => $request->rekening,
+            'nama' => $request->urusan,
+            'organisasi_id' => $request->organisasi,
+        ]);
+        $urusans->save();
+        return redirect()->route('admin.organisasi.index');
     }
 
     /**
@@ -55,9 +74,10 @@ class UrusanController extends Controller
      * @param  \App\Urusan  $urusan
      * @return \Illuminate\Http\Response
      */
-    public function edit(Urusan $urusan)
+    public function edit($id)
     {
-        //
+      $urusan = Urusan::findOrFail($id);
+        return view('data_master/organisasi/urusan/edit', ['urusan' => $urusan]);
     }
 
     /**

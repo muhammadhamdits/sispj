@@ -57,6 +57,45 @@
                         </table>
                     </div>
                 </div>
+               <!--  Konten tab urusan -->
+                <div class="tab-pane fade in row" id="tab-urusan">
+                    <div class="text-right">
+                        <a class="btn btn-success update-pro" href="{{ route('admin.urusan.create') }}" title="Tambah data organisasi"><i class="fa fa-plus"></i> <span> Add Data</span></a>
+                    </div>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table project-table text-center">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Kode</th>
+                                    <th class="text-center">Urusan</th>
+                                    <th class="text-center">Organisasi</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($urusan as $urusans)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $urusans->kode }}</td>
+                                    <td>{{ $urusans->nama }}</td>
+                                    <td>{{ $urusans->organisasi}}</td>
+                                    <td>
+                                        <a href="{{ route('admin.organisasi.show', $urusans->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a>
+                                        <a href="{{ route('admin.urusan.edit', $urusans->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+                                        <form style="display: inline" method="POST" action="{{ route('admin.organisasi.destroy', $urusans->id) }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" onclick="confirm('Yakin?')" class="btn btn-danger btn-xs" value="Delete user"><i class="fa fa-trash"></i> Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 <!-- Akhir konten masing-masing tab -->
             </div>
             <!-- END TABBED CONTENT -->

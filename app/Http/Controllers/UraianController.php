@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Uraian;
 use Illuminate\Http\Request;
 
+use App\Periode;
+
 class UraianController extends Controller
 {
     /**
@@ -14,7 +16,9 @@ class UraianController extends Controller
      */
     public function index()
     {
-        //
+         $uraians = Uraian::all();
+        $periode = Periode::where('status', 1)->first();
+        return view('data_master/uraian/index', ['uraians' => $uraians, 'periode' => $periode]);
     }
 
     /**
