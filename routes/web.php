@@ -34,3 +34,11 @@ Route::get('/admin/organisasi/{id}', 'OrganisasiController@show')->name('admin.o
 Route::get('/admin/organisasi/{id}/edit', 'OrganisasiController@edit')->name('admin.organisasi.edit');
 Route::patch('/admin/organisasi/{id}', 'OrganisasiController@update')->name('admin.organisasi.update');
 Route::delete('/admin/organisasi/{id}', 'OrganisasiController@destroy')->name('admin.organisasi.destroy');
+
+// Route for urusan management
+Route::get('/admin/urusan/create', 'UrusanController@create')->name('admin.urusan.create');
+Route::post('/admin/urusan/create', 'UrusanController@store')->name('admin.urusan.store');
+Route::get('/admin/urusan/{id}', 'UrusanController@show')->name('admin.urusan.show');
+Route::get('/admin/urusan/{id}/edit', 'UrusanController@edit')->name('admin.urusan.edit');
+Route::patch('/admin/urusan/{id}', 'UrusanController@update')->name('admin.urusan.update');
+Route::delete('/admin/urusan/{id}', 'UrusanController@destroy')->name('admin.urusan.destroy');

@@ -24,7 +24,7 @@ class UrusanController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->route('admin.organisasi.index', ['tabName' => 'urusan']);
     }
 
     /**

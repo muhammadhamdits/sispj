@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Organisasi;
 use App\Periode;
+use App\Urusan;
 use Illuminate\Http\Request;
 
 class OrganisasiController extends Controller
@@ -18,8 +19,9 @@ class OrganisasiController extends Controller
         $organisasis = Organisasi::join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
                                 ->where('periodes.status', 1)
                                 ->get();
+        $urusans = Urusan::all();                            
         $periode = Periode::where('status', 1)->first();
-        return view('data_master/organisasi/index', ['organisasis' => $organisasis, 'periode' => $periode]);
+        return view('data_master/organisasi/index', ['organisasis' => $organisasis, 'periode' => $periode, 'urusans' => $urusans]);
     }
 
     /**
