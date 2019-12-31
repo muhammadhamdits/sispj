@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Organisasi;
 use App\Periode;
+
+use App\Organisasi;
+
 use Illuminate\Http\Request;
 
 class OrganisasiController extends Controller
@@ -15,9 +17,7 @@ class OrganisasiController extends Controller
      */
     public function index()
     {
-        $organisasis = Organisasi::join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
-                                ->where('periodes.status', 1)
-                                ->get();
+        $organisasis = Organisasi::all();
         $periode = Periode::where('status', 1)->first();
         return view('data_master/organisasi/index', ['organisasis' => $organisasis, 'periode' => $periode]);
     }
@@ -29,7 +29,8 @@ class OrganisasiController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('data_master/organisasi/add');
     }
 
     /**
@@ -40,18 +41,22 @@ class OrganisasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $organisasi = Organisasi::create([
+           
+            'id' => $request->no,
+            'kode' => $request->kode,
+            'nama' => $request->name,
+            
+        ]);
+        $organisasi->save();
+        return redirect()->route('admin.organisasi.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Organisasi  $organisasi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Organisasi $organisasi)
+    public function show($organisasi)
     {
-        //
+         $user = Organisasi::findOrFail($organisasi);
+
+       return view('data_master/organisasi/show', ['organisasi' => $organisasi]);
     }
 
     /**
@@ -60,9 +65,11 @@ class OrganisasiController extends Controller
      * @param  \App\Organisasi  $organisasi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Organisasi $organisasi)
+    public function edit($id)
     {
-        //
+        $organisasi = Organisasi::findOrFail($id);
+
+        return view('data_master/organisasi/edit', ['organisasi' => $organisasi]);
     }
 
     /**
@@ -72,9 +79,22 @@ class OrganisasiController extends Controller
      * @param  \App\Organisasi  $organisasi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Organisasi $organisasi)
+    public function update(Request $request, $id)
     {
-        //
+        $organisasi = Organisasi::findOrFail($id);
+        //if($request->password == null){
+            $organisasi->update([
+            
+                //'id'        => $request ->no,
+                'kode'      => $request->kode,
+                'nama'      => $request->name,
+
+                
+            ]);
+        
+        $organisasi->update($request->all());
+        
+        return redirect()->route('admin.organisasi.index');
     }
 
     /**
@@ -83,8 +103,10 @@ class OrganisasiController extends Controller
      * @param  \App\Organisasi  $organisasi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Organisasi $organisasi)
+    public function destroy($id)
     {
-        //
+        $organisasi = Organisasi::findOrFail($id);
+        $organisasi->delete();
+        return redirect()->route('admin.organisasi.index');
     }
 }
