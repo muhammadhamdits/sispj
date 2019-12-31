@@ -9,7 +9,7 @@
                     <div id="subPages" class="{{ Request::segment(1) ==  'admin' ? 'active' : 'collapse' }}">
                         <ul class="nav">
                             <li><a href="{{ route('admin.organisasi.index') }}" class="{{ Request::segment(2) ==  'organisasi' ? 'active' : '' }}">Data Organisasi</a></li>
-                            <li><a href="page-login.html" class="{{ Request::segment(2) ==  'uraian' ? 'active' : '' }}">Data Uraian</a></li>
+                            <li><a href="{{ route('admin.uraian.index') }}" class="{{ Request::segment(2) ==  'uraian' ? 'active' : '' }}">Data Uraian</a></li>
                             <li><a href="{{ route('admin.user.index') }}" class="{{ Request::segment(2) ==  'user' ? 'active' : '' }}">Data user</a></li>
                         </ul>
                     </div>

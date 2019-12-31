@@ -34,3 +34,21 @@ Route::get('/admin/organisasi/{id}', 'OrganisasiController@show')->name('admin.o
 Route::get('/admin/organisasi/{id}/edit', 'OrganisasiController@edit')->name('admin.organisasi.edit');
 Route::patch('/admin/organisasi/{id}', 'OrganisasiController@update')->name('admin.organisasi.update');
 Route::delete('/admin/organisasi/{id}', 'OrganisasiController@destroy')->name('admin.organisasi.destroy');
+
+// Route for uraian
+Route::get('/admin/uraian', 'UraianController@index')->name('admin.uraian.index');
+Route::get('/admin/uraian/create', 'UraianController@create')->name('admin.uraian.create');
+Route::post('/admin/uraian/create', 'UraianController@store')->name('admin.uraian.store');
+Route::get('/admin/uraian/{id}', 'UraianController@show')->name('admin.uraian.show');
+Route::get('/admin/uraian/{id}/edit', 'UraianController@edit')->name('admin.uraian.edit');
+Route::patch('/admin/uraian/{id}', 'UraianController@update')->name('admin.uraian.update');
+Route::delete('/admin/uraian/{id}', 'UraianController@destroy')->name('admin.uraian.destroy');
+
+// Route for urusan
+Route::get('/admin/urusan/create', 'UrusanController@create')->name('admin.urusan.create');
+Route::post('/admin/urusan/create', 'UrusanController@store')->name('admin.urusan.store');
+Route::get('/admin/urusan/{id}', 'UrusanController@show')->name('admin.urusan.show');
+Route::get('/admin/urusan/{id}/edit', 'UrusanController@edit')->name('admin.urusan.edit');
+Route::patch('/admin/urusan/{id}', 'UrusanController@update')->name('admin.urusan.update');
+Route::delete('/admin/urusan/{id}', 'UrusanController@destroy')->name('admin.urusan.destroy');
+
