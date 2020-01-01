@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Organisasi extends Model
 {
-    //
+    public function periode()
+    {
+        return $this->belongsTo('App\Periode');
+    }
+
+    public function program()
+    {
+        return $this->hasMany('App\Program');
+    }
 }

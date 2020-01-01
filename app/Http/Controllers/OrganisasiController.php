@@ -15,11 +15,12 @@ class OrganisasiController extends Controller
      */
     public function index()
     {
-        $organisasis = Organisasi::join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
-                                ->where('periodes.status', 1)
-                                ->get();
-        $periode = Periode::where('status', 1)->first();
-        return view('data_master/organisasi/index', ['organisasis' => $organisasis, 'periode' => $periode]);
+        dd(\App\Kegiatan::first()->item);
+        // $organisasis = Organisasi::join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
+        //                         ->where('periodes.status', 1)
+        //                         ->get();
+        // $periode = Periode::where('status', 1)->first();
+        // return view('data_master/organisasi/index', ['organisasis' => $organisasis, 'periode' => $periode]);
     }
 
     /**
