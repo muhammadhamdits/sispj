@@ -16,12 +16,8 @@ class OrganisasiController extends Controller
      */
     public function index()
     {
-        $organisasis = Organisasi::join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
-                                ->where('periodes.status', 1)
-                                ->get();
+        $organisasis = Organisasi::all();
         $urusan = Urusan::join('organisasis','urusans.organisasi_id','=','organisasis.id')
-                           ->join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
-                                ->where('periodes.status', 1)
                                 ->select('urusans.id', 'urusans.kode', 'urusans.nama', 'organisasis.nama as organisasi','organisasi_id')
                                 ->get();
         $periode = Periode::where('status', 1)->first();
