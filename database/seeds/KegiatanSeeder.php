@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Kegiatan;
 
 class KegiatanSeeder extends Seeder
 {
@@ -11,6 +12,12 @@ class KegiatanSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $kegiatan = Kegiatan::create([
+            'kode' => '37',
+            'nama' => 'Workshop',
+            'program_id' => 1,
+        ]);
+
+        $kegiatan->save();
     }
 }
