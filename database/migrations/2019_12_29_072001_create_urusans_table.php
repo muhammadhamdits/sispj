@@ -17,8 +17,8 @@ class CreateUrusansTable extends Migration
             $table->bigIncrements('id');
             $table->string('kode')->unique();
             $table->string('nama');
-            $table->bigInteger('organisasi_id')->unsigned()->index();
-            $table->foreign('organisasi_id')->references('id')->on('organisasis');
+            $table->bigInteger('periode_id')->unsigned()->index();
+            $table->foreign('periode_id')->references('id')->on('periodes');
             $table->timestamps();
         });
     }

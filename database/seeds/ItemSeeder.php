@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Item;
 
 class ItemSeeder extends Seeder
 {
@@ -11,6 +12,11 @@ class ItemSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $item = Item::create([
+            'nama' => 'Kertas HVS A4',
+            'satuan' => 'rim',
+        ]);
+
+        $item->save();
     }
 }
