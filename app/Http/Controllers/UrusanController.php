@@ -2,104 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Periode;
 use App\Urusan;
-use App\Organisasi;
 use Illuminate\Http\Request;
 
 class UrusanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $organisasis = Organisasi::join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
-                                ->where('periodes.status', 1)
-                                ->get();
-        $urusan = Urusan::join('organisasis','urusans.organisasi_id','=','organisasis.id')
-                           ->join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
-                           ->select('organisasis.nama as organisasi','urusans.nama','organisasi_id')
-                                ->where('periodes.status', 1)
-                                ->get();
-        $periode = Periode::where('status', 1)->first();
-        return view('data_master/organisasi/index', ['urusan' => $urusan, 'periode' => $periode, 'organisasis' => $organisasis]);
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $organisasis = Organisasi::join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
-                                ->where('periodes.status', 1)
-                                ->get();
-         return view('data_master/organisasi/urusan/add',['organisasis' => $organisasis]);
+        $data = Periode::where('status', 1)->first();
+         return view('data_master/utama/urusan/add', ['data' => $data]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-       $urusans = Urusan::create([
-            'kode' => $request->rekening,
-            'nama' => $request->urusan,
-            'organisasi_id' => $request->organisasi,
-        ]);
-        $urusans->save();
-        return redirect()->route('admin.organisasi.index');
+        $urusan = Urusan::create($request->all());
+        $urusan->save();
+        return redirect()->route('admin.utama.index', ['tabName' => 'urusan']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Urusan  $urusan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Urusan $urusan)
+    public function show($id)
     {
-        //
+        $urusan = Urusan::findOrFail($id);
+        return view('data_master/utama/urusan/show', ['urusan' => $urusan]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Urusan  $urusan
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-      $urusan = Urusan::findOrFail($id);
-        return view('data_master/organisasi/urusan/edit', ['urusan' => $urusan]);
+        $urusan = Urusan::findOrFail($id);
+        return view('data_master/utama/urusan/edit', ['urusan' => $urusan]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Urusan  $urusan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Urusan $urusan)
+    public function update(Request $request, $id)
     {
-        //
+        $urusan = Urusan::findOrFail($id);
+        $urusan->update($request->all());
+
+        return redirect()->route('admin.utama.index', ['tabName' => 'urusan']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Urusan  $urusan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Urusan $urusan)
+    public function destroy($id)
     {
-        //
+        $urusan = Urusan::findOrFail($id);
+        $urusan->delete();
+        return redirect()->route('admin.utama.index', ['tabName' => 'urusan']);
     }
 }

@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Periode extends Model
 {
-    public function urusans()
+    public function urusan()
     {
         return $this->hasMany('App\Urusan');
     }
 
-    public function organisasis()
+    public function organisasi()
     {
         return $this->hasMany('App\Organisasi');
     }
