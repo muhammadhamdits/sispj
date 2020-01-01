@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Uraian;
+use App\Sub4Uraian;
 use Illuminate\Http\Request;
 
 use App\Periode;
@@ -17,8 +18,9 @@ class UraianController extends Controller
     public function index()
     {
          $uraians = Uraian::all();
+         $sub4uraians =Sub4Uraian::all();
         $periode = Periode::where('status', 1)->first();
-        return view('data_master/uraian/index', ['uraians' => $uraians, 'periode' => $periode]);
+        return view('data_master/uraian/index', ['uraians' => $uraians, 'periode' => $periode,'sub4uraians' => $sub4uraians]);
     }
 
     /**
@@ -28,7 +30,7 @@ class UraianController extends Controller
      */
     public function create()
     {
-        //
+        return view('data_master/uraian/add');
     }
 
     /**
@@ -39,7 +41,13 @@ class UraianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $uraian = Uraian::create([
+            'rekening' => $request->kode_rekening,
+            'nama' => $request->uraian,
+                ]);
+        $uraian->save();
+        return redirect()->route('admin.uraian.index');
+
     }
 
     /**
@@ -59,9 +67,10 @@ class UraianController extends Controller
      * @param  \App\Uraian  $uraian
      * @return \Illuminate\Http\Response
      */
-    public function edit(Uraian $uraian)
+    public function edit($id)
     {
-        //
+         $uraian = Uraian::findOrFail($id);
+        return view('data_master/uraian/edit', ['uraian' => $uraian]);
     }
 
     /**
@@ -71,9 +80,18 @@ class UraianController extends Controller
      * @param  \App\Uraian  $uraian
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Uraian $uraian)
+    public function update(Request $request,$id)
     {
-        //
+         $uraian = Uraian::findOrFail($id);
+       
+            $uraian->update([
+            'rekening' => $request->rekening,
+            'nama' => $request->uraian,
+            ]);
+      
+            $uraian->update($request->all());
+        
+        return redirect()->route('admin.uraian.index');
     }
 
     /**
@@ -82,8 +100,10 @@ class UraianController extends Controller
      * @param  \App\Uraian  $uraian
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Uraian $uraian)
+    public function destroy($id)
     {
-        //
+        $uraian = Uraian::findOrFail($id);
+        $uraian->delete();
+        return redirect()->route('admin.uraian.index');
     }
 }

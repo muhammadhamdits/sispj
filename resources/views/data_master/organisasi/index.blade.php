@@ -84,7 +84,7 @@
                                     <td>
                                         <a href="{{ route('admin.organisasi.show', $urusans->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a>
                                         <a href="{{ route('admin.urusan.edit', $urusans->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-                                        <form style="display: inline" method="POST" action="{{ route('admin.organisasi.destroy', $urusans->id) }}">
+                                        <form style="display: inline" method="POST" action="{{ route('admin.urusan.destroy', $urusans->id) }}">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" onclick="confirm('Yakin?')" class="btn btn-danger btn-xs" value="Delete user"><i class="fa fa-trash"></i> Delete</button>

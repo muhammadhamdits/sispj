@@ -87,9 +87,19 @@ class UrusanController extends Controller
      * @param  \App\Urusan  $urusan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Urusan $urusan)
+    public function update(Request $request,$id)
     {
-        //
+         $urusan = Urusan::findOrFail($id);
+       
+            $urusan->update([
+                 'kode' => $request->rekening,
+            'nama' => $request->urusan,
+            'organisasi_id' => $request->organisasi
+            ]);
+      
+            $urusan->update($request->all());
+        
+        return redirect()->route('admin.organisasi.index');
     }
 
     /**
@@ -98,8 +108,10 @@ class UrusanController extends Controller
      * @param  \App\Urusan  $urusan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Urusan $urusan)
+    public function destroy($id)
     {
-        //
+       $urusan = Urusan::findOrFail($id);
+        $urusan->delete();
+        return redirect()->route('admin.organisasi.index');
     }
 }
