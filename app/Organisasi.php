@@ -15,4 +15,8 @@ class Organisasi extends Model
     {
         return $this->hasMany('App\Program');
     }
+  
+    protected $fillable = [
+        'id', 'kode', 'nama', 'periode_id',
+    ];
 }

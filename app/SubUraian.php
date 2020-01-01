@@ -15,4 +15,8 @@ class SubUraian extends Model
     {
         return $this->belongsTo('App\Uraian');
     }
+  
+    protected $fillable = [
+        'rekening', 'nama', 'uraian_id' 
+    ];
 }

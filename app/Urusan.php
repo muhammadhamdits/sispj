@@ -15,4 +15,8 @@ class Urusan extends Model
     {
         return $this->hasMany('App\Program');
     }
+  
+    protected $fillable = [
+        'kode', 'nama', 'periode_id', 
+    ];
 }
