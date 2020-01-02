@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Uraian;
 
 class UraianSeeder extends Seeder
 {
@@ -11,6 +12,11 @@ class UraianSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $uraian = Uraian::create([
+            'rekening' => '5',
+            'nama' => 'Belanja Daerah',
+        ]);
+
+        $uraian->save();
     }
 }

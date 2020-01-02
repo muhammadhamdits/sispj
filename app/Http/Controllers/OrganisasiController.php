@@ -2,89 +2,55 @@
 
 namespace App\Http\Controllers;
 
-use App\Organisasi;
 use App\Periode;
+use App\Organisasi;
 use Illuminate\Http\Request;
 
 class OrganisasiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $organisasis = Organisasi::join('periodes', 'organisasis.periode_id', '=', 'periodes.id')
-                                ->where('periodes.status', 1)
-                                ->get();
-        $periode = Periode::where('status', 1)->first();
-        return view('data_master/organisasi/index', ['organisasis' => $organisasis, 'periode' => $periode]);
+        $data = Periode::where('status', 1)->first();
+        return view('data_master/utama/index', ['data' => $data]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $data = Periode::where('status', 1)->first();
+        return view('data_master/utama/organisasi/add', ['data' => $data]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $organisasi = Organisasi::create($request->all());
+        $organisasi->save();
+        return redirect()->route('admin.utama.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Organisasi  $organisasi
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Organisasi $organisasi)
+    public function show($id)
     {
-        //
+        $organisasi = Organisasi::findOrFail($id);
+        return view('data_master/utama/organisasi/show', ['organisasi' => $organisasi]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Organisasi  $organisasi
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Organisasi $organisasi)
+    public function edit($id)
     {
-        //
+        $organisasi = Organisasi::findOrFail($id);
+        return view('data_master/utama/organisasi/edit', ['organisasi' => $organisasi]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Organisasi  $organisasi
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Organisasi $organisasi)
+    public function update(Request $request, $id)
     {
-        //
+        $organisasi = Organisasi::findOrFail($id);
+        $organisasi->update($request->all());
+        
+        return redirect()->route('admin.utama.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Organisasi  $organisasi
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Organisasi $organisasi)
+    public function destroy($id)
     {
-        //
+        $organisasi = Organisasi::findOrFail($id);
+        $organisasi->delete();
+        return redirect()->route('admin.utama.index');
     }
 }
