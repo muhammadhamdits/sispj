@@ -6,7 +6,7 @@
         <div class="panel-heading">
             <h3 class="panel-title">Data Kegiatan {{ $kegiatan->nama }}</h3>
             <div class="text-right">
-                <a class="btn btn-success update-pro" href="{{ route('admin.organisasi.index') }}" title="Back"><i class="fa fa-arrow-left"></i> <span> Back</span></a>
+                <a class="btn btn-success update-pro" href="{{ route('admin.utama.index', ['tabName' => 'kegiatan']) }}" title="Back"><i class="fa fa-arrow-left"></i> <span> Back</span></a>
             </div>
         </div>
         <div class="panel-body">

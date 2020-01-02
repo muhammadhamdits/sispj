@@ -75,4 +75,4 @@ Route::get('/admin/kegiatan/{kegiatan}', 'KegiatanController@show')->name('admin
 Route::post('/admin/kegiatan', 'KegiatanController@store')->name('admin.kegiatan.store');
 Route::delete('/admin/kegiatan/{kegiatan}', 'KegiatanController@destroy')->name('admin.kegiatan.destroy');
 Route::get('/admin/kegiatan/{kegiatan}/edit', 'KegiatanController@edit')->name('admin.kegiatan.edit');
-Route::patch('/admin/kegiatan/{kegiatan}', 'KegiatanController@update')->name('admin.kegiatan.update');
+Route::patch('/admin/kegiatan/{id}', 'KegiatanController@update')->name('admin.kegiatan.update');

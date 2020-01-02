@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kegiatan extends Model
 {
+    protected $fillable = ['kode', 'nama', 'program_id'];
     public function program()
     {
         return $this->belongsTo('App\Program');
