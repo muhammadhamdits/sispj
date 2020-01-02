@@ -34,3 +34,11 @@ Route::get('/admin/organisasi/{id}', 'OrganisasiController@show')->name('admin.o
 Route::get('/admin/organisasi/{id}/edit', 'OrganisasiController@edit')->name('admin.organisasi.edit');
 Route::patch('/admin/organisasi/{id}', 'OrganisasiController@update')->name('admin.organisasi.update');
 Route::delete('/admin/organisasi/{id}', 'OrganisasiController@destroy')->name('admin.organisasi.destroy');
+
+// Route for organisasi kegiatan
+Route::get('/kegiatan/create', 'KegiatanController@create');
+Route::get('admin/kegiatan/{kegiatan}', 'KegiatanController@show')->name('admin.kegiatan.show');
+Route::post('/kegiatan', 'KegiatanController@store');
+Route::delete('/kegiatan/{kegiatan}', 'KegiatanController@destroy');
+Route::get('/kegiatan/{kegiatan}/edit', 'KegiatanController@edit');
+Route::patch('/kegiatan/{kegiatan}', 'KegiatanController@update');

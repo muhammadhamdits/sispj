@@ -7,11 +7,7 @@ use Illuminate\Http\Request;
 
 class KegiatanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
@@ -38,15 +34,9 @@ class KegiatanController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Kegiatan  $kegiatan
-     * @return \Illuminate\Http\Response
-     */
     public function show(Kegiatan $kegiatan)
     {
-        //
+        return view('data_master.organisasi.kegiatan.show', compact('kegiatan'));
     }
 
     /**
