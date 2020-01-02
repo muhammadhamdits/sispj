@@ -68,3 +68,11 @@ Route::get('/admin/sub_uraian/{id}', 'SubUraianController@show')->name('admin.su
 Route::get('/admin/sub_uraian/{id}/edit', 'SubUraianController@edit')->name('admin.sub_uraian.edit');
 Route::patch('/admin/sub_uraian/{id}', 'SubUraianController@update')->name('admin.sub_uraian.update');
 Route::delete('/admin/sub_uraian/{id}', 'SubUraianController@destroy')->name('admin.sub_uraian.destroy');
+
+// Route for kegiatan
+Route::get('/admin/kegiatan/create', 'KegiatanController@create')->name('admin.kegiatan.create');
+Route::get('/admin/kegiatan/{kegiatan}', 'KegiatanController@show')->name('admin.kegiatan.show');
+Route::post('/admin/kegiatan', 'KegiatanController@store')->name('admin.kegiatan.store');
+Route::delete('/admin/kegiatan/{kegiatan}', 'KegiatanController@destroy')->name('admin.kegiatan.destroy');
+Route::get('/admin/kegiatan/{kegiatan}/edit', 'KegiatanController@edit')->name('admin.kegiatan.edit');
+Route::patch('/admin/kegiatan/{kegiatan}', 'KegiatanController@update')->name('admin.kegiatan.update');
