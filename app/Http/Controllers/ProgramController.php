@@ -2,84 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Periode;
 use App\Program;
 use Illuminate\Http\Request;
 
 class ProgramController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $data = Periode::where('status', 1)->first();
+        return view('data_master/utama/program/add', ['data' => $data]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $program = Program::create($request->all());
+        $program->save();
+        return redirect()->route('admin.utama.index', ['tabName' => 'program']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Program  $program
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Program $program)
+    public function show($id)
     {
-        //
+        $program = Program::findOrFail($id);
+        return view('data_master/utama/program/show', ['program' => $program]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Program  $program
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Program $program)
+    public function edit($id)
     {
-        //
+        $program = Program::findOrFail($id);
+        $data = Periode::where('status', 1)->first();
+        return view('data_master/utama/program/edit', ['program' => $program, 'data' => $data]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Program  $program
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Program $program)
+    public function update(Request $request, $id)
     {
-        //
+        $program = Program::findOrFail($id);
+        $program->update($request->all());
+        return redirect()->route('admin.utama.index', ['tabName' => 'program']);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Program  $program
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Program $program)
+    public function destroy($id)
     {
-        //
+        $program = Program::findOrFail($id);
+        $program->delete();
+        return redirect()->route('admin.utama.index', ['tabName' => 'program']);
     }
 }

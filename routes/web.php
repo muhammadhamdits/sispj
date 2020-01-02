@@ -44,6 +44,14 @@ Route::get('/admin/urusan/{id}/edit', 'UrusanController@edit')->name('admin.urus
 Route::patch('/admin/urusan/{id}', 'UrusanController@update')->name('admin.urusan.update');
 Route::delete('/admin/urusan/{id}', 'UrusanController@destroy')->name('admin.urusan.destroy');
 
+// Route for program
+Route::get('/admin/program/create', 'ProgramController@create')->name('admin.program.create');
+Route::post('/admin/program/create', 'ProgramController@store')->name('admin.program.store');
+Route::get('/admin/program/{id}', 'ProgramController@show')->name('admin.program.show');
+Route::get('/admin/program/{id}/edit', 'ProgramController@edit')->name('admin.program.edit');
+Route::patch('/admin/program/{id}', 'ProgramController@update')->name('admin.program.update');
+Route::delete('/admin/program/{id}', 'ProgramController@destroy')->name('admin.program.destroy');
+
 // Route for uraian
 Route::get('/admin/uraian', 'UraianController@index')->name('admin.uraian.index');
 Route::get('/admin/uraian/create', 'UraianController@create')->name('admin.uraian.create');
