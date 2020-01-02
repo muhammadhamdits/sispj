@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Periode;
 use App\Organisasi;
+use App\Kegiatan;
 use Illuminate\Http\Request;
 
 class OrganisasiController extends Controller
@@ -11,7 +12,8 @@ class OrganisasiController extends Controller
     public function index()
     {
         $data = Periode::where('status', 1)->first();
-        return view('data_master/utama/index', ['data' => $data]);
+        $kegiatans = Kegiatan::all();
+        return view('data_master/utama/index', ['data' => $data, 'kegiatans' => $kegiatans]);
     }
 
     public function create()
