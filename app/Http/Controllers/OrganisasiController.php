@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Periode;
 use App\Organisasi;
 use App\Kegiatan;
+use App\Program;
 use Illuminate\Http\Request;
 
 class OrganisasiController extends Controller
@@ -14,6 +15,8 @@ class OrganisasiController extends Controller
         $data = Periode::where('status', 1)->first();
         $kegiatans = Kegiatan::all();
         return view('data_master/utama/index', ['data' => $data, 'kegiatans' => $kegiatans]);
+        $programs = Program::all();
+        return view('data_master/utama/index', ['data' => $data, 'programs' => $programs]);
     }
 
     public function create()
@@ -45,7 +48,6 @@ class OrganisasiController extends Controller
     {
         $organisasi = Organisasi::findOrFail($id);
         $organisasi->update($request->all());
-        
         return redirect()->route('admin.utama.index');
     }
 
