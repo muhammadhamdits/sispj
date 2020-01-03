@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Uraian;
 use App\SubUraian;
+use App\Sub2Uraian;
 use Illuminate\Http\Request;
 
 use App\Periode;
@@ -17,10 +18,11 @@ class UraianController extends Controller
     
     public function index()
     {
-         $uraians = Uraian::all();
-         $sub_uraians = SubUraian::all();
+        $uraians = Uraian::all();
+        $sub_uraians = SubUraian::all();
+        $sub2_uraians = Sub2Uraian::all();
         $periode = Periode::where('status', 1)->first();
-        return view('data_master/uraian/index', ['uraians' => $uraians, 'periode' => $periode, 'sub_uraians' => $sub_uraians]);
+        return view('data_master/uraian/index', ['uraians' => $uraians, 'periode' => $periode, 'sub_uraians' => $sub_uraians, 'sub2_uraians' => $sub2_uraians]);
     }
 
     /**
