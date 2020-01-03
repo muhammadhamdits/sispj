@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\SubUraian;
 use App\Uraian;
+use App\Periode;
+
 use Illuminate\Http\Request;
 
 class SubUraianController extends Controller
@@ -59,9 +61,10 @@ class SubUraianController extends Controller
      * @param  \App\SubUraian  $subUraian
      * @return \Illuminate\Http\Response
      */
-    public function show(SubUraian $subUraian)
+    public function show($id)
     {
-        //
+        $sub_uraian = SubUraian::findOrFail($id);
+        return view('data_master/uraian/Sub_uraian/show', ['sub_uraian' => $sub_uraian]);
     }
 
     /**
@@ -72,8 +75,10 @@ class SubUraianController extends Controller
      */
     public function edit($id)
     {
-        $uraian = SubUraian::findOrFail($id);
-        return view('data_master/uraian/sub_uraian/edit', ['uraian' => $uraian]);
+       $uraians = Uraian::all();
+        $sub_uraian = SubUraian::findOrFail($id);
+        return view('data_master/uraian/sub_uraian/edit', ['sub_uraian' => $sub_uraian, 'uraians' => $uraians]);
+        
     }
 
     /**
@@ -83,9 +88,21 @@ class SubUraianController extends Controller
      * @param  \App\SubUraian  $subUraian
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SubUraian $subUraian)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'rekening' => 'required',
+            'nama' => 'required'
+            //'uraian' => 'required'
+        ]);
+
+        try {
+            $sub_uraian = SubUraian::findOrFail($id);
+            $sub_uraian->update($request->all());
+            return redirect()->route('admin.uraian.index', ['tabName' => 'sub_uraian'])->with('warning', 'Data sub_urusan '.$request->nama.' berhasil diperbaharui!');
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.sub_uraian.edit', ['id' => $id])->with('danger', 'Data dengan kode '.$request->rekening.' sudah ada!');
+        }
     }
 
     /**
@@ -94,8 +111,13 @@ class SubUraianController extends Controller
      * @param  \App\SubUraian  $subUraian
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SubUraian $subUraian)
+    public function destroy($id)
     {
-        //
+        
+        $sub_uraian = SubUraian::findOrFail($id);
+        $sub_uraian->delete();
+        return redirect()->route('admin.uraian.index', ['tabName' => 'sub_uraian'])->with('danger', 'Data sub_uraian '.$sub_uraian->nama.' Berhasil dihapus');;
+    
+   
     }
 }
