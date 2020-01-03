@@ -72,6 +72,6 @@ class UrusanController extends Controller
     {
         $urusan = Urusan::findOrFail($id);
         $urusan->delete();
-        return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])>with('danger', 'Data urusan  '.$urusan->nama.' berhasil dihapus!');
+        return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])->with('danger', 'Data urusan  '.$urusan->nama.' berhasil dihapus!');
     }
 }

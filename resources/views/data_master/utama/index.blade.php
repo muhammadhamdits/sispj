@@ -42,7 +42,7 @@
                 <!-- Konten tab organisasi -->
                 <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? '' : 'active' }}" id="tab-organisasi">
                     <div class="text-right">
-                        <a class="fab update-pro" href="{{ route('admin.organisasi.create') }}" title="Tambah data organisasi"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
+                        <a class="fab update-pro btn-success" href="{{ route('admin.organisasi.create') }}" title="Tambah data organisasi"><i class="fa fa-plus"> </i> <span> Tambah Data</span></a>
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -64,11 +64,11 @@
                                         <td>
                                             <a href="{{ route('admin.organisasi.show', $organisasi->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> Lihat</a>
                                             <a href="{{ route('admin.organisasi.edit', $organisasi->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-                                            <form style="display: inline" method="POST" action="{{ route('admin.organisasi.destroy', $organisasi->id) }}">
+                                            <form style="display: inline" method="POST" id="data-{{ '1'.$organisasi->id }}" action="{{ route('admin.organisasi.destroy', $organisasi->id) }}">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
-                                                <button type="submit" onclick="return confirm('Yakin?')" class="btn btn-danger btn-xs" value="Delete organisasi"><i class="fa fa-trash"></i> Hapus</button>
                                             </form>
+                                            <button class="btn btn-danger btn-xs" onclick="remove({{ '1'.$organisasi->id }})"><i class="fa fa-trash"></i> Hapus</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -80,7 +80,7 @@
                 <!--  Konten tab urusan -->
                 <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'urusan' ? 'active' : '' : '' }}" id="tab-urusan">
                     <div class="text-right">
-                        <a class="fab update-pro" href="{{ route('admin.urusan.create') }}" title="Tambah data urusan"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
+                        <a class="fab btn-success update-pro" href="{{ route('admin.urusan.create') }}" title="Tambah data urusan"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -102,11 +102,11 @@
                                     <td>
                                         <a href="{{ route('admin.urusan.show', $urusan->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> Lihat</a>
                                         <a href="{{ route('admin.urusan.edit', $urusan->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-                                        <form style="display: inline" method="POST" action="{{ route('admin.urusan.destroy', $urusan->id) }}">
+                                        <form style="display: inline" method="POST" id="data-{{ '2'.$urusan->id }}" action="{{ route('admin.urusan.destroy', $urusan->id) }}">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type="submit" onclick="return confirm('Yakin?')" class="btn btn-danger btn-xs" value="Delete urusan"><i class="fa fa-trash"></i> Hapus</button>
                                         </form>
+                                        <button onclick="remove({{ '2'.$urusan->id }})" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</button>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -118,7 +118,7 @@
                 <!--  Konten tab program -->
                 <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'program' ? 'active' : '' : '' }}" id="tab-program">
                     <div class="text-right">
-                        <a class="fab update-pro" href="{{ route('admin.program.create') }}" title="Tambah data program"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
+                        <a class="fab btn-success update-pro" href="{{ route('admin.program.create') }}" title="Tambah data program"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -141,11 +141,11 @@
                                     <td>
                                         <a href="{{ route('admin.program.show', $program->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"> Lihat</i></a>
                                         <a href="{{ route('admin.program.edit', $program->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"> Edit</i></a>
-                                        <form style="display: inline" method="POST" action="{{ route('admin.program.destroy', $program->id) }}">
+                                        <form style="display: inline" method="POST" id="data-{{ '3'.$program->id }}" action="{{ route('admin.program.destroy', $program->id) }}">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type="submit" onclick="return confirm('Yakin?')" class="btn btn-danger btn-xs" value="Delete program"><i class="fa fa-trash"></i> Hapus</button>
                                         </form>
+                                        <button onclick="remove({{ '3'.$program->id }})" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</button>
                                     </td>
                                 </tr>
                                 @endif
@@ -180,11 +180,11 @@
                                     <td>
                                         <a href="{{ route('admin.kegiatan.show', $kegiatan->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> Lihat</a>
                                         <a href="{{ route('admin.kegiatan.edit', $kegiatan->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-                                        <form style="display: inline" method="POST" action="{{ route('admin.kegiatan.destroy', $kegiatan->id) }}">
+                                        <form style="display: inline" method="POST" id="data-{{ '4'.$kegiatan->id }}" action="{{ route('admin.kegiatan.destroy', $kegiatan->id) }}">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
-                                            <button type="submit" onclick="return confirm('Yakin?')" class="btn btn-danger btn-xs" value="Delete kegiatan"><i class="fa fa-trash"></i> Hapus</button>
                                         </form>
+                                        <button onclick="remove({{ '4'.$kegiatan->id }})" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</button>
                                     </td>
                                 </tr>
                             @endforeach
