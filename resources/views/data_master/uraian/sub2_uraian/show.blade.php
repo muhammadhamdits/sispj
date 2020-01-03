@@ -15,6 +15,7 @@
                 <label for="kode">Rekening : </label>
                 <input class="form-control transparent" disabled value="{{ $sub2Uraian->rekening }}">
             </div>
+            
             <div class="form-group">
                 <label for="nama">Nama Sub2 Uraian : </label>
                 <input class="form-control transparent" disabled value="{{ $sub2Uraian->nama }}">

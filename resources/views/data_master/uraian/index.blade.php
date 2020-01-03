@@ -20,12 +20,33 @@
                 </ul>
             </div>
             <div class="tab-content">
+            <br>
+
+
+            @if(session('status'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-check-circle"></i> {{ session('status') }}
+                </div>
+            @elseif(session('warning'))
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-pencil"></i> {{ session('warning') }}
+                </div>
+            @elseif(session('danger'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-trash"></i> {{ session('danger') }}
+                </div>
+            @endif
+
+
                 <!-- Konten tab organisasi -->
                 <div class="tab-pane fade in {{ isset($_GET['tabName']) ? '' : 'active' }} row" id="tab-uraian">
                     <div class="text-right">
                         <a class="btn btn-success update-pro" href="{{ route('admin.uraian.create') }}" title="Tambah data sub_uraian"><i class="fa fa-plus"></i> <span> Add Data</span></a>
                     </div>
-                    <br>
+           
                     <div class="table-responsive">
                         <table class="table project-table text-center">
                             <thead>
@@ -101,7 +122,7 @@
                 <!-- Konten tab sub2 uraian -->
                 <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'sub2uraian' ? 'active' : '' : '' }}" id="tab-sub2uraian">
                     <div class="text-right">
-                        <a class="btn btn-success update-pro" href="{{ route('admin.sub2_uraian.create') }}" title="Tambah data sub2 uraian"><i class="fa fa-plus"></i> <span> Add Data</span></a>
+                        <a class="fab update-pro" href="{{ route('admin.sub2_uraian.create') }}" title="Tambah data sub2 uraian"><i class="fa fa-plus"></i> <span> Add Data</span></a>
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -125,7 +146,7 @@
                                     <td>
                                         <a href="{{ route('admin.sub2_uraian.show', $sub2_uraian->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a>
                                         <a href="{{ route('admin.sub2_uraian.edit', $sub2_uraian->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-                                        <form style="display: inline" method="POST" action="{{ route('admin.sub_uraian.destroy', $sub_uraian->id) }}">
+                                        <form style="display: inline" method="POST" action="{{ route('admin.sub2_uraian.destroy', $sub2_uraian->id) }}">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
                                             <button type="submit" onclick="confirm('Yakin?')" class="btn btn-danger btn-xs" value="Delete user"><i class="fa fa-trash"></i> Delete</button>
