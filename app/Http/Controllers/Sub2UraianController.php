@@ -7,21 +7,11 @@ use Illuminate\Http\Request;
 
 class Sub2UraianController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
@@ -45,8 +35,8 @@ class Sub2UraianController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Sub2Uraian $sub2Uraian)
-    {
-        //
+    {   
+        return view('data_master.uraian.sub2_uraian.show', compact('sub2Uraian'));
     }
 
     /**
