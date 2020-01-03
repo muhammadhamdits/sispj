@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class SubUraianController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
        $uraian = uraian::join('uraian', 'sub_uraians.uraian_id', '=', 'uraian.id')
