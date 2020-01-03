@@ -10,10 +10,21 @@
             </div>
         </div>
         <div class="panel-body">
-        
             <div class="form-group">
-                <label for="kode">Kode : </label>
-                <input class="form-control transparent" disabled value="{{ $kegiatan->kode }}">
+                <label for="kode">Kode Kegiatan : </label>
+                <input class="form-control transparent" disabled value="{{ $kegiatan->program->urusan->kode.'.'.$kegiatan->program->organisasi->kode.'.'.$kegiatan->program->kode.'.'.$kegiatan->kode }}">
+            </div>
+            <div class="form-group">
+                <label for="kode">Urusan : </label>
+                <input class="form-control transparent" disabled value="{{ $kegiatan->program->urusan->nama }}">
+            </div>
+            <div class="form-group">
+                <label for="kode">Organisasi : </label>
+                <input class="form-control transparent" disabled value="{{ $kegiatan->program->organisasi->nama }}">
+            </div>
+            <div class="form-group">
+                <label for="kode">Program : </label>
+                <input class="form-control transparent" disabled value="{{ $kegiatan->program->nama }}">
             </div>
             <div class="form-group">
                 <label for="nama">Nama Kegiatan : </label>

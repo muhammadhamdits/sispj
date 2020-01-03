@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class UrusanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         
@@ -21,9 +26,18 @@ class UrusanController extends Controller
 
     public function store(Request $request)
     {
-        $urusan = Urusan::create($request->all());
-        $urusan->save();
-        return redirect()->route('admin.utama.index', ['tabName' => 'urusan']);
+        $request->validate([
+            'kode' => 'required',
+            'nama' => 'required'
+        ]);
+
+        try {
+            $urusan = Urusan::create($request->all());
+            $urusan->save();
+            return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])->with('status', 'Data urusan '.$request->nama.' berhasil ditambahkan!');
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.urusan.create')->with('danger', 'Data dengan kode '.$request->kode.' sudah ada!');
+        }
     }
 
     public function show($id)
@@ -40,16 +54,24 @@ class UrusanController extends Controller
 
     public function update(Request $request, $id)
     {
-        $urusan = Urusan::findOrFail($id);
-        $urusan->update($request->all());
+        $request->validate([
+            'kode' => 'required',
+            'nama' => 'required'
+        ]);
 
-        return redirect()->route('admin.utama.index', ['tabName' => 'urusan']);
+        try {
+            $urusan = Urusan::findOrFail($id);
+            $urusan->update($request->all());
+            return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])->with('warning', 'Data urusan '.$request->nama.' berhasil diperbaharui!');
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.urusan.edit', ['id' => $id])->with('danger', 'Data dengan kode '.$request->kode.' sudah ada!');
+        }
     }
 
     public function destroy($id)
     {
         $urusan = Urusan::findOrFail($id);
         $urusan->delete();
-        return redirect()->route('admin.utama.index', ['tabName' => 'urusan']);
+        return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])>with('danger', 'Data urusan  '.$urusan->nama.' berhasil dihapus!');
     }
 }

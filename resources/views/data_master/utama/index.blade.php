@@ -21,11 +21,28 @@
                     <li class=""><a href="#tab-periode" role="tab" data-toggle="tab">Periode</a></li>
                 </ul>
             </div>
+            <br>
+            @if(session('status'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-check-circle"></i> {{ session('status') }}
+                </div>
+            @elseif(session('warning'))
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-pencil"></i> {{ session('warning') }}
+                </div>
+            @elseif(session('danger'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-trash"></i> {{ session('danger') }}
+                </div>
+            @endif
             <div class="tab-content">
                 <!-- Konten tab organisasi -->
                 <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? '' : 'active' }}" id="tab-organisasi">
                     <div class="text-right">
-                        <a class="btn btn-success update-pro" href="{{ route('admin.organisasi.create') }}" title="Tambah data organisasi"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
+                        <a class="fab update-pro" href="{{ route('admin.organisasi.create') }}" title="Tambah data organisasi"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -63,13 +80,7 @@
                 <!--  Konten tab urusan -->
                 <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'urusan' ? 'active' : '' : '' }}" id="tab-urusan">
                     <div class="text-right">
-                        <a class="btn btn-success update-pro" href="{{ route('admin.urusan.create') }}" title="Tambah data urusan"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
-                        
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+                        <a class="fab update-pro" href="{{ route('admin.urusan.create') }}" title="Tambah data urusan"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -107,7 +118,7 @@
                 <!--  Konten tab program -->
                 <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'program' ? 'active' : '' : '' }}" id="tab-program">
                     <div class="text-right">
-                        <a class="btn btn-success update-pro" href="{{ route('admin.program.create') }}" title="Tambah data program"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
+                        <a class="fab update-pro" href="{{ route('admin.program.create') }}" title="Tambah data program"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -143,10 +154,11 @@
                         </table>
                     </div>
                 </div>
+                
                 <!--  Konten tab kegiatan -->
                 <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'kegiatan' ? 'active' : '' : '' }}" id="tab-kegiatan">
                     <div class="text-right">
-                        <a class="btn btn-success update-pro" href="{{ route('admin.kegiatan.create') }}" title="Tambah Data Kegiatan"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
+                        <a class="fab update-pro" href="{{ route('admin.kegiatan.create') }}" title="Tambah Data Kegiatan"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
                     </div>
                     <br>
                     <div class="table-responsive">
@@ -163,7 +175,7 @@
                             @foreach($kegiatans as $kegiatan)
                                 <tr>
                                     <td class="text-left">{{ $loop->iteration }}</td>
-                                    <td class="text-left">{{ $kegiatan->kode }}</td>
+                                    <td class="text-left">{{ $kegiatan->program->urusan->kode.".".$kegiatan->program->organisasi->kode.".".$kegiatan->program->kode.".".$kegiatan->kode }}</td>
                                     <td class="text-left">{{ $kegiatan->nama }}</td>
                                     <td>
                                         <a href="{{ route('admin.kegiatan.show', $kegiatan->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> Lihat</a>

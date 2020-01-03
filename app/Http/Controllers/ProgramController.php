@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class ProgramController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         //
@@ -21,9 +26,19 @@ class ProgramController extends Controller
 
     public function store(Request $request)
     {
-        $program = Program::create($request->all());
-        $program->save();
-        return redirect()->route('admin.utama.index', ['tabName' => 'program']);
+        $request->validate([
+            'urusan_id' => 'required',
+            'organisasi_id' => 'required',
+            'kode' => 'required',
+            'nama' => 'required',
+        ]);
+        try {
+            $program = Program::create($request->all());
+            $program->save();
+            return redirect()->route('admin.utama.index', ['tabName' => 'program'])->with('status', 'Data Kegiatan '.$program->nama.' Berhasil Ditambahkan!');
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.program.create')->with('danger', 'Data dengan kode '.$request->kode.' sudah ada!');
+        }
     }
 
     public function show($id)
@@ -41,15 +56,26 @@ class ProgramController extends Controller
 
     public function update(Request $request, $id)
     {
-        $program = Program::findOrFail($id);
-        $program->update($request->all());
-        return redirect()->route('admin.utama.index', ['tabName' => 'program']);
+        $request->validate([
+            'urusan_id' => 'required',
+            'organisasi_id' => 'required',
+            'kode' => 'required',
+            'nama' => 'required',
+        ]);
+        
+        try {
+            $program = Program::findOrFail($id);
+            $program->update($request->all());
+            return redirect()->route('admin.utama.index', ['tabName' => 'program'])->with('warning', 'Data program '.$program->nama.' Berhasil diperbaharui!');
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.program.edit', ['id' => $id])->with('danger', 'Data dengan kode '.$request->kode.' sudah ada!');
+        }
     }
 
     public function destroy($id)
     {
         $program = Program::findOrFail($id);
         $program->delete();
-        return redirect()->route('admin.utama.index', ['tabName' => 'program']);
+        return redirect()->route('admin.utama.index', ['tabName' => 'program'])->with('danger', 'Data program '.$program->nama.' Berhasil dihapus');;
     }
 }
