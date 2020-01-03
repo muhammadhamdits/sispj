@@ -6,5 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kegiatan extends Model
 {
-    //
+    protected $fillable = ['kode', 'nama', 'program_id'];
+    public function program()
+    {
+        return $this->belongsTo('App\Program');
+    }
+
+    public function kegiatan()
+    {
+        return $this->hasMany('App\Kegiatan');
+    }
+
+    public function item()
+    {
+        return $this->belongsToMany('App\Item', 'detail_kegiatans');
+    }
+
+    public function sub4Uraian()
+    {
+        return $this->belongsToMany('App\Sub4Uraian', 'detail_kegiatans');
+    }
 }

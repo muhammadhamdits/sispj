@@ -18,7 +18,9 @@ class CreateProgramsTable extends Migration
             $table->string('kode')->unique();
             $table->string('nama');
             $table->bigInteger('urusan_id')->unsigned()->index();
+            $table->bigInteger('organisasi_id')->unsigned()->index();
             $table->foreign('urusan_id')->references('id')->on('urusans');
+            $table->foreign('organisasi_id')->references('id')->on('organisasis');
             $table->timestamps();
         });
     }

@@ -17,8 +17,8 @@ class CreateSub3UraiansTable extends Migration
             $table->bigIncrements('id');
             $table->string('rekening')->unique();
             $table->string('nama');
-            $table->bigInteger('sub2_uraian')->unsigned()->index();
-            $table->foreign('sub2_uraian')->references('id')->on('sub2_uraians');
+            $table->bigInteger('sub2_uraian_id')->unsigned()->index();
+            $table->foreign('sub2_uraian_id')->references('id')->on('sub2_uraians');
             $table->timestamps();
         });
     }
