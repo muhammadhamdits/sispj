@@ -5,7 +5,7 @@
     <!-- OVERVIEW -->
     <div class="panel panel-headline">
         <div class="panel-heading">
-            <h3 class="panel-title">Edit data {{ $uraian->uraian }}</h3>
+            <h3 class="panel-title">Edit data {{ $sub_uraian->nama }}</h3>
             <div class="text-right">
                 <a class="btn btn-success update-pro" href="{{ route('admin.uraian.index') }}" title="Back"><i class="fa fa-arrow-left"></i> <span> Back</span></a>
             </div>
@@ -24,7 +24,11 @@
                 </div>
                 <div class="form-group">
                     <label for="uraian">Uraian : </label>
-                  <input class="form-control" name="uraian" value="{{ $uraian->uraian_id }}" placeholder="Type preferred Uraian here..." type="text" required id="uraian">
+                  <select class="form-control" name="uraian_id" value="{{ $sub_uraian->uraian_id }}" placeholder="Type preferred Uraian here..." type="text" required id="uraian">
+                  @foreach($uraians as $uraian)
+                    <option value="{{$uraian->id}}">{{$uraian->nama}}</option>
+                    @endforeach 
+                    </select>
                 </div>
           
                 <br>
