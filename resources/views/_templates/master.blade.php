@@ -47,6 +47,36 @@
 	<script src="{{ url('assets/vendor/chartist/js/chartist.min.js') }}"></script>
 	<script src="{{ url('assets/vendor/toastr/toastr.min.js') }}"></script>
 	<script src="{{ url('assets/scripts/klorofil-common.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script>
+	function remove(id) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			buttonsStyling: true
+		});
+
+		swalWithBootstrapButtons.fire({
+		title: 'Anda yakin menghapus data ini?',
+		text: "Data akan terhapus",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Ya!',
+		cancelButtonText: 'Tidak!',
+		reverseButtons: false
+		}).then((result) => {
+			if (result.value) {
+				$('#data-'+id).submit();
+			} else if (result.dismiss === Swal.DismissReason.cancel) {
+				swalWithBootstrapButtons.fire({
+				title: 'Dibatalkan',
+				text: 'Data tidak jadi dihapus :)',
+				icon: 'error',
+				timer: 1000,
+				showConfirmButton: false
+				})
+			}
+		})
+    }
+	</script>
 </body>
 
 </html>
