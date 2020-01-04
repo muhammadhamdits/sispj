@@ -171,6 +171,7 @@
                             </thead>
                             <tbody>
                             @foreach($kegiatans as $kegiatan)
+                            @if($kegiatan->program->urusan->periode->status == 1 && $program->organisasi->periode->status == 1)
                                 <tr>
                                     <td class="text-left">{{ $loop->iteration }}</td>
                                     <td class="text-left">{{ $kegiatan->program->urusan->kode.".".$kegiatan->program->organisasi->kode.".".$kegiatan->program->kode.".".$kegiatan->kode }}</td>
@@ -185,6 +186,7 @@
                                         <button onclick="remove({{ '4'.$kegiatan->id }})" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</button>
                                     </td>
                                 </tr>
+                            @endif
                             @endforeach
                             </tbody>
                         </table>
