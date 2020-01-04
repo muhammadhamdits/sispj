@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="{{ url('assets/vendor/linearicons/style.css') }}">
 	<link rel="stylesheet" href="{{ url('assets/vendor/chartist/css/chartist-custom.css') }}">
 	<link rel="stylesheet" href="{{ url('assets/vendor/toastr/toastr.min.css') }}">
+	<link rel="stylesheet" href="{{ url('assets/vendor/datatables/datatables.min.css') }}">
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="{{ url('assets/css/main.css') }}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
@@ -47,7 +48,8 @@
 	<script src="{{ url('assets/vendor/chartist/js/chartist.min.js') }}"></script>
 	<script src="{{ url('assets/vendor/toastr/toastr.min.js') }}"></script>
 	<script src="{{ url('assets/scripts/klorofil-common.js') }}"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script src="{{ url('assets/vendor/sweetalert2/sweetalert2@9.js') }}"></script>
+	<script src="{{ url('assets/vendor/datatables/datatables.min.js') }}"></script>
 	<script>
 	function remove(id) {
 		const swalWithBootstrapButtons = Swal.mixin({
@@ -64,6 +66,7 @@
 		reverseButtons: false
 		}).then((result) => {
 			if (result.value) {
+				console.log($('#data-'+id));
 				$('#data-'+id).submit();
 			} else if (result.dismiss === Swal.DismissReason.cancel) {
 				swalWithBootstrapButtons.fire({
@@ -76,6 +79,14 @@
 			}
 		})
     }
+
+	$(document).ready(function() {
+		$('#tabel-user').DataTable();
+		$('#tabel-organisasi').DataTable();
+		$('#tabel-urusan').DataTable();
+		$('#tabel-program').DataTable();
+		$('#tabel-kegiatan').DataTable();
+	});
 	</script>
 </body>
 

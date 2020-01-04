@@ -27,14 +27,25 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'password' => bcrypt($request->password),
-            'role' => $request->role,
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'role' => 'required',
         ]);
-        $user->save();
-        return redirect()->route('admin.user.index');
+
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'username' => $request->username,
+                'password' => bcrypt($request->password),
+                'role' => $request->role,
+            ]);
+            $user->save();
+            return redirect()->route('admin.user.index')->with('status', 'Data user '.$request->name.' Berhasil Ditambahkan!');
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.user.create')->with('danger', 'Data dengan username '.$request->username.' sudah ada!');
+        }
     }
     
     public function show($id)
@@ -51,17 +62,27 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        if($request->password == null){
-            $user->update([
-                'name'      => $request->name,
-                'username'  => $request->username,
-                'role'      => $request->role
-            ]);
-        }else{
-            $user->update($request->all());
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'role' => 'required',
+        ]);
+
+        try {
+            $user = User::findOrFail($id);
+            if($request->password == null){
+                $user->update([
+                    'name'      => $request->name,
+                    'username'  => $request->username,
+                    'role'      => $request->role
+                ]);
+            }else{
+                $user->update($request->all());
+            }
+            return redirect()->route('admin.user.index')->with('warning', 'Data user '.$user->name.' Berhasil diperbaharui!');;
+        } catch (\Throwable $th) {
+            return redirect()->route('admin.user.edit', ['id' => $id])->with('danger', 'Data dengan username '.$request->username.' sudah ada!');
         }
-        return redirect()->route('admin.user.index');
     }
 
 
@@ -69,6 +90,6 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('admin.user.index');
+        return redirect()->route('admin.user.index')->with('danger', 'Data user '.$user->name.' berhasil dihapus!');
     }
 }

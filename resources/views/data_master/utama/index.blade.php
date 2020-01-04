@@ -21,18 +21,20 @@
                     <li class=""><a href="#tab-periode" role="tab" data-toggle="tab">Periode</a></li>
                 </ul>
             </div>
-            <br>
             @if(session('status'))
+                    <br>
                 <div class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-check-circle"></i> {{ session('status') }}
                 </div>
             @elseif(session('warning'))
+                    <br>
                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-pencil"></i> {{ session('warning') }}
                 </div>
             @elseif(session('danger'))
+                    <br>
                 <div class="alert alert-danger alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <i class="fa fa-trash"></i> {{ session('danger') }}
@@ -44,9 +46,8 @@
                     <div class="text-right">
                         <a class="fab update-pro btn-success" href="{{ route('admin.organisasi.create') }}" title="Tambah data organisasi"><i class="fa fa-plus"> </i> <span> Tambah Data</span></a>
                     </div>
-                    <br>
                     <div class="table-responsive">
-                        <table class="table project-table text-center">
+                        <table class="table project-table text-center" id="tabel-organisasi">
                             <thead>
                                 <tr>
                                     <th class="text-left">No</th>
@@ -82,9 +83,8 @@
                     <div class="text-right">
                         <a class="fab btn-success update-pro" href="{{ route('admin.urusan.create') }}" title="Tambah data urusan"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
                     </div>
-                    <br>
                     <div class="table-responsive">
-                        <table class="table project-table text-center">
+                        <table class="table project-table text-center"  id="tabel-urusan">
                             <thead>
                                 <tr>
                                     <th class="text-left">No</th>
@@ -120,9 +120,8 @@
                     <div class="text-right">
                         <a class="fab btn-success update-pro" href="{{ route('admin.program.create') }}" title="Tambah data program"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
                     </div>
-                    <br>
                     <div class="table-responsive">
-                        <table class="table project-table text-center">
+                        <table class="table project-table text-center"  id="tabel-program">
                             <thead>
                                 <tr>
                                     <th class="text-left">No</th>
@@ -158,11 +157,10 @@
                 <!--  Konten tab kegiatan -->
                 <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'kegiatan' ? 'active' : '' : '' }}" id="tab-kegiatan">
                     <div class="text-right">
-                        <a class="fab update-pro" href="{{ route('admin.kegiatan.create') }}" title="Tambah Data Kegiatan"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
+                        <a class="fab btn-success update-pro" href="{{ route('admin.kegiatan.create') }}" title="Tambah Data Kegiatan"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
                     </div>
-                    <br>
                     <div class="table-responsive">
-                        <table class="table project-table text-center">
+                        <table class="table project-table text-center"  id="tabel-kegiatan">
                             <thead>
                                 <tr>
                                     <th class="text-left">No</th>

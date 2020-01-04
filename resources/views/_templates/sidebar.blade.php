@@ -10,7 +10,7 @@
                         <ul class="nav">
                             <li><a href="{{ route('admin.utama.index') }}" class="{{ Request::segment(2) ==  'main' ? 'active' : '' }}">Data Utama</a></li>
                             <li><a href="{{ route('admin.uraian.index') }}" class="{{ Request::segment(2) ==  'uraian' ? 'active' : '' }}">Data Uraian</a></li>
-                            <li><a href="{{ route('admin.user.index') }}" class="{{ Request::segment(2) ==  'user' ? 'active' : '' }}">Data user</a></li>
+                            <li><a href="{{ route('admin.user.index') }}" class="{{ Request::segment(2) ==  'user' ? 'active' : '' }}">Data User</a></li>
                         </ul>
                     </div>
                 </li>
