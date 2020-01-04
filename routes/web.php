@@ -28,6 +28,12 @@ Route::delete('/admin/user/{id}', 'UsersController@destroy')->name('admin.user.d
 
 Route::get('/admin/main', 'OrganisasiController@index')->name('admin.utama.index');
 
+// Route for periode
+Route::get('/admin/periode/create', 'PeriodeController@create')->name('admin.periode.create');
+Route::post('/admin/periode/create', 'PeriodeController@store')->name('admin.periode.store');
+Route::patch('/admin/periode/{id}', 'PeriodeController@update')->name('admin.periode.update');
+Route::delete('/admin/periode/{periode}', 'PeriodeController@destroy')->name('admin.periode.destroy');
+
 // Route for organisasi management
 Route::get('/admin/organisasi/create', 'OrganisasiController@create')->name('admin.organisasi.create');
 Route::post('/admin/organisasi/create', 'OrganisasiController@store')->name('admin.organisasi.store');

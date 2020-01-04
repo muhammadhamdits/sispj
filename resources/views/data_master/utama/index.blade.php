@@ -18,7 +18,7 @@
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'urusan' ? 'active' : '' : '' }}"><a href="#tab-urusan" role="tab" data-toggle="tab">Urusan</a></li>
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'program' ? 'active' : '' : '' }}"><a href="#tab-program" role="tab" data-toggle="tab">Program</a></li>                    
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'kegiatan' ? 'active' : '' : '' }}"><a href="#tab-kegiatan" role="tab" data-toggle="tab">Kegiatan</a></li>
-                    <li class=""><a href="#tab-periode" role="tab" data-toggle="tab">Periode</a></li>
+                    <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'periode' ? 'active' : '' : '' }}"><a href="#tab-periode" role="tab" data-toggle="tab">Periode</a></li>
                 </ul>
             </div>
             @if(session('status'))
@@ -183,6 +183,55 @@
                                             {{ method_field('DELETE') }}
                                         </form>
                                         <button onclick="remove({{ '4'.$kegiatan->id }})" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Konten tab periode -->
+                <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'periode' ? 'active' : '' : '' }}" id="tab-periode">
+                    <div class="text-right">
+                        <a class="fab btn-success update-pro" href="{{ route('admin.periode.create') }}" title="Tambah Data periode"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table project-table text-center"  id="tabel-periode">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">No</th>
+                                    <th class="text-left">Tahun</th>
+                                    <th class="text-center">Jenis</th>
+                                    <th class="text-left">Status</th>
+                                    <th class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($periodes as $periode)
+                                <tr>
+                                    <td class="text-left">{{ $loop->iteration }}</td>
+                                    <td class="text-left">{{ $periode->tahun }}</td>
+                                    <td class="text-center">
+                                        <form id="periode-{{ $periode->id }}" action="{{ route('admin.periode.update', $periode->id) }}" method="post">
+                                        {{ csrf_field() }}
+                                        {{ method_field('PATCH') }}
+                                        <select class="form-control" name="jenis" id="jenis">
+                                            <option value="0" {{ $data->jenis == 0 ? 'selected' : '' }}>Sebelum Perubahan</option>
+                                            <option value="1" {{ $data->jenis == 1 ? 'selected' : '' }}>Setelah Perubahan</option>
+                                        </select>
+                                        </form>
+                                    </td>
+                                    <td class="text-left">
+                                        {{ $periode->status == 1 ? 'Aktif' : 'Tidak Aktif' }}
+                                    </td>
+                                    <td>
+                                        <button onclick="activate({{ $periode->id }})" class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i> Aktifkan</button>
+                                        <form style="display: inline" method="POST" id="data-{{ '5'.$periode->id }}" action="{{ route('admin.periode.destroy', $periode) }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                        </form>
+                                        <button onclick="remove({{ '5'.$periode->id }})" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</button>
                                     </td>
                                 </tr>
                             @endforeach

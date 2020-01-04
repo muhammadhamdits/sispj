@@ -20,7 +20,8 @@ class OrganisasiController extends Controller
         $data = Periode::where('status', 1)->first();
         $kegiatans = Kegiatan::all();
         $programs = Program::all();
-        return view('data_master/utama/index', ['data' => $data, 'programs' => $programs, 'kegiatans' => $kegiatans]);
+        $periodes = Periode::orderBy('status', 'desc')->get();
+        return view('data_master/utama/index', ['data' => $data, 'programs' => $programs, 'kegiatans' => $kegiatans, 'periodes' => $periodes]);
     }
 
     public function create()

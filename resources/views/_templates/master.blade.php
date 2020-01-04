@@ -51,6 +51,7 @@
 	<script src="{{ url('assets/vendor/sweetalert2/sweetalert2@9.js') }}"></script>
 	<script src="{{ url('assets/vendor/datatables/datatables.min.js') }}"></script>
 	<script>
+
 	function remove(id) {
 		const swalWithBootstrapButtons = Swal.mixin({
 			buttonsStyling: true
@@ -66,7 +67,6 @@
 		reverseButtons: false
 		}).then((result) => {
 			if (result.value) {
-				console.log($('#data-'+id));
 				$('#data-'+id).submit();
 			} else if (result.dismiss === Swal.DismissReason.cancel) {
 				swalWithBootstrapButtons.fire({
@@ -80,8 +80,37 @@
 		})
     }
 
+	function activate(id) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			buttonsStyling: true
+		});
+
+		swalWithBootstrapButtons.fire({
+		title: 'Aktifkan periode ini?',
+		text: "Periode ini akan aktif, periode lainnya akan non-aktif.",
+		icon: 'success',
+		showCancelButton: true,
+		confirmButtonText: 'Ya!',
+		cancelButtonText: 'Tidak!',
+		reverseButtons: false
+		}).then((result) => {
+			if (result.value) {
+				$('#periode-'+id).submit();
+			} else if (result.dismiss === Swal.DismissReason.cancel) {
+				swalWithBootstrapButtons.fire({
+				title: 'Dibatalkan',
+				text: 'Periode tidak jadi diaktifkan',
+				icon: 'error',
+				timer: 1000,
+				showConfirmButton: false
+				})
+			}
+		})
+    }
+
 	$(document).ready(function() {
 		$('#tabel-user').DataTable();
+		$('#tabel-periode').DataTable();
 		$('#tabel-organisasi').DataTable();
 		$('#tabel-urusan').DataTable();
 		$('#tabel-program').DataTable();
