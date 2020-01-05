@@ -225,7 +225,7 @@
                                         </form>
                                     </td>
                                     <td class="text-left">
-                                        {{ $periode->status == 1 ? 'Aktif' : 'Tidak Aktif' }}
+                                        <span class="label label-{{ $periode->status == 1 ? 'success' : 'default' }}">{{ $periode->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</span>
                                     </td>
                                     <td>
                                         <button onclick="activate({{ $periode->id }})" class="btn btn-success btn-xs"><i class="fa fa-check-circle"></i> Aktifkan</button>

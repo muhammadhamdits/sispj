@@ -8,7 +8,7 @@
                     <a href="#subPages" data-toggle="collapse" class="{{ Request::segment(1) ==  'admin' ? 'active' : 'collapse' }}"><i class="lnr lnr-file-empty"></i> <span>Data Master</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                     <div id="subPages" class="{{ Request::segment(1) ==  'admin' ? 'active' : 'collapse' }}">
                         <ul class="nav">
-                            <li><a href="{{ route('admin.utama.index') }}" class="{{ Request::segment(2) ==  'main' ? 'active' : '' }}">Data Utama</a></li>
+                            <li><a href="{{ route('admin.utama.index') }}" class="{{ Request::segment(2) ==  'main' ? 'active' : Request::segment(2) ==  'organisasi' ? 'active' : Request::segment(2) ==  'urusan' ? 'active' : Request::segment(2) ==  'program' ? 'active' : Request::segment(2) ==  'organisasi' ? 'kegiatan' : Request::segment(2) ==  'periode' ? 'active' : '' }}">Data Utama</a></li>
                             <li><a href="{{ route('admin.uraian.index') }}" class="{{ Request::segment(2) ==  'uraian' ? 'active' : '' }}">Data Uraian</a></li>
                             <li><a href="{{ route('admin.user.index') }}" class="{{ Request::segment(2) ==  'user' ? 'active' : '' }}">Data User</a></li>
                         </ul>
