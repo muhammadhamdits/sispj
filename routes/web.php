@@ -90,3 +90,10 @@ Route::get('/admin/sub2_uraian/{sub2Uraian}', 'Sub2UraianController@show')->name
 Route::get('/admin/sub2_uraian/{sub2Uraian}/edit', 'Sub2UraianController@edit')->name('admin.sub2_uraian.edit');
 Route::patch('/admin/sub2_uraian/{sub2Uraian}', 'Sub2UraianController@update')->name('admin.sub2_uraian.update');
 Route::delete('/admin/sub2_uraian/{sub2Uraian}', 'Sub2UraianController@destroy')->name('admin.sub2_uraian.destroy');
+// Route for sub 4 uraian
+Route::get('/admin/sub4uraian/create', 'Sub4UraianController@create')->name('admin.sub4uraian.create');
+Route::post('/admin/sub4uraian/create', 'Sub4UraianController@store')->name('admin.sub4uraian.store');
+Route::get('/admin/sub4uraian/{id}', 'Sub4UraianController@show')->name('admin.sub4uraian.show');
+Route::get('/admin/sub4uraian/{id}/edit', 'Sub4UraianController@edit')->name('admin.sub4uraian.edit');
+Route::patch('/admin/sub4uraian/{id}', 'Sub4UraianController@update')->name('admin.sub4uraian.update');
+Route::delete('/admin/sub4uraian/{id}', 'Sub4UraianController@destroy')->name('admin.sub4uraian.destroy');
