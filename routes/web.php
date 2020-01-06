@@ -76,3 +76,11 @@ Route::post('/admin/kegiatan', 'KegiatanController@store')->name('admin.kegiatan
 Route::delete('/admin/kegiatan/{kegiatan}', 'KegiatanController@destroy')->name('admin.kegiatan.destroy');
 Route::get('/admin/kegiatan/{kegiatan}/edit', 'KegiatanController@edit')->name('admin.kegiatan.edit');
 Route::patch('/admin/kegiatan/{id}', 'KegiatanController@update')->name('admin.kegiatan.update');
+
+// Route for sub 4 uraian
+Route::get('/admin/sub4uraian/create', 'Sub4UraianController@create')->name('admin.sub4uraian.create');
+Route::post('/admin/sub4uraian/create', 'Sub4UraianController@store')->name('admin.sub4uraian.store');
+Route::get('/admin/sub4uraian/{id}', 'Sub4UraianController@show')->name('admin.sub4uraian.show');
+Route::get('/admin/sub4uraian/{id}/edit', 'Sub4UraianController@edit')->name('admin.sub4uraian.edit');
+Route::patch('/admin/sub4uraian/{id}', 'Sub4UraianController@update')->name('admin.sub4uraian.update');
+Route::delete('/admin/sub4uraian/{id}', 'Sub4UraianController@destroy')->name('admin.sub4uraian.destroy');

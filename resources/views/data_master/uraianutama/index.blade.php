@@ -97,6 +97,45 @@
                         </table>
                     </div>
                 </div>
+                <!-- Konten tab sub uraian -->
+                <div class="tab-pane fade in row" id="tab-sub4uraian">
+                    <div class="text-right">
+                        <a class="btn btn-success update-pro" href="{{ route('admin.sub4uraian.create') }}" title="Tambah data sub4uraian"><i class="fa fa-plus"></i> <span> Add Data</span></a>
+                    </div>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table project-table text-center">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Kode Rekening</th>
+                                    <th class="text-center">Nama</th>
+                                    
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($sub4uraians as $sub4uraian)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $sub4uraian->rekening }}</td>
+                                    <td>{{ $sub4uraian->nama }}</td>
+                                  
+                                    <td>
+                                        <a href="{{ route('admin.sub4uraian.show', $sub4uraian->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a>
+                                        <a href="{{ route('admin.sub4uraian.edit', $sub4uraian->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+                                        <form style="display: inline" method="POST" action="{{ route('admin.sub4uraian.destroy', $sub4uraian->id) }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                            <button type="submit" onclick="confirm('Yakin?')" class="btn btn-danger btn-xs" value="Delete user"><i class="fa fa-trash"></i> Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 <!-- Akhir konten masing-masing tab -->
             </div>
             <!-- END TABBED CONTENT -->
