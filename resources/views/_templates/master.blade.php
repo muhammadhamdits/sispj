@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="{{ url('assets/vendor/linearicons/style.css') }}">
 	<link rel="stylesheet" href="{{ url('assets/vendor/chartist/css/chartist-custom.css') }}">
 	<link rel="stylesheet" href="{{ url('assets/vendor/toastr/toastr.min.css') }}">
+	<link rel="stylesheet" href="{{ url('assets/vendor/datatables/datatables.min.css') }}">
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="{{ url('assets/css/main.css') }}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
@@ -47,6 +48,81 @@
 	<script src="{{ url('assets/vendor/chartist/js/chartist.min.js') }}"></script>
 	<script src="{{ url('assets/vendor/toastr/toastr.min.js') }}"></script>
 	<script src="{{ url('assets/scripts/klorofil-common.js') }}"></script>
+	<script src="{{ url('assets/vendor/sweetalert2/sweetalert2@9.js') }}"></script>
+	<script src="{{ url('assets/vendor/datatables/datatables.min.js') }}"></script>
+	<script>
+
+	function remove(id) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			buttonsStyling: true
+		});
+
+		swalWithBootstrapButtons.fire({
+		title: 'Anda yakin menghapus data ini?',
+		text: "Data akan terhapus",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Ya!',
+		cancelButtonText: 'Tidak!',
+		reverseButtons: false
+		}).then((result) => {
+			if (result.value) {
+				$('#data-'+id).submit();
+			} else if (result.dismiss === Swal.DismissReason.cancel) {
+				swalWithBootstrapButtons.fire({
+				title: 'Dibatalkan',
+				text: 'Data tidak jadi dihapus :)',
+				icon: 'error',
+				timer: 1000,
+				showConfirmButton: false
+				})
+			}
+		})
+    }
+
+	function activate(id) {
+		const swalWithBootstrapButtons = Swal.mixin({
+			buttonsStyling: true
+		});
+
+		swalWithBootstrapButtons.fire({
+		title: 'Aktifkan periode ini?',
+		text: "Periode ini akan aktif, periode lainnya akan non-aktif.",
+		icon: 'success',
+		showCancelButton: true,
+		confirmButtonText: 'Ya!',
+		cancelButtonText: 'Tidak!',
+		reverseButtons: false
+		}).then((result) => {
+			if (result.value) {
+				$('#periode-'+id).submit();
+			} else if (result.dismiss === Swal.DismissReason.cancel) {
+				swalWithBootstrapButtons.fire({
+				title: 'Dibatalkan',
+				text: 'Periode tidak jadi diaktifkan',
+				icon: 'error',
+				timer: 1000,
+				showConfirmButton: false
+				})
+			}
+		})
+    }
+
+	$(document).ready(function() {
+		$('#tabel-user').DataTable();
+		$('#tabel-periode').DataTable();
+		$('#tabel-organisasi').DataTable();
+		$('#tabel-urusan').DataTable();
+		$('#tabel-program').DataTable();
+		$('#tabel-kegiatan').DataTable();
+		$('#tabel-uraian').DataTable();
+		$('#tabel-suburaian').DataTable();
+		$('#tabel-sub2uraian').DataTable();
+		$('#tabel-sub3uraian').DataTable();
+		$('#tabel-sub4uraian').DataTable();
+		$('#tabel-item').DataTable();
+	});
+	</script>
 </body>
 
 </html>

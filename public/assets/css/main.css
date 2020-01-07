@@ -472,13 +472,13 @@ ul.list-justify > li {
   bottom: 0px;
   height: auto;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 6px 0px;
-  color: rgb(3, 172, 14);
+  /* color: rgb(3, 172, 14); */
   font-size: 16px;
   z-index: 100;
   transform: translateY(-40px);
   opacity: 1;
   outline: none;
-  background: radial-gradient(circle, transparent 1%, rgb(255, 255, 255) 1%) center center / 15000% rgb(255, 255, 255);
+  /* background: radial-gradient(circle, transparent 1%, rgb(255, 255, 255) 1%) center center / 15000% rgb(255, 255, 255); */
   border-width: initial;
   border-style: none;
   border-color: initial;

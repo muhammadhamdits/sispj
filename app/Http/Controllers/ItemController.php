@@ -17,69 +17,47 @@ class ItemController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('data_master/desc/item/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'satuan' => 'required',
+        ]);
+        
+        $item = Item::create($request->all()); 
+        $item->save();
+        return redirect()->route('admin.uraian.index', ['tabName' => 'item'])->with('status', 'Data item '.$item->nama.' Berhasil Ditambah!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
     public function show(Item $item)
     {
-        //
+        return view('data_master/desc/item/show', ['item' => $item]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Item $item)
     {
-        //
+        return view('data_master/desc/item/edit', ['item' => $item]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Item $item)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'satuan' => 'required',
+        ]);
+
+        $item->update($request->all());
+        return redirect()->route('admin.uraian.index', ['tabName' => 'item'])->with('warning', 'Data item '.$item->nama.' Berhasil Diperbaharui!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Item  $item
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Item $item)
     {
-        //
+        $item->delete();
+        return redirect()->route('admin.uraian.index', ['tabName' => 'item'])->with('danger', 'Data item '.$item->nama.' Berhasil Dihapus!');
     }
 }
