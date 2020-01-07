@@ -5,10 +5,10 @@
     <!-- OVERVIEW -->
     <div class="panel panel-headline">
         <div class="panel-heading">
-            <h3 class="panel-title">Tambah data Uraian</h3>
-           
+            <h3 class="panel-title">Edit data {{ $uraian->nama }}</h3>
+            
             <div class="text-right">
-                <a class="btn btn-success update-pro" href="{{ route('admin.uraian.index') }}" title="Back"><i class="fa fa-arrow-left"></i> <span> Kembali</span></a>
+                <a class="btn btn-success update-pro" href="{{ route('admin.uraian.index') }}" title="Kembali"><i class="fa fa-arrow-left"></i> <span> Kembali</span></a>
             </div>
         </div>
         <div class="panel-body">
@@ -28,28 +28,29 @@
                     <i class="fa fa-trash"></i> {{ session('danger') }}
                 </div>
             @endif
-            <form action="{{ route('admin.uraian.store') }}" method="post">
+            <form action="{{ route('admin.uraian.update', ['id' => $uraian->id]) }}" method="post">
                 @csrf
+                @method('PATCH')
                 <div class="form-group">
-                    <label for="rekening">Kode Rekening Uraian : </label>
-                    <input class="form-control @error('rekening') is-invalid @enderror" name="rekening" placeholder="Masukkan kode rekening uraian..." type="text" id="rekening">
+                    <label for="id">Rekening : </label>
+                    <input class="form-control @error('rekening') is-invalid @enderror" name="rekening" value="{{ $uraian->rekening }}" placeholder="Ketikkan rekening uraian di sini..." type="text" id="rekening">
 
-                    @error('kode')
-                        <div class="invalid-feedback text-danger">{{ $message = "Isi kode rekening uraian terlebih dahulu!" }}</div>
+                    @error('rekening')
+                        <div class="invalid-feedback text-danger">{{ $message = "Kode uraian Wajib diisi!" }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="nama">Uraian : </label>
-                    <input class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Masukkan uraian..." type="text" id="nama">
+                    <label for="nama">Nama uraian : </label>
+                    <input class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ $uraian->nama }}" placeholder="Ketikkan nama uraian di sini..." type="text" id="name">
 
                     @error('nama')
-                        <div class="invalid-feedback text-danger">{{ $message = "Isi uraian terlebih dahulu!" }}</div>
+                        <div class="invalid-feedback text-danger">{{ $message = "Nama uraian Wajib diisi!" }}</div>
                     @enderror
-                </div>                
+                </div>
+                
                 <br>
                 <div class="form-group">
-                    
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Perbaharui</button>
                     <button type="reset" class="btn btn-default">Reset</button>
                 </div>
             </form>

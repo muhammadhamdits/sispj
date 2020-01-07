@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Uraian;
 use App\SubUraian;
 use App\Sub2Uraian;
+use App\Sub3Uraian;
 use App\Sub4Uraian;
 use Illuminate\Http\Request;
 
@@ -22,19 +23,18 @@ class UraianController extends Controller
         $uraians = Uraian::all();
         $sub_uraians = SubUraian::all();
         $sub2_uraians = Sub2Uraian::all();
-        $sub4uraians =Sub4Uraian::all();
-        $periode = Periode::where('status', 1)->first();
-        return view('data_master/uraian/index', ['uraians' => $uraians, 'periode' => $periode, 'sub_uraians' => $sub_uraians, 'sub2_uraians' => $sub2_uraians, 'sub4uraians' => $sub4uraians]);
+        $sub3_uraians = Sub3Uraian::all();
+        $sub4_uraians = Sub4Uraian::all();
+        return view('data_master/desc/index', ['uraians' => $uraians, 'sub_uraians' => $sub_uraians, 'sub2_uraians' => $sub2_uraians, 'sub3_uraians' => $sub3_uraians, 'sub4uraians' => $sub4_uraians]);
     }
 
     public function create()
     {
-        return view('data_master/uraianutama/uraian/add');
+        return view('data_master/desc/uraian/add');
     }
 
     public function store(Request $request)
     {
-        
         $request->validate([
             'rekening' => 'required',
             'nama' => 'required',
@@ -42,24 +42,23 @@ class UraianController extends Controller
         
         try {
             $uraian = Uraian::create($request->all()); 
-             $uraian->save();
+            $uraian->save();
             return redirect()->route('admin.uraian.index')->with('status', 'Data Uraian '.$uraian->nama.' Berhasil Ditambah!');
         } catch (\Throwable $th) {
-            return redirect()->route('admin.uraian.create')->with('danger', 'Data dengan kode rekening '.$request->rekening.' sudah ada!');
+            return redirect()->route('admin.uraian.create')->with('danger', 'Uraian dengan rekening '.$request->rekening.' sudah ada!');
         }
-
     }
 
     public function show($id)
     {
       $uraian = Uraian::findOrFail($id);
-        return view('data_master/uraianutama/uraian/show', ['uraian' => $uraian]);
+        return view('data_master/desc/uraian/show', ['uraian' => $uraian]);
     }
 
     public function edit($id)
     {
         $uraian = Uraian::findOrFail($id);
-        return view('data_master/uraianutama/uraian/edit', ['uraian' => $uraian]);
+        return view('data_master/desc/uraian/edit', ['uraian' => $uraian]);
     }
 
     public function update(Request $request, $id)
@@ -74,13 +73,13 @@ class UraianController extends Controller
             $uraian->update($request->all());
             return redirect()->route('admin.uraian.index')->with('warning', 'Data uraian '.$uraian->nama.' Berhasil Diperbaharui!');
         } catch (\Throwable $th) {
-            return redirect()->route('admin.uraian.edit', ['id' => $id])->with('danger', 'Data dengan kode '.$request->kode.' sudah ada!');
+            return redirect()->route('admin.uraian.edit', ['id' => $id])->with('danger', 'Uraian dengan kode '.$request->rekening.' sudah ada!');
         }
     }
 
     public function destroy($id)
     {
-         $uraian = Uraian::findOrFail($id);
+        $uraian = Uraian::findOrFail($id);
         $uraian->delete();
         return redirect()->route('admin.uraian.index')->with('danger', 'Data Uraian '.$uraian->nama.' Berhasil Dihapus!');
     }

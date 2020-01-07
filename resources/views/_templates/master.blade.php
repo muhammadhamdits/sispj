@@ -115,6 +115,11 @@
 		$('#tabel-urusan').DataTable();
 		$('#tabel-program').DataTable();
 		$('#tabel-kegiatan').DataTable();
+		$('#tabel-uraian').DataTable();
+		$('#tabel-suburaian').DataTable();
+		$('#tabel-sub2uraian').DataTable();
+		$('#tabel-sub3uraian').DataTable();
+		$('#tabel-sub4uraian').DataTable();
 	});
 	</script>
 </body>

@@ -58,6 +58,14 @@ Route::get('/admin/program/{id}/edit', 'ProgramController@edit')->name('admin.pr
 Route::patch('/admin/program/{id}', 'ProgramController@update')->name('admin.program.update');
 Route::delete('/admin/program/{id}', 'ProgramController@destroy')->name('admin.program.destroy');
 
+// Route for kegiatan
+Route::get('/admin/kegiatan/create', 'KegiatanController@create')->name('admin.kegiatan.create');
+Route::get('/admin/kegiatan/{kegiatan}', 'KegiatanController@show')->name('admin.kegiatan.show');
+Route::post('/admin/kegiatan', 'KegiatanController@store')->name('admin.kegiatan.store');
+Route::delete('/admin/kegiatan/{kegiatan}', 'KegiatanController@destroy')->name('admin.kegiatan.destroy');
+Route::get('/admin/kegiatan/{kegiatan}/edit', 'KegiatanController@edit')->name('admin.kegiatan.edit');
+Route::patch('/admin/kegiatan/{id}', 'KegiatanController@update')->name('admin.kegiatan.update');
+
 // Route for uraian
 Route::get('/admin/uraian', 'UraianController@index')->name('admin.uraian.index');
 Route::get('/admin/uraian/create', 'UraianController@create')->name('admin.uraian.create');
@@ -75,14 +83,6 @@ Route::get('/admin/sub_uraian/{id}/edit', 'SubUraianController@edit')->name('adm
 Route::patch('/admin/sub_uraian/{id}', 'SubUraianController@update')->name('admin.sub_uraian.update');
 Route::delete('/admin/sub_uraian/{id}', 'SubUraianController@destroy')->name('admin.sub_uraian.destroy');
 
-// Route for kegiatan
-Route::get('/admin/kegiatan/create', 'KegiatanController@create')->name('admin.kegiatan.create');
-Route::get('/admin/kegiatan/{kegiatan}', 'KegiatanController@show')->name('admin.kegiatan.show');
-Route::post('/admin/kegiatan', 'KegiatanController@store')->name('admin.kegiatan.store');
-Route::delete('/admin/kegiatan/{kegiatan}', 'KegiatanController@destroy')->name('admin.kegiatan.destroy');
-Route::get('/admin/kegiatan/{kegiatan}/edit', 'KegiatanController@edit')->name('admin.kegiatan.edit');
-Route::patch('/admin/kegiatan/{id}', 'KegiatanController@update')->name('admin.kegiatan.update');
-
 // Route for sub2 uraian
 Route::get('/admin/sub2_uraian/create', 'Sub2UraianController@create')->name('admin.sub2_uraian.create');
 Route::post('/admin/sub2_uraian/create', 'Sub2UraianController@store')->name('admin.sub2_uraian.store');
@@ -90,6 +90,15 @@ Route::get('/admin/sub2_uraian/{sub2Uraian}', 'Sub2UraianController@show')->name
 Route::get('/admin/sub2_uraian/{sub2Uraian}/edit', 'Sub2UraianController@edit')->name('admin.sub2_uraian.edit');
 Route::patch('/admin/sub2_uraian/{sub2Uraian}', 'Sub2UraianController@update')->name('admin.sub2_uraian.update');
 Route::delete('/admin/sub2_uraian/{sub2Uraian}', 'Sub2UraianController@destroy')->name('admin.sub2_uraian.destroy');
+
+// Route for sub3 uraian
+Route::get('/admin/sub3_uraian/create', 'Sub3UraianController@create')->name('admin.sub3_uraian.create');
+Route::post('/admin/sub3_uraian/create', 'Sub3UraianController@store')->name('admin.sub3_uraian.store');
+Route::get('/admin/sub3_uraian/{sub3Uraian}', 'Sub3UraianController@show')->name('admin.sub3_uraian.show');
+Route::get('/admin/sub3_uraian/{sub3Uraian}/edit', 'Sub3UraianController@edit')->name('admin.sub3_uraian.edit');
+Route::patch('/admin/sub3_uraian/{id}', 'Sub3UraianController@update')->name('admin.sub3_uraian.update');
+Route::delete('/admin/sub3_uraian/{sub3Uraian}', 'Sub3UraianController@destroy')->name('admin.sub3_uraian.destroy');
+
 // Route for sub 4 uraian
 Route::get('/admin/sub4uraian/create', 'Sub4UraianController@create')->name('admin.sub4uraian.create');
 Route::post('/admin/sub4uraian/create', 'Sub4UraianController@store')->name('admin.sub4uraian.store');
