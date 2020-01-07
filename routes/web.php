@@ -106,3 +106,11 @@ Route::get('/admin/sub4uraian/{id}', 'Sub4UraianController@show')->name('admin.s
 Route::get('/admin/sub4uraian/{id}/edit', 'Sub4UraianController@edit')->name('admin.sub4uraian.edit');
 Route::patch('/admin/sub4uraian/{id}', 'Sub4UraianController@update')->name('admin.sub4uraian.update');
 Route::delete('/admin/sub4uraian/{id}', 'Sub4UraianController@destroy')->name('admin.sub4uraian.destroy');
+
+// Route for item
+Route::get('/admin/item/create', 'ItemController@create')->name('admin.item.create');
+Route::post('/admin/item/create', 'ItemController@store')->name('admin.item.store');
+Route::get('/admin/item/{item}', 'ItemController@show')->name('admin.item.show');
+Route::get('/admin/item/{item}/edit', 'ItemController@edit')->name('admin.item.edit');
+Route::patch('/admin/item/{item}', 'ItemController@update')->name('admin.item.update');
+Route::delete('/admin/item/{item}', 'ItemController@destroy')->name('admin.item.destroy');

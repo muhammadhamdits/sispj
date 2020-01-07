@@ -16,6 +16,7 @@
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'sub2uraian' ? 'active' : '' : '' }}"><a href="#tab-sub2uraian" role="tab" data-toggle="tab">Sub 2 Uraian</a></li>
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'sub3uraian' ? 'active' : '' : '' }}"><a href="#tab-sub3uraian" role="tab" data-toggle="tab">Sub 3 Uraian</a></li>
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'sub4uraian' ? 'active' : '' : '' }}"><a href="#tab-sub4uraian" role="tab" data-toggle="tab">Sub 4 Uraian</a></li>
+                    <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'item' ? 'active' : '' : '' }}"><a href="#tab-item" role="tab" data-toggle="tab">Item</a></li>
                 </ul>
             </div>
             <div class="tab-content">
@@ -99,7 +100,7 @@
                                     <td class="text-left">{{ $sub_uraian->uraian->rekening.".".$sub_uraian->rekening }}</td>
                                     <td class="text-left">{{ $sub_uraian->nama }}</td>
                                     <td>
-                                        <a href="{{ route('admin.sub_uraian.show', $sub_uraian->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a>
+                                        <a href="{{ route('admin.sub_uraian.show', $sub_uraian->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> Lihat</a>
                                         <a href="{{ route('admin.sub_uraian.edit', $sub_uraian->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
                                         <form style="display: inline" id="data-{{ '2'.$sub_uraian->id }}" method="POST" action="{{ route('admin.sub_uraian.destroy', $sub_uraian->id) }}">
                                             {{ csrf_field() }}
@@ -219,10 +220,46 @@
                                             <button type="submit" onclick="remove({{ '5'.$sub4uraian->id }})" class="btn btn-danger btn-xs" value="Delete user"><i class="fa fa-trash"></i> Hapus</button>
                                         </td>
                                     </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Konten tab Item -->
+                <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'item' ? 'active' : '' : '' }}" id="tab-item">
+                    <div class="text-right">
+                        <a class="fab btn-success update-pro" href="{{ route('admin.item.create') }}" title="Tambah item"><i class="fa fa-plus"></i> <span> Tambah Item</span></a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table project-table text-center" id="tabel-item">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">No</th>
+                                    <th class="text-left">Nama</th>
+                                    <th class="text-left">Satuan</th>
+                                    <th class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($items as $item)
+                                <tr>
+                                    <td class="text-left">{{ $loop->iteration }}</td>
+                                    <td class="text-left">{{ $item->nama }}</td>
+                                    <td class="text-left">{{ $item->satuan }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.item.show', $item->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> Lihat</a>
+                                        <a href="{{ route('admin.item.edit', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+                                        <form style="display: inline" id="data-{{ '6'.$item->id }}" method="POST" action="{{ route('admin.item.destroy', $item) }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+                                        </form>
+                                        <button type="submit" onclick="remove({{ '6'.$item->id }})" class="btn btn-danger btn-xs" value="Delete user"><i class="fa fa-trash"></i> Hapus</button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <!-- Akhir konten masing-masing tab -->

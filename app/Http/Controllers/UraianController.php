@@ -7,6 +7,7 @@ use App\SubUraian;
 use App\Sub2Uraian;
 use App\Sub3Uraian;
 use App\Sub4Uraian;
+use App\Item;
 use Illuminate\Http\Request;
 
 use App\Periode;
@@ -25,7 +26,8 @@ class UraianController extends Controller
         $sub2_uraians = Sub2Uraian::all();
         $sub3_uraians = Sub3Uraian::all();
         $sub4_uraians = Sub4Uraian::all();
-        return view('data_master/desc/index', ['uraians' => $uraians, 'sub_uraians' => $sub_uraians, 'sub2_uraians' => $sub2_uraians, 'sub3_uraians' => $sub3_uraians, 'sub4uraians' => $sub4_uraians]);
+        $items = Item::all();
+        return view('data_master/desc/index', ['uraians' => $uraians, 'sub_uraians' => $sub_uraians, 'sub2_uraians' => $sub2_uraians, 'sub3_uraians' => $sub3_uraians, 'sub4uraians' => $sub4_uraians, 'items' => $items]);
     }
 
     public function create()

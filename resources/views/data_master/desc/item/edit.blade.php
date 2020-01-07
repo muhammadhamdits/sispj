@@ -5,9 +5,9 @@
     <!-- OVERVIEW -->
     <div class="panel panel-headline">
         <div class="panel-heading">
-            <h3 class="panel-title">Edit data {{ $sub2Uraian->nama }}</h3>
+            <h3 class="panel-title">Edit item {{ $item->nama }}</h3>
             <div class="text-right">
-                <a class="btn btn-success update-pro" href="{{ route('admin.uraian.index', ['tabName' => 'sub2uraian']) }}" title="Kembali"><i class="fa fa-arrow-left"></i> <span> Kembali</span></a>
+                <a class="btn btn-success update-pro" href="{{ route('admin.uraian.index', ['tabName' => 'item']) }}" title="Kembali"><i class="fa fa-arrow-left"></i> <span> Kembali</span></a>
             </div>
         </div>
 
@@ -29,37 +29,23 @@
                 </div>
             @endif
 
-            <form action="{{ route('admin.sub2_uraian.update', ['sub2Uraian' => $sub2Uraian]) }}" method="post">
+            <form action="{{ route('admin.item.update', ['item' => $item]) }}" method="post">
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
-                    <label for="rekening">Rekening : </label>
-                    <input class="form-control  @error('rekening') is-invalid @enderror" name="rekening" placeholder="Masukkan rekening kegiatan..." type="text" id="rekening" value="{{ $sub2Uraian->rekening }}">
+                    <label for="nama">Nama item : </label>
+                    <input class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Masukkan nama item..." type="text" id="nama" value="{{ $item->nama }}">
 
-                    @error('rekening')
+                    @error('nama')
                         <div class="invalid-feedback text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                
-                <div class="form-group">
-                    <label for="sub_uraian_id">Sub Uraian : </label>
-                    <select name="sub_uraian_id" id="sub_uraian_id" class="form-control @error('sub_uraian_id') is-invalid @enderror">
-                        <option value="null" disabled>Pilih Sub Uraian...</option>
-                        @foreach($subUraians as $subUraian)
-                            @if($subUraian->id == $sub2Uraian->sub_uraian_id)
-                                <option selected value="{{ $subUraian->id }}">{{ $subUraian->nama }}</option>
-                            @else
-                                <option value="{{ $subUraian->id }}">{{ $subUraian->nama }}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                </div>
 
                 <div class="form-group">
-                    <label for="nama">Nama Sub2 Uraian : </label>
-                    <input class="form-control @error('nama') is-invalid @enderror" name="nama" placeholder="Masukkan nama kegiatan..." type="text" id="nama" value="{{ $sub2Uraian->nama }}">
+                    <label for="satuan">Satuan : </label>
+                    <input class="form-control  @error('satuan') is-invalid @enderror" name="satuan" placeholder="Masukkan nama satuan..." type="text" id="satuan" value="{{ $item->satuan }}">
 
-                    @error('nama')
+                    @error('satuan')
                         <div class="invalid-feedback text-danger">{{ $message }}</div>
                     @enderror
                 </div>

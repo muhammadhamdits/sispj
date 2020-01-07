@@ -120,6 +120,7 @@
 		$('#tabel-sub2uraian').DataTable();
 		$('#tabel-sub3uraian').DataTable();
 		$('#tabel-sub4uraian').DataTable();
+		$('#tabel-item').DataTable();
 	});
 	</script>
 </body>
