@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Sub4UraianSeeder::class);
         $this->call(ItemSeeder::class);
         $this->call(DetailKegiatanSeeder::class);
+        $this->call(DetailItemSeeder::class);
     }
 }

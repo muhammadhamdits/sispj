@@ -16,13 +16,9 @@ class CreateDetailKegiatansTable extends Migration
         Schema::create('detail_kegiatans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('kegiatan_id')->unsigned()->index();
-            $table->bigInteger('item_id')->unsigned()->index();
-            $table->bigInteger('sub4_uraian_id')->unsigned()->index();
-            $table->integer('harga_satuan');
-            $table->integer('volume');
+            $table->bigInteger('sub4_uraian_id')->unsigned()->index()->unique();
             $table->integer('status'); // 0 = Sebelum perubahan; 1 = Setelah perubahan;
             $table->foreign('kegiatan_id')->references('id')->on('kegiatans');
-            $table->foreign('item_id')->references('id')->on('items');
             $table->foreign('sub4_uraian_id')->references('id')->on('sub4_uraians');
             $table->timestamps();
         });

@@ -5,50 +5,38 @@
     <!-- OVERVIEW -->
     <div class="panel panel-headline">
         <div class="panel-heading">
-            <h3 class="panel-title">Kelola data utama</h3>
+            <h3 class="panel-title">Daftar kegiatan</h3>
             @if($data != null)
                 <p class="panel-subtitle">Periode: <b>{{ $data->tahun }} - {{ $data->jenis == 0 ? 'Sebelum perubahan' : 'Setelah perubahan' }}</b></p>
             @endif
         </div>
         <div class="panel-body">
-                <!-- Konten tab organisasi -->
-                <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? '' : 'active' }}" id="tab-organisasi">
-                    <div class="text-right">
-                        <a class="fab update-pro btn-success" href="{{ route('admin.organisasi.create') }}" title="Tambah data organisasi"><i class="fa fa-plus"> </i> <span> Tambah Data</span></a>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table project-table text-center" id="tabel-organisasi">
-                            <thead>
-                                <tr>
-                                    <th class="text-left">No</th>
-                                    <th class="text-left">Kode Organisasi</th>
-                                    <th class="text-left">Nama Organisasi</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($data->organisasi as $organisasi)
-                                    <tr>
-                                        <td class="text-left">{{ $loop->iteration }}</td>
-                                        <td class="text-left">{{ $organisasi->kode }}</td>
-                                        <td class="text-left">{{ $organisasi->nama }}</td>
-                                        <td>
-                                            <a href="{{ route('admin.organisasi.show', $organisasi->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> Lihat</a>
-                                            <a href="{{ route('admin.organisasi.edit', $organisasi->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-                                            <form style="display: inline" method="POST" id="data-{{ '1'.$organisasi->id }}" action="{{ route('admin.organisasi.destroy', $organisasi->id) }}">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-                                            </form>
-                                            <button class="btn btn-danger btn-xs" onclick="remove({{ '1'.$organisasi->id }})"><i class="fa fa-trash"></i> Hapus</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <!-- Akhir konten masing-masing tab -->
-            <!-- END TABBED CONTENT -->
+            <div class="table-responsive">
+                <table class="table project-table" id="tabel-anggaran">
+                    <thead>
+                        <tr>
+                            <th class="text-left">No</th>
+                            <th class="text-left">Kode</th>
+                            <th class="text-left">Nama Kegiatan</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($kegiatans as $kegiatan)
+                        @if($kegiatan->program->urusan->periode->status == 1)
+                            <tr>
+                                <td class="text-left">{{ $loop->iteration }}</td>
+                                <td class="text-left">{{ $kegiatan->program->urusan->kode.'.'.$kegiatan->program->organisasi->kode.'.'.$kegiatan->program->kode.'.'.$kegiatan->kode }}</td>
+                                <td class="text-left">{{ $kegiatan->nama }}</td>
+                                <td class="text-center">
+                                    <a href="{{ route('anggaran.show', $kegiatan->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> Detail</a>
+                                </td>
+                            </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

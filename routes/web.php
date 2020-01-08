@@ -114,3 +114,13 @@ Route::get('/admin/item/{item}', 'ItemController@show')->name('admin.item.show')
 Route::get('/admin/item/{item}/edit', 'ItemController@edit')->name('admin.item.edit');
 Route::patch('/admin/item/{item}', 'ItemController@update')->name('admin.item.update');
 Route::delete('/admin/item/{item}', 'ItemController@destroy')->name('admin.item.destroy');
+
+// Route for anggaran
+Route::get('/anggaran', 'DetailKegiatanController@index')->name('anggaran.index');
+Route::get('/anggaran/create', 'DetailKegiatanController@create')->name('anggaran.create');
+Route::post('/anggaran/create', 'DetailKegiatanController@store')->name('anggaran.store');
+Route::get('/anggaran/{id}', 'DetailKegiatanController@show')->name('anggaran.show');
+Route::get('/anggaran/{detailKegiatan}/edit', 'DetailKegiatanController@edit')->name('anggaran.edit');
+Route::patch('/anggaran/{detailKegiatan}', 'DetailKegiatanController@update')->name('anggaran.update');
+Route::delete('/anggaran/{detailKegiatan}', 'DetailKegiatanController@destroy')->name('anggaran.destroy');
+Route::post('/anggaran/fetch', 'DetailKegiatanController@fetch')->name('anggaran.fetch');

@@ -121,6 +121,28 @@
 		$('#tabel-sub3uraian').DataTable();
 		$('#tabel-sub4uraian').DataTable();
 		$('#tabel-item').DataTable();
+		$('#tabel-anggaran').DataTable();
+
+		$('.dynamic').change(function(){
+			if($(this).val() != ''){
+				var value 		= $(this).val();
+				var dependent	= $(this).data("dependent");
+				var _token		= $("input[name='_token']").val();
+				
+				$.ajax({
+					url: "{{ route('anggaran.fetch') }}",
+					method: "POST",
+					data: {
+						value: value,
+						dependent: dependent,
+						_token: _token
+					},
+					success: function(result){
+						$('#'+dependent).html(result);
+					}
+				});
+			}
+		});
 	});
 	</script>
 </body>
