@@ -121,7 +121,9 @@
 		$('#tabel-sub3uraian').DataTable();
 		$('#tabel-sub4uraian').DataTable();
 		$('#tabel-item').DataTable();
-		$('#tabel-anggaran').DataTable();
+		$('#tabel-anggaran').DataTable({
+			"paging": false
+		});
 
 		$('.dynamic').change(function(){
 			if($(this).val() != ''){
@@ -142,6 +144,37 @@
 					}
 				});
 			}
+		});
+
+		$('.showhr').click(function(event) {
+			event.preventDefault();
+			event.stopPropagation();
+			var currentLevel = parseInt($(this).parent().parent().attr('class')),
+				state = $(this).parent().parent().hasClass('hiding'),
+				nextEl = $(this).parent().parent().next(),
+				nextLevel = parseInt(nextEl.attr('class'));
+
+			if(currentLevel < 6){
+				while (currentLevel < nextLevel) {
+					nextEl.toggle(state);
+					nextEl = nextEl.next();
+					nextLevel = parseInt(nextEl.attr('class'));
+				}
+			}
+
+			$(this).parent().parent().toggleClass('hiding');
+			if($(this).children('i').attr('class') == 'fa fa-plus'){
+				$(this).children('i').removeClass('fa-plus').addClass('fa-minus');
+			} else {
+				$(this).children('i').removeClass('fa-minus').addClass('fa-plus');
+			}
+		});
+
+		$(".showhr1").click();
+
+		$(".addItem").click(function(event) {
+			var button = $(this).data('id');
+     		$("#detail_kegiatan_id").val(button);
 		});
 	});
 	</script>
