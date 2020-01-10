@@ -14,7 +14,7 @@
                         </ul>
                     </div>
                 </li>
-                <li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>Anggaran</span></a></li>
+                <li><a href="{{ route('anggaran.index') }}" class="{{ Request::segment(1) ==  'anggaran' ? 'active' : '' }}"><i class="lnr lnr-code"></i> <span>Anggaran</span></a></li>
                 <li><a href="charts.html" class=""><i class="lnr lnr-chart-bars"></i> <span>Kwitansi</span></a></li>
             </ul>
         </nav>

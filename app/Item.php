@@ -8,13 +8,13 @@ class Item extends Model
 {
     protected $fillable = ['nama', 'satuan'];
 
-    public function sub4Uraian()
+    public function detailItem()
     {
-        return $this->belongsToMany('App\Sub4Uraian', 'detail_kegiatans');
+        return $this->hasMany('App\DetailItem');
     }
 
-    public function kegiatan()
+    public function detailKegiatan()
     {
-        return $this->belongsToMany('App\Kegiatan', 'detail_kegiatans');
+        return $this->belongsToMany('App\DetailKegiatan', 'detail_items');
     }
 }
