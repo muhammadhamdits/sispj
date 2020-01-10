@@ -137,9 +137,9 @@
                             <th>Act</th>
                             <th class="text-left">Rekening</th>
                             <th class="text-left">Uraian</th>
-                            <th class="text-left">Volume</th>
-                            <th class="text-left">Satuan</th>
-                            <th class="text-left">Harga Satuan</th>
+                            <th class="text-right">Volume</th>
+                            <th class="text-right">Satuan</th>
+                            <th class="text-right">Harga Satuan</th>
                             <th class="text-right">Aksi</th>
                         </tr>
                     </thead>
@@ -221,9 +221,9 @@
                                                     <td><a class="showhr showhr6 hidden" href="#"><i class="fa fa-minus"></i></a></td>
                                                     <td></td>
                                                     <td>{{ $tmp5[0] }}</td>
-                                                    <td>{{ $tmp5[1] }}</td>
-                                                    <td>{{ $tmp5[2] }}</td>
-                                                    <td>{{ $tmp5[3] }}</td>
+                                                    <td class="text-right">{{ $tmp5[1] }}</td>
+                                                    <td class="text-right">{{ $tmp5[2] }}</td>
+                                                    <td class="text-right">{{ $tmp5[3] }}</td>
                                                     <td></td>
                                                 </tr>
                                             @endif

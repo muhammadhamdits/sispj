@@ -36,6 +36,12 @@ class DetailKegiatanController extends Controller
     {
         $detailKegiatan = DetailKegiatan::create($request->all());
         $detailKegiatan->save();
+        $detailKegiatanPerubahan = DetailKegiatan::create([
+            'sub4_uraian_id' => $request->sub4_uraian_id,
+            'kegiatan_id' => $request->kegiatan_id,
+            'status' => 1
+        ]);
+        $detailKegiatanPerubahan->save();
         return redirect()->route('anggaran.show', ['id' => $request->kegiatan_id]);
     }
 
@@ -43,17 +49,19 @@ class DetailKegiatanController extends Controller
     {
         $uraians = Uraian::all();
         $kegiatan = Kegiatan::findOrFail($id);
+        $state = Periode::where('status', 1)->first()->jenis;
         $items = Item::all();
         $data = [];
-        $i = 0;
-        foreach($kegiatan->sub4Uraian as $d){
-            $detail = DetailKegiatan::where([['kegiatan_id', '=', $d->pivot->kegiatan_id], ['sub4_uraian_id', '=', $d->pivot->sub4_uraian_id]])->first();
-
+        $max = count($kegiatan->sub4_uraian($state)->get());
+        for($n=0; $n < $max; $n++){
+            $d = $kegiatan->sub4_uraian($state)->get()[0]->sub4Uraian;
+            $detail = DetailKegiatan::where([['kegiatan_id', '=', $id], ['sub4_uraian_id', '=', $d->id], ['status', '=', $state]])->first();
+            
             $data[$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'-'.$d->sub3Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'.'.$d->rekening.'-'.$detail->id.'-'.$d->nama][] = '';
+
             foreach($detail->detailItem as $detailItem){
                 $data[$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'-'.$d->sub3Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'.'.$d->rekening.'-'.$detail->id.'-'.$d->nama][] = $detailItem->item->nama.'-'.$detailItem->volume.'-'.$detailItem->item->satuan.'-'.$detailItem->harga_satuan;
             }
-            $i++;
         }
         return view('anggaran/show', ['kegiatan' => $kegiatan, 'uraians' => $uraians, 'data' => $data, 'items' => $items]);
     }
