@@ -76,8 +76,23 @@ class OrganisasiController extends Controller
 
     public function destroy($id)
     {
-        $organisasi = Organisasi::findOrFail($id);
-        $organisasi->delete();
-        return redirect()->route('admin.utama.index')->with('danger', 'Data Organisasi '.$organisasi->nama.' Berhasil Dihapus!');
+        try {
+            $organisasi = Organisasi::findOrFail($id);
+            $organisasi->delete();
+            return redirect()->route('admin.utama.index')->with('danger', 'Data Organisasi '.$organisasi->nama.' Berhasil Dihapus!');
+        } catch (\Throwable $th) {
+            $dependent = "";
+            $data = $organisasi->program;
+            for($i=0; $i < count($data); $i++){
+                if($i == count($data)-1 && count($data) != 1){
+                    $dependent .= " dan ".$data[$i]->nama.".";
+                } elseif(count($data) != 1){
+                    $dependent .= $data[$i]->nama.", ";
+                } else{
+                    $dependent .= $data[$i]->nama.".";
+                }
+            }
+            return redirect()->route('admin.utama.index')->with('danger', 'Data Organisasi '.$organisasi->nama.' gagal Dihapus! Data digunakan pada program '.$dependent);
+        }
     }
 }

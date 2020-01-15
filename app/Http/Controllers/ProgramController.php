@@ -74,8 +74,23 @@ class ProgramController extends Controller
 
     public function destroy($id)
     {
-        $program = Program::findOrFail($id);
-        $program->delete();
-        return redirect()->route('admin.utama.index', ['tabName' => 'program'])->with('danger', 'Data program '.$program->nama.' Berhasil dihapus');;
+        try {
+            $program = Program::findOrFail($id);
+            $program->delete();
+            return redirect()->route('admin.utama.index', ['tabName' => 'program'])->with('danger', 'Data program '.$program->nama.' Berhasil dihapus');
+        } catch (\Throwable $th) {
+            $dependent = "";
+            $data = $program->kegiatan;
+            for($i=0; $i < count($data); $i++){
+                if($i == count($data)-1 && count($data) != 1){
+                    $dependent .= " dan ".$data[$i]->nama.".";
+                } elseif(count($data) != 1){
+                    $dependent .= $data[$i]->nama.", ";
+                } else{
+                    $dependent .= $data[$i]->nama.".";
+                }
+            }
+            return redirect()->route('admin.utama.index', ['tabName' => 'program'])->with('danger', 'Data program '.$program->nama.' gagal dihapus! Data digunakan pada kegiatan '.$dependent);
+        }
     }
 }

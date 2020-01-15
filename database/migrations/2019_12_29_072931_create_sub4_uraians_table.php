@@ -15,9 +15,10 @@ class CreateSub4UraiansTable extends Migration
     {
         Schema::create('sub4_uraians', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('rekening')->unique();
+            $table->string('rekening');
             $table->string('nama');
             $table->bigInteger('sub3_uraian_id')->unsigned()->index();
+            $table->unique(['rekening', 'sub3_uraian_id']);
             $table->foreign('sub3_uraian_id')->references('id')->on('sub3_uraians');
             $table->timestamps();
         });

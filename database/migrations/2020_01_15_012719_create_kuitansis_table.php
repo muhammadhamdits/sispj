@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDetailItemsTable extends Migration
+class CreateKuitansisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateDetailItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('detail_items', function (Blueprint $table) {
+        Schema::create('kuitansis', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->date('tanggal');
+            $table->string('terima_dari');
+            $table->string('sebab');
+            $table->date('dibukukan_tanggal');
             $table->unsignedBigInteger('detail_kegiatan_id');
-            $table->unsignedBigInteger('item_id');
-            $table->integer('harga_satuan');
-            $table->integer('volume');
             $table->foreign('detail_kegiatan_id')->references('id')->on('detail_kegiatans')->onDelete('cascade');
-            $table->foreign('item_id')->references('id')->on('items');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateDetailItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detail_items');
+        Schema::dropIfExists('kuitansis');
     }
 }

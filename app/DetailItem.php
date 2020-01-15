@@ -17,4 +17,9 @@ class DetailItem extends Model
     {
         return $this->belongsTo('App\Item');
     }
+
+    public function kuitansi()
+    {
+        return $this->belongsToMany('App\Kuitansi', 'detail_kuitansis');
+    }
 }

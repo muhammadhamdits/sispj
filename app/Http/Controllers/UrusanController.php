@@ -70,8 +70,23 @@ class UrusanController extends Controller
 
     public function destroy($id)
     {
-        $urusan = Urusan::findOrFail($id);
-        $urusan->delete();
-        return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])->with('danger', 'Data urusan  '.$urusan->nama.' berhasil dihapus!');
+        try {
+            $urusan = Urusan::findOrFail($id);
+            $urusan->delete();
+            return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])->with('danger', 'Data urusan  '.$urusan->nama.' berhasil dihapus!');
+        } catch (\Throwable $th) {
+            $dependent = "";
+            $data = $urusan->program;
+            for($i=0; $i < count($data); $i++){
+                if($i == count($data)-1 && count($data) != 1){
+                    $dependent .= " dan ".$data[$i]->nama.".";
+                } elseif(count($data) != 1){
+                    $dependent .= $data[$i]->nama.", ";
+                } else{
+                    $dependent .= $data[$i]->nama.".";
+                }
+            }
+            return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])->with('danger', 'Data urusan  '.$urusan->nama.' gagal dihapus! Data digunakan pada program '.$dependent);
+        }
     }
 }

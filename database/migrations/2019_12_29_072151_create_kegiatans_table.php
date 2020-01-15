@@ -15,9 +15,10 @@ class CreateKegiatansTable extends Migration
     {
         Schema::create('kegiatans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kode')->unique();
+            $table->string('kode');
             $table->string('nama');
             $table->bigInteger('program_id')->unsigned()->index();
+            $table->unique(['kode', 'program_id']);
             $table->foreign('program_id')->references('id')->on('programs');
             $table->timestamps();
         });

@@ -35,7 +35,7 @@
 		<div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">
-				<p class="copyright">Copyright &copy2019 <a href="#">Integer'8</a></p>
+				<p class="copyright">Copyright &copy2020 <a href="#">Integer'8</a></p>
 			</div>
 		</footer>
 	</div>
