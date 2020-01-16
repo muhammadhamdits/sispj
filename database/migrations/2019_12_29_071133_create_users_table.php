@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->integer('role'); // 0 = Admin; 1 = Operator;
+            $table->unsignedBigInteger('organisasi_id')->index()->nullable();
+            $table->foreign('organisasi_id')->references('id')->on('organisasis');
             $table->rememberToken();
             $table->timestamps();
         });

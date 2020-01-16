@@ -103,6 +103,53 @@
                 </div>
             </div>
 
+            <!-- Modal Kuitansi -->
+            <div class="modal fade" id="modalCetakKuitansi" tabindex="-1" role="dialog" aria-labelledby="modalCetakKuitansiLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modalCetakKuitansiLabel">Cetak kuitansi</h4>
+                        </div>
+                        <form action="{{ route('kuitansi.print') }}" method="post">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="tanggal">Tanggal : </label>
+                                <input required type="date" name="tanggal" id="tanggal" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="terima_dari">Terima Dari : </label>
+                                <input required type="text" name="terima_dari" id="terima_dari" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="sebab">Sebab : </label>
+                                <input required type="text" name="sebab" id="sebab" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="dibukukan_tanggal">Dibukukan Tanggal : </label>
+                                <input required type="date" name="dibukukan_tanggal" id="dibukukan_tanggal" class="form-control">
+                            </div>
+                            <table style="margin: auto; width: 100%;" id="tabel-items">
+                                <tr>
+                                    <th></th>
+                                    <th>Item</th>
+                                    <th>Jumlah</th>
+                                    <th>Satuan</th>
+                                    <th>Harga</th>
+                                </tr>
+                                <!-- Item -->
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="detail_kegiatan_id" id="detail_kegiatan_id2">
+                            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Cetak</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             <div class="table-responsive">
                 <table style="border-collapse: separate; border-spacing: 12px;">
                     <tr>
@@ -209,6 +256,7 @@
                                                 <td></td>
                                                 <td class="text-right">
                                                     <button class="btn btn-success btn-xs addItem" data-toggle="modal" data-target="#modalTambahItem" data-id="{{ $tmp4[1] }}" title="Tambah Item"><i class="fa fa-plus"></i> Tambah</button>
+                                                    <button class="btn btn-warning btn-xs cetakKuitansi" data-toggle="modal" data-target="#modalCetakKuitansi" data-id="{{ $tmp4[1] }}" title="Cetak Kuitansi"><i class="fa fa-print"></i> Kuitansi</button>
                                                     <a href="" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</a>
                                                 </td>
                                             </tr>

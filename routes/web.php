@@ -133,4 +133,10 @@ Route::get('/anggaran/item/{id}', 'DetailItemController@show')->name('anggaran.i
 Route::get('/anggaran/item/{detailKegiatan}/edit', 'DetailItemController@edit')->name('anggaran.item.edit');
 Route::patch('/anggaran/item/{detailKegiatan}', 'DetailItemController@update')->name('anggaran.item.update');
 Route::delete('/anggaran/item/{detailKegiatan}', 'DetailItemController@destroy')->name('anggaran.item.destroy');
+
+// Route for ajax
 Route::post('/anggaran/item/fetch', 'DetailItemController@fetch')->name('anggaran.item.fetch');
+Route::get('/anggaran/item/fetch/{id}', 'DetailItemController@get')->name('anggaran.item.get');
+
+// Route for kuitansi
+Route::post('/kuitansi', 'KuitansiController@store')->name('kuitansi.print');

@@ -22,4 +22,9 @@ class DetailItem extends Model
     {
         return $this->belongsToMany('App\Kuitansi', 'detail_kuitansis');
     }
+
+    public function detailKuitansi()
+    {
+        return $this->hasMany('App\DetailKuitansi');
+    }
 }

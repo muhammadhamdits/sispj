@@ -20,7 +20,7 @@ class CreateDetailKuitansisTable extends Migration
             $table->integer('volume');
             $table->unsignedBigInteger('detail_item_id');
             $table->unique(['kuitansi_id', 'detail_item_id']);
-            $table->foreign('kuitansi_id')->references('id')->on('suitansis')->onDelete('cascade');
+            $table->foreign('kuitansi_id')->references('id')->on('kuitansis')->onDelete('cascade');
             $table->foreign('detail_item_id')->references('id')->on('detail_items')->onDelete('cascade');
             $table->timestamps();
         });

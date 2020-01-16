@@ -170,11 +170,24 @@
 			}
 		});
 
-		$(".showhr1").click();
+		// $(".showhr1").click();
 
 		$(".addItem").click(function(event) {
 			var button = $(this).data('id');
      		$("#detail_kegiatan_id").val(button);
+		});
+
+		$(".cetakKuitansi").click(function(event) {
+			var button = $(this).data('id');
+			$.ajax({
+					url: "/anggaran/item/fetch/{id}",
+					method: "GET",
+					data: { id: button },
+					success: function(result){
+						$("#tabel-items").html(result);
+					}
+				});
+     		$("#detail_kegiatan_id2").val(button);
 		});
 	});
 	</script>

@@ -3,81 +3,61 @@
 namespace App\Http\Controllers;
 
 use App\Kuitansi;
+use App\DetailKuitansi;
 use Illuminate\Http\Request;
 
 class KuitansiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $kuitansi = Kuitansi::create([
+            'tanggal' => $request->tanggal,
+            'terima_dari' => $request->terima_dari,
+            'sebab' => $request->sebab,
+            'dibukukan_tanggal' => $request->dibukukan_tanggal,
+            'detail_kegiatan_id' => $request->detail_kegiatan_id,
+        ]);
+        $kuitansi->save();
+        
+        for($i=0; $i<=max(array_keys($request->detail_item_id)); $i++){
+            if(isset($request->detail_item_id[$i])){
+                $detailKuitansi = DetailKuitansi::create([
+                    'harga_satuan' => $request->harga_satuan[$i],
+                    'kuitansi_id' => $kuitansi->id,
+                    'volume' => $request->volume[$i],
+                    'detail_item_id' => $i,
+                ]);
+                $detailKuitansi->save();
+            }
+        }
+        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Kuitansi  $kuitansi
-     * @return \Illuminate\Http\Response
-     */
     public function show(Kuitansi $kuitansi)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Kuitansi  $kuitansi
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Kuitansi $kuitansi)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Kuitansi  $kuitansi
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Kuitansi $kuitansi)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Kuitansi  $kuitansi
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Kuitansi $kuitansi)
     {
         //
