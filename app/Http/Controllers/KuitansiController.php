@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Kuitansi;
 use App\DetailKuitansi;
 use Illuminate\Http\Request;
+use PDF;
 
 class KuitansiController extends Controller
 {
@@ -40,7 +41,9 @@ class KuitansiController extends Controller
                 $detailKuitansi->save();
             }
         }
-        
+
+        $pdf = PDF::loadview('anggaran/kuitansi', ['kuitansi' => $kuitansi]);
+    	return view('anggaran/kuitansi', ['kuitansi' => $kuitansi]);
     }
 
     public function show(Kuitansi $kuitansi)
