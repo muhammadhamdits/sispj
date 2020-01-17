@@ -1,3 +1,6 @@
+<?php
+    require_once __DIR__ . '/function.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +51,7 @@
             </tr>
 
             <tr>
-                <td colspan="7"><b style="margin-left:50px;">Seratus Ribu</b></td>
+                <td colspan="7"><b style="margin-left:50px;">{{ ucfirst(terbilang($uang))." rupiah." }}</b></td>
             </tr>
 
             <tr>
@@ -81,7 +84,7 @@
                                 <td>Dibukukan</td>
                                 <td>tgl</td>
                                 <td>:</td>
-                                <td colspan="2">02022020</td>
+                                <td colspan="2">{{ date_format(date_create($kuitansi->dibukukan_tanggal),"d F Y") }}</td>
                             </tr>
 
                             <tr>
@@ -170,7 +173,7 @@
                 <td width="30%" style="font-size:14px">
                     <table cellspacing="0" cellpadding="5" width="100%">
                         <tr>
-                            <td colspan="2">Padang, ................................... </td>
+                            <td colspan="2">Padang, {{ date_format(date_create($kuitansi->tanggal),"d F Y") }} </td>
                         </tr>
 
                         <tr>
