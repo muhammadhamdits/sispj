@@ -149,7 +149,22 @@
                     </div>
                 </div>
             </div>
-
+            @if(session('status'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-check-circle"></i> {{ session('status') }}
+                </div>
+            @elseif(session('warning'))
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-pencil"></i> {{ session('warning') }}
+                </div>
+            @elseif(session('danger'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <i class="fa fa-trash"></i> {{ session('danger') }}
+                </div>
+            @endif
             <div class="table-responsive">
                 <table style="border-collapse: separate; border-spacing: 12px;">
                     <tr>
@@ -257,7 +272,11 @@
                                                 <td class="text-right">
                                                     <button class="btn btn-success btn-xs addItem" data-toggle="modal" data-target="#modalTambahItem" data-id="{{ $tmp4[1] }}" title="Tambah Item"><i class="fa fa-plus"></i> Tambah</button>
                                                     <button class="btn btn-warning btn-xs cetakKuitansi" data-toggle="modal" data-target="#modalCetakKuitansi" data-id="{{ $tmp4[1] }}" title="Cetak Kuitansi"><i class="fa fa-print"></i> Kuitansi</button>
-                                                    <a href="" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</a>
+                                                    <button class="btn btn-danger btn-xs delang" data-id="{{ $tmp4[1] }}"><i class="fa fa-trash"></i> Hapus</button>
+                                                    <form action="{{ route('anggaran.destroy', ['id' => $tmp4[1]]) }}" method="post" id="ang-{{ $tmp4[1] }}">
+                                                        @csrf
+                                                        {{ method_field('DELETE') }}
+                                                    </form>
                                                 </td>
                                             </tr>
                                             @foreach($value4 as $value5)
@@ -272,7 +291,13 @@
                                                     <td class="text-right">{{ $tmp5[1] }}</td>
                                                     <td class="text-right">{{ $tmp5[2] }}</td>
                                                     <td class="text-right">{{ $tmp5[3] }}</td>
-                                                    <td></td>
+                                                    <td class="text-right">
+                                                        <button class="btn btn-danger btn-xs delit" data-id="{{ $tmp5[4] }}"><i class="fa fa-trash"></i> Hapus</button>
+                                                        <form action="{{ route('anggaran.item.destroy', ['id' => $tmp5[4]]) }}" method="post" id="it-{{ $tmp5[4] }}">
+                                                            @csrf
+                                                            {{ method_field('DELETE') }}
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             @endif
                                             @endforeach

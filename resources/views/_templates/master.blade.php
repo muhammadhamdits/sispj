@@ -189,6 +189,66 @@
 				});
      		$("#detail_kegiatan_id2").val(button);
 		});
+
+		$(".delang").click(function(e) {
+			const swalWithBootstrapButtons = Swal.mixin({
+				buttonsStyling: true
+			});
+
+			let aidi = $(this).data('id');
+
+			swalWithBootstrapButtons.fire({
+			title: 'Anda yakin menghapus data ini?',
+			text: "Data akan terhapus",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Ya!',
+			cancelButtonText: 'Tidak!',
+			reverseButtons: false
+			}).then((result) => {
+				if (result.value) {
+					$('#ang-'+aidi).submit();
+				} else if (result.dismiss === Swal.DismissReason.cancel) {
+					swalWithBootstrapButtons.fire({
+					title: 'Dibatalkan',
+					text: 'Data tidak jadi dihapus :)',
+					icon: 'error',
+					timer: 1000,
+					showConfirmButton: false
+					})
+				}
+			})
+		});
+
+		$(".delit").click(function(e) {
+			const swalWithBootstrapButtons = Swal.mixin({
+				buttonsStyling: true
+			});
+
+			let aidi = $(this).data('id');
+
+			swalWithBootstrapButtons.fire({
+			title: 'Anda yakin menghapus data ini?',
+			text: "Data akan terhapus",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Ya!',
+			cancelButtonText: 'Tidak!',
+			reverseButtons: false
+			}).then((result) => {
+				if (result.value) {
+					$('#it-'+aidi).submit();
+				} else if (result.dismiss === Swal.DismissReason.cancel) {
+					swalWithBootstrapButtons.fire({
+					title: 'Dibatalkan',
+					text: 'Data tidak jadi dihapus :)',
+					icon: 'error',
+					timer: 1000,
+					showConfirmButton: false
+					})
+				}
+			})
+		});
 	});
 	</script>
 </body>

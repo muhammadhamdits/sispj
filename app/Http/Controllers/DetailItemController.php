@@ -40,9 +40,12 @@ class DetailItemController extends Controller
         //
     }
 
-    public function destroy(DetailItem $detailItem)
+    public function destroy($id)
     {
-        //
+        $detailItem = DetailItem::findOrFail($id);
+        $idKegiatan = $detailItem->detailKegiatan->kegiatan->id;
+        $detailItem->delete();
+        return redirect()->route('anggaran.show', ['id' => $idKegiatan])->with('danger', 'Item Berhasil Dihapus!');
     }
 
     public function get()

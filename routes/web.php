@@ -122,7 +122,7 @@ Route::post('/anggaran/create', 'DetailKegiatanController@store')->name('anggara
 Route::get('/anggaran/{id}', 'DetailKegiatanController@show')->name('anggaran.show');
 Route::get('/anggaran/{detailKegiatan}/edit', 'DetailKegiatanController@edit')->name('anggaran.edit');
 Route::patch('/anggaran/{detailKegiatan}', 'DetailKegiatanController@update')->name('anggaran.update');
-Route::delete('/anggaran/{detailKegiatan}', 'DetailKegiatanController@destroy')->name('anggaran.destroy');
+Route::delete('/anggaran/{id}', 'DetailKegiatanController@destroy')->name('anggaran.destroy');
 Route::post('/anggaran/fetch', 'DetailKegiatanController@fetch')->name('anggaran.fetch');
 
 // Route for detail item
@@ -132,7 +132,7 @@ Route::post('/anggaran/item/create', 'DetailItemController@store')->name('anggar
 Route::get('/anggaran/item/{id}', 'DetailItemController@show')->name('anggaran.item.show');
 Route::get('/anggaran/item/{detailKegiatan}/edit', 'DetailItemController@edit')->name('anggaran.item.edit');
 Route::patch('/anggaran/item/{detailKegiatan}', 'DetailItemController@update')->name('anggaran.item.update');
-Route::delete('/anggaran/item/{detailKegiatan}', 'DetailItemController@destroy')->name('anggaran.item.destroy');
+Route::delete('/anggaran/item/{id}', 'DetailItemController@destroy')->name('anggaran.item.destroy');
 
 // Route for ajax
 Route::post('/anggaran/item/fetch', 'DetailItemController@fetch')->name('anggaran.item.fetch');
