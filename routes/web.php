@@ -120,6 +120,7 @@ Route::get('/anggaran', 'DetailKegiatanController@index')->name('anggaran.index'
 Route::get('/anggaran/create', 'DetailKegiatanController@create')->name('anggaran.create');
 Route::post('/anggaran/create', 'DetailKegiatanController@store')->name('anggaran.store');
 Route::get('/anggaran/{id}', 'DetailKegiatanController@show')->name('anggaran.show');
+Route::get('/anggaran/{id}/rekap', 'DetailKegiatanController@rekap')->name('anggaran.rekap');
 Route::get('/anggaran/{detailKegiatan}/edit', 'DetailKegiatanController@edit')->name('anggaran.edit');
 Route::patch('/anggaran/{detailKegiatan}', 'DetailKegiatanController@update')->name('anggaran.update');
 Route::delete('/anggaran/{id}', 'DetailKegiatanController@destroy')->name('anggaran.destroy');
@@ -130,13 +131,14 @@ Route::get('/anggaran/item', 'DetailItemController@index')->name('anggaran.item.
 Route::get('/anggaran/item/create', 'DetailItemController@create')->name('anggaran.item.create');
 Route::post('/anggaran/item/create', 'DetailItemController@store')->name('anggaran.item.store');
 Route::get('/anggaran/item/{id}', 'DetailItemController@show')->name('anggaran.item.show');
-Route::get('/anggaran/item/{detailKegiatan}/edit', 'DetailItemController@edit')->name('anggaran.item.edit');
-Route::patch('/anggaran/item/{detailKegiatan}', 'DetailItemController@update')->name('anggaran.item.update');
+Route::post('/anggaran/item/{id}/edit', 'DetailItemController@edit')->name('anggaran.item.edit');
+Route::patch('/anggaran/item/{id}', 'DetailItemController@update')->name('anggaran.item.update');
 Route::delete('/anggaran/item/{id}', 'DetailItemController@destroy')->name('anggaran.item.destroy');
 
 // Route for ajax
 Route::post('/anggaran/item/fetch', 'DetailItemController@fetch')->name('anggaran.item.fetch');
 Route::get('/anggaran/item/fetch/{id}', 'DetailItemController@get')->name('anggaran.item.get');
+Route::get('/anggaran/item/min/{id}', 'DetailItemController@min')->name('anggaran.item.min');
 
 // Route for kuitansi
 Route::post('/kuitansi', 'KuitansiController@store')->name('kuitansi.print');

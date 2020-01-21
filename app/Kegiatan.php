@@ -23,8 +23,8 @@ class Kegiatan extends Model
         return $this->belongsToMany('App\Sub4Uraian', 'detail_kegiatans');
     }
 
-    public function sub4_uraian($state)
-    {
-        return $this->detailKegiatan()->where('status', '=', $state);
-    }
+    // public function sub4_uraian($state)
+    // {
+    //     return $this->detailKegiatan()->where('status', '=', $state);
+    // }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DetailKegiatan extends Model
 {
-    protected $fillable = ['kegiatan_id', 'sub4_uraian_id', 'status'];
+    protected $fillable = ['kegiatan_id', 'sub4_uraian_id'];
 
     public function detailItem()
     {

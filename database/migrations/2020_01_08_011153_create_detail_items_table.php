@@ -19,6 +19,7 @@ class CreateDetailItemsTable extends Migration
             $table->unsignedBigInteger('item_id');
             $table->integer('harga_satuan');
             $table->integer('volume');
+            $table->integer('status'); // 0 = Sebelum perubahan; 1 = Setelah perubahan;
             $table->foreign('detail_kegiatan_id')->references('id')->on('detail_kegiatans')->onDelete('cascade');
             $table->foreign('item_id')->references('id')->on('items');
             $table->timestamps();

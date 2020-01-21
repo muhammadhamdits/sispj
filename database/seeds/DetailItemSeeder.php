@@ -17,6 +17,7 @@ class DetailItemSeeder extends Seeder
             'item_id' => 1,
             'harga_satuan' => 5000,
             'volume' => 7,
+            'status' => 0,
         ]);
 
         $detailItem->save();

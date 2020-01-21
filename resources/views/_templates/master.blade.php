@@ -190,6 +190,23 @@
      		$("#detail_kegiatan_id2").val(button);
 		});
 
+		$(".editItem").click(function(event) {
+			var id = $(this).data('id');
+     		$("#id_detail_item").val(id);
+			$("#formEditItem").attr("action", "/anggaran/item/"+id+"/edit");
+			$.ajax({
+					url: "/anggaran/item/min/{id}",
+					method: "GET",
+					data: {
+						id: id
+					},
+					success: function(result){
+						var min = result;
+						$("#volume2").attr("min", min);
+					}
+				});
+		});
+
 		$(".delang").click(function(e) {
 			const swalWithBootstrapButtons = Swal.mixin({
 				buttonsStyling: true

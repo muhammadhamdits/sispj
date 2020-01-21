@@ -29,6 +29,7 @@
                                 <td class="text-left">{{ $kegiatan->program->urusan->kode.'.'.$kegiatan->program->organisasi->kode.'.'.$kegiatan->program->kode.'.'.$kegiatan->kode }}</td>
                                 <td class="text-left">{{ $kegiatan->nama }}</td>
                                 <td class="text-center">
+                                    <a href="{{ route('anggaran.rekap', $kegiatan->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-file"></i> Rekap</a>
                                     <a href="{{ route('anggaran.show', $kegiatan->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> Detail</a>
                                 </td>
                             </tr>

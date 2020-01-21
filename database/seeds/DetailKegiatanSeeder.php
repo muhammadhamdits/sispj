@@ -15,7 +15,6 @@ class DetailKegiatanSeeder extends Seeder
         $detailKegiatan = DetailKegiatan::create([
             'kegiatan_id' => 1,
             'sub4_uraian_id' => 1,
-            'status' => 0,
         ]);
 
         $detailKegiatan->save();

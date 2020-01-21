@@ -56,7 +56,6 @@
                         </div>
                         <div class="modal-footer">
                             <input type="hidden" name="kegiatan_id" value="{{ $kegiatan->id }}">
-                            <input type="hidden" name="status" value="{{ $kegiatan->program->urusan->periode->jenis }}">
                             <button type="reset" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
@@ -149,6 +148,35 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Modal Edit Item -->
+            <div class="modal fade" id="modalEditItem" tabindex="-1" role="dialog" aria-labelledby="modalEditItemLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modalEditItemLabel">Edit Item</h4>
+                        </div>
+                        <form action="" method="post" id="formEditItem">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="volume">Volume : </label>
+                                <input required type="number" name="volume" id="volume2" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="harga_satuan">Harga Satuan : </label>
+                                <input required type="number" name="harga_satuan" id="harga_satuan" class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
             @if(session('status'))
                 <div class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -165,6 +193,7 @@
                     <i class="fa fa-trash"></i> {{ session('danger') }}
                 </div>
             @endif
+
             <div class="table-responsive">
                 <table style="border-collapse: separate; border-spacing: 12px;">
                     <tr>
@@ -292,6 +321,7 @@
                                                     <td class="text-right">{{ $tmp5[2] }}</td>
                                                     <td class="text-right">{{ $tmp5[3] }}</td>
                                                     <td class="text-right">
+                                                        <button class="btn btn-warning btn-xs editItem" data-toggle="modal" data-target="#modalEditItem" data-id="{{ $tmp5[4] }}" title="Edit item"><i class="fa fa-pencil"></i> Edit</button>
                                                         <button class="btn btn-danger btn-xs delit" data-id="{{ $tmp5[4] }}"><i class="fa fa-trash"></i> Hapus</button>
                                                         <form action="{{ route('anggaran.item.destroy', ['id' => $tmp5[4]]) }}" method="post" id="it-{{ $tmp5[4] }}">
                                                             @csrf

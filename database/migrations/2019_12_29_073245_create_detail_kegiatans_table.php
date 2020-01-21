@@ -17,8 +17,7 @@ class CreateDetailKegiatansTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('kegiatan_id')->unsigned()->index();
             $table->bigInteger('sub4_uraian_id')->unsigned()->index();
-            $table->integer('status'); // 0 = Sebelum perubahan; 1 = Setelah perubahan;
-            $table->unique(['kegiatan_id', 'sub4_uraian_id', 'status']);
+            $table->unique(['kegiatan_id', 'sub4_uraian_id']);
             $table->foreign('kegiatan_id')->references('id')->on('kegiatans')->onDelete('cascade');
             $table->foreign('sub4_uraian_id')->references('id')->on('sub4_uraians');
             $table->timestamps();
