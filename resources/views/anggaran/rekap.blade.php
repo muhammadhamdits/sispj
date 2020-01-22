@@ -2,6 +2,9 @@
 
 @section('content')
 <style>
+    @page { 
+        size: landscape; 
+    }
     .border{
         border: 1px solid black;
         padding-left: 2%;
@@ -24,7 +27,10 @@
     <div class="panel panel-headline">
         <div class="panel-heading">
             <h3 class="panel-title">Rekap</h3>
-            <a class="fab btn-success update-pro" title="Cetak"><i class="fa fa-print"></i> <span> Cetak</span></a>
+            <?php
+                $id = Request::segment(2);
+            ?>
+            <a class="fab btn-success update-pro" title="Cetak" target="_blank" href="{{ route('anggaran.print', ['id' => $id]) }}"><i class="fa fa-print"></i> <span> Cetak</span></a>
         </div>
         <div class="panel-body">
             <div class="border">
@@ -114,70 +120,74 @@
             <div style="border: 1px solid black; padding:0;">
 
                 <table class="tabel-border text-center" width="100%">
-                    <tr>
-                        <td rowspan="3">Kode Rekening</td>
-                        <td rowspan="3">Uraian</td>
-                        <td colspan="4">Sebelum Perubahan</td>
-                        <td colspan="4">Setelah Perubahan</td>
-                        <td colspan="2">Bertambah/Berkurang</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <td rowspan="3">Kode Rekening</td>
+                            <td rowspan="3">Uraian</td>
+                            <td colspan="4">Sebelum Perubahan</td>
+                            <td colspan="4">Setelah Perubahan</td>
+                            <td colspan="2">Bertambah/Berkurang</td>
+                        </tr>
 
-                    <tr>
-                        <td colspan="3">Rincian Perhitungan</td>
-                        <td rowspan="2">Jumlah (Rp)</td>
-                        <td colspan="3">Rincian Perhitungan</td>
-                        <td rowspan="2">Jumlah (Rp)</td>
-                        <td rowspan="2">Rp</td>
-                        <td rowspan="2">%</td>
-                    </tr>
+                        <tr>
+                            <td colspan="3">Rincian Perhitungan</td>
+                            <td rowspan="2">Jumlah (Rp)</td>
+                            <td colspan="3">Rincian Perhitungan</td>
+                            <td rowspan="2">Jumlah (Rp)</td>
+                            <td rowspan="2">Rp</td>
+                            <td rowspan="2">%</td>
+                        </tr>
 
-                    <tr>
-                        <td>Volume</td>
-                        <td>Satuan</td>
-                        <td>Harga Satuan</td>
-                        <td>Volume</td>
-                        <td>Satuan</td>
-                        <td>Harga Satuan</td>
-                    </tr>
+                        <tr>
+                            <td>Volume</td>
+                            <td>Satuan</td>
+                            <td>Harga Satuan</td>
+                            <td>Volume</td>
+                            <td>Satuan</td>
+                            <td>Harga Satuan</td>
+                        </tr>
 
-                    <tr>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6 = ( 3 x 5 )</td>
-                        <td>7</td>
-                        <td>8</td>
-                        <td>9</td>
-                        <td>10</td>
-                        <td>11</td>
-                        <td>12</td>
-                    </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6 = ( 3 x 5 )</td>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                        </tr>
+                    </thead>
 
-                    <tr>
-                        <td>5.2</td>
-                        <td>BELANJA LANGSUNG</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>226.061.200,00</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>96.521.200,00</td>
-                        <td>(129.240.000,00)</td>
-                        <td>(57)</td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <td>5.2</td>
+                            <td>BELANJA LANGSUNG</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>226.061.200,00</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>96.521.200,00</td>
+                            <td>(129.240.000,00)</td>
+                            <td>(57)</td>
+                        </tr>
 
-                    <tr>
-                        <td colspan="5">Jumlah</td>
-                        <td>226.061.200,00</td>
-                        <td colspan="3"></td>
-                        <td>96.821.200,00</td>
-                        <td>(129.240.000,00)</td>
-                        <td>(57)</td>
-                    </tr>
+                        <tr>
+                            <td colspan="5">Jumlah</td>
+                            <td>226.061.200,00</td>
+                            <td colspan="3"></td>
+                            <td>96.821.200,00</td>
+                            <td>(129.240.000,00)</td>
+                            <td>(57)</td>
+                        </tr>
+                    </tbody>
 
                     <tfoot>
                         <tr>

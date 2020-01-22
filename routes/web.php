@@ -121,6 +121,7 @@ Route::get('/anggaran/create', 'DetailKegiatanController@create')->name('anggara
 Route::post('/anggaran/create', 'DetailKegiatanController@store')->name('anggaran.store');
 Route::get('/anggaran/{id}', 'DetailKegiatanController@show')->name('anggaran.show');
 Route::get('/anggaran/{id}/rekap', 'DetailKegiatanController@rekap')->name('anggaran.rekap');
+Route::get('/anggaran/{id}/print', 'DetailKegiatanController@print')->name('anggaran.print');
 Route::get('/anggaran/{detailKegiatan}/edit', 'DetailKegiatanController@edit')->name('anggaran.edit');
 Route::patch('/anggaran/{detailKegiatan}', 'DetailKegiatanController@update')->name('anggaran.update');
 Route::delete('/anggaran/{id}', 'DetailKegiatanController@destroy')->name('anggaran.destroy');

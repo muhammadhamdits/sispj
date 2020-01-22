@@ -68,6 +68,11 @@ class DetailKegiatanController extends Controller
         return view('anggaran/rekap');
     }
 
+    public function print()
+    {
+        return view('anggaran/print');
+    }
+
     public function edit(DetailKegiatan $detailKegiatan)
     {
         //
