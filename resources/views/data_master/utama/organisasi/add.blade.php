@@ -8,7 +8,7 @@
             <h3 class="panel-title">Tambah data Organisasi</h3>
             <p class="panel-subtitle">Periode: <b>{{ $data->tahun }} - {{ $data->jenis == 0 ? 'Sebelum perubahan' : 'Setelah perubahan' }}</b></p>
             <div class="text-right">
-                <a class="btn btn-success update-pro" href="{{ route('admin.utama.index') }}" title="Back"><i class="fa fa-arrow-left"></i> <span> Kembali</span></a>
+                <a class="btn btn-success update-pro" href="{{ route('admin.utama.index', ['tabName' => 'organisasi']) }}" title="Back"><i class="fa fa-arrow-left"></i> <span> Kembali</span></a>
             </div>
         </div>
         <div class="panel-body">

@@ -266,6 +266,14 @@
 				}
 			})
 		});
+
+		$("#role").change(function(e) {
+			if($(this).val() == 0){
+				$("#organisasi").parent().hide();
+			} else{
+				$("#organisasi").parent().show();
+			}
+		});
 	});
 	</script>
 </body>

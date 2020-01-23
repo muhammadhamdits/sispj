@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'username', 'password', 'role',
+        'name', 'username', 'password', 'role', 'organisasi_id'
     ];
 
     /**
@@ -27,4 +27,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function organisasi()
+    {
+        return $this->belongsTo('App\Organisasi');
+    }
 }

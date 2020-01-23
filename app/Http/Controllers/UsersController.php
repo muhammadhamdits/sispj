@@ -22,25 +22,46 @@ class UsersController extends Controller
 
     public function create()
     {
-        return view('data_master/user/add');
+        $data = Periode::where('status', 1)->first();
+        return view('data_master/user/add', compact('data'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'username' => 'required',
-            'password' => 'required',
-            'role' => 'required',
-        ]);
+        if($request->role == 0){
+            $request->validate([
+                'name' => 'required',
+                'username' => 'required',
+                'password' => 'required',
+                'role' => 'required',
+            ]);
+        } else{
+            $request->validate([
+                'name' => 'required',
+                'username' => 'required',
+                'password' => 'required',
+                'role' => 'required',
+                'organisasi' => 'required',
+            ]);
+        }
 
         try {
-            $user = User::create([
-                'name' => $request->name,
-                'username' => $request->username,
-                'password' => bcrypt($request->password),
-                'role' => $request->role,
-            ]);
+            if($request->role == 0){
+                $user = User::create([
+                    'name' => $request->name,
+                    'username' => $request->username,
+                    'password' => bcrypt($request->password),
+                    'role' => $request->role,
+                ]);
+            } else{
+                $user = User::create([
+                    'name' => $request->name,
+                    'username' => $request->username,
+                    'password' => bcrypt($request->password),
+                    'role' => $request->role,
+                    'organisasi_id' => $request->organisasi,
+                ]);
+            }
             $user->save();
             return redirect()->route('admin.user.index')->with('status', 'Data user '.$request->name.' Berhasil Ditambahkan!');
         } catch (\Throwable $th) {

@@ -40,7 +40,7 @@ class OrganisasiController extends Controller
         try {
             $organisasi = Organisasi::create($request->all());
             $organisasi->save();
-            return redirect()->route('admin.utama.index')->with('status', 'Data Organisasi '.$organisasi->nama.' Berhasil Ditambah!');
+            return redirect()->route('admin.utama.index', ['tabName' => 'organisasi'])->with('status', 'Data Organisasi '.$organisasi->nama.' Berhasil Ditambah!');
         } catch (\Throwable $th) {
             return redirect()->route('admin.organisasi.create')->with('danger', 'Data dengan kode '.$request->kode.' sudah ada!');
         }
@@ -68,7 +68,7 @@ class OrganisasiController extends Controller
         try {
             $organisasi = Organisasi::findOrFail($id);
             $organisasi->update($request->all());
-            return redirect()->route('admin.utama.index')->with('warning', 'Data Organisasi '.$organisasi->nama.' Berhasil Diperbaharui!');
+            return redirect()->route('admin.utama.index', ['tabName' => 'organisasi'])->with('warning', 'Data Organisasi '.$organisasi->nama.' Berhasil Diperbaharui!');
         } catch (\Throwable $th) {
             return redirect()->route('admin.organisasi.edit', ['id' => $id])->with('danger', 'Data dengan kode '.$request->kode.' sudah ada!');
         }
@@ -79,7 +79,7 @@ class OrganisasiController extends Controller
         try {
             $organisasi = Organisasi::findOrFail($id);
             $organisasi->delete();
-            return redirect()->route('admin.utama.index')->with('danger', 'Data Organisasi '.$organisasi->nama.' Berhasil Dihapus!');
+            return redirect()->route('admin.utama.index', ['tabName' => 'organisasi'])->with('danger', 'Data Organisasi '.$organisasi->nama.' Berhasil Dihapus!');
         } catch (\Throwable $th) {
             $dependent = "";
             $data = $organisasi->program;
@@ -92,7 +92,7 @@ class OrganisasiController extends Controller
                     $dependent .= $data[$i]->nama.".";
                 }
             }
-            return redirect()->route('admin.utama.index')->with('danger', 'Data Organisasi '.$organisasi->nama.' gagal Dihapus! Data digunakan pada program '.$dependent);
+            return redirect()->route('admin.utama.index', ['tabName' => 'organisasi'])->with('danger', 'Data Organisasi '.$organisasi->nama.' gagal Dihapus! Data digunakan pada program '.$dependent);
         }
     }
 }

@@ -58,11 +58,25 @@
                     <select name="role" id="role" class="form-control @error('role') is-invalid @enderror">
                         <option value="null" disabled selected>Pilih role user</option>
                         <option value="0">Admin</option>
-                        <option value="1">Operator</option>
+                        <option value="1">Admin Organisasi</option>
+                        <option value="2">Operator</option>
                     </select>
 
                     @error('role')
                         <div class="invalid-feedback text-danger">{{ $message = "Pilih role user terlebih dahulu!" }}</div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="organisasi">Organisasi : </label>
+                    <select name="organisasi" id="organisasi" class="form-control @error('organisasi') is-invalid @enderror">
+                        <option value="null" disabled selected>Pilih organisasi user</option>
+                        @foreach($data->organisasi as $d)
+                            <option value="{{ $d->id }}">{{ $d->nama }}</option>
+                        @endforeach
+                    </select>
+
+                    @error('organisasi')
+                        <div class="invalid-feedback text-danger">{{ $message = "Pilih organisasi terlebih dahulu!" }}</div>
                     @enderror
                 </div>
                 <br>

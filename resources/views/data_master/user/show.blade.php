@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label for="role">Role : </label>
-                <input class="form-control transparent" disabled value="{{ $user->role == 0 ? 'Admin' : 'Operator' }}">
+                <input class="form-control transparent" disabled value="{{ $user->role == 0 ? 'Admin' : $user->role == 1 ? 'Admin Organisasi' : 'Operator' }}">
             </div>
             <br>
         </div>

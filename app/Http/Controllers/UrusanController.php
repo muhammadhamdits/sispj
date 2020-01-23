@@ -34,7 +34,7 @@ class UrusanController extends Controller
         try {
             $urusan = Urusan::create($request->all());
             $urusan->save();
-            return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])->with('status', 'Data urusan '.$request->nama.' berhasil ditambahkan!');
+            return redirect()->route('admin.utama.index')->with('status', 'Data urusan '.$request->nama.' berhasil ditambahkan!');
         } catch (\Throwable $th) {
             return redirect()->route('admin.urusan.create')->with('danger', 'Data dengan kode '.$request->kode.' sudah ada!');
         }
@@ -62,7 +62,7 @@ class UrusanController extends Controller
         try {
             $urusan = Urusan::findOrFail($id);
             $urusan->update($request->all());
-            return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])->with('warning', 'Data urusan '.$request->nama.' berhasil diperbaharui!');
+            return redirect()->route('admin.utama.index')->with('warning', 'Data urusan '.$request->nama.' berhasil diperbaharui!');
         } catch (\Throwable $th) {
             return redirect()->route('admin.urusan.edit', ['id' => $id])->with('danger', 'Data dengan kode '.$request->kode.' sudah ada!');
         }
@@ -73,7 +73,7 @@ class UrusanController extends Controller
         try {
             $urusan = Urusan::findOrFail($id);
             $urusan->delete();
-            return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])->with('danger', 'Data urusan  '.$urusan->nama.' berhasil dihapus!');
+            return redirect()->route('admin.utama.index')->with('danger', 'Data urusan  '.$urusan->nama.' berhasil dihapus!');
         } catch (\Throwable $th) {
             $dependent = "";
             $data = $urusan->program;
@@ -86,7 +86,7 @@ class UrusanController extends Controller
                     $dependent .= $data[$i]->nama.".";
                 }
             }
-            return redirect()->route('admin.utama.index', ['tabName' => 'urusan'])->with('danger', 'Data urusan  '.$urusan->nama.' gagal dihapus! Data digunakan pada program '.$dependent);
+            return redirect()->route('admin.utama.index')->with('danger', 'Data urusan  '.$urusan->nama.' gagal dihapus! Data digunakan pada program '.$dependent);
         }
     }
 }

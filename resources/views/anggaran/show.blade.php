@@ -9,6 +9,7 @@
             <p class="panel-subtitle">Periode: <b>{{ $kegiatan->program->urusan->periode->tahun }} - {{ $kegiatan->program->urusan->periode->jenis == 0 ? 'Sebelum perubahan' : 'Setelah perubahan' }}</b></p>
         </div>
         <div class="panel-body">
+            @if(Auth::user()->role == 0 || Auth::user()->role == 1)
             <!-- Modal Urian -->
             <button class="fab btn-success update-pro" data-toggle="modal" data-target="#modalTambahDetailKegiatan" title="Tambah uraian"><i class="fa fa-plus"></i> <span> Tambah Uraian</span></button>
             <div class="modal fade" id="modalTambahDetailKegiatan" tabindex="-1" role="dialog" aria-labelledby="modalTambahDetailKegiatanLabel" aria-hidden="true">
@@ -102,6 +103,35 @@
                 </div>
             </div>
 
+            <!-- Modal Edit Item -->
+            <div class="modal fade" id="modalEditItem" tabindex="-1" role="dialog" aria-labelledby="modalEditItemLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modalEditItemLabel">Edit Item</h4>
+                        </div>
+                        <form action="" method="post" id="formEditItem">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="volume">Volume : </label>
+                                <input required type="number" name="volume" id="volume2" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="harga_satuan">Harga Satuan : </label>
+                                <input required type="number" name="harga_satuan" id="harga_satuan" class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @endif
+
             <!-- Modal Kuitansi -->
             <div class="modal fade" id="modalCetakKuitansi" tabindex="-1" role="dialog" aria-labelledby="modalCetakKuitansiLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -143,34 +173,6 @@
                             <input type="hidden" name="detail_kegiatan_id" id="detail_kegiatan_id2">
                             <button type="reset" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Cetak</button>
-                        </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal Edit Item -->
-            <div class="modal fade" id="modalEditItem" tabindex="-1" role="dialog" aria-labelledby="modalEditItemLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="modalEditItemLabel">Edit Item</h4>
-                        </div>
-                        <form action="" method="post" id="formEditItem">
-                        @csrf
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="volume">Volume : </label>
-                                <input required type="number" name="volume" id="volume2" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="harga_satuan">Harga Satuan : </label>
-                                <input required type="number" name="harga_satuan" id="harga_satuan" class="form-control">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
                         </div>
                         </form>
                     </div>
@@ -299,13 +301,17 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td class="text-right">
+                                                    @if(Auth::user()->role == 0 || Auth::user()->role == 1)
                                                     <button class="btn btn-success btn-xs addItem" data-toggle="modal" data-target="#modalTambahItem" data-id="{{ $tmp4[1] }}" title="Tambah Item"><i class="fa fa-plus"></i> Tambah</button>
+                                                    @endif
                                                     <button class="btn btn-warning btn-xs cetakKuitansi" data-toggle="modal" data-target="#modalCetakKuitansi" data-id="{{ $tmp4[1] }}" title="Cetak Kuitansi"><i class="fa fa-print"></i> Kuitansi</button>
+                                                    @if(Auth::user()->role == 0 || Auth::user()->role == 1)
                                                     <button class="btn btn-danger btn-xs delang" data-id="{{ $tmp4[1] }}"><i class="fa fa-trash"></i> Hapus</button>
                                                     <form action="{{ route('anggaran.destroy', ['id' => $tmp4[1]]) }}" method="post" id="ang-{{ $tmp4[1] }}">
                                                         @csrf
                                                         {{ method_field('DELETE') }}
                                                     </form>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @foreach($value4 as $value5)
@@ -321,12 +327,14 @@
                                                     <td class="text-right">{{ $tmp5[2] }}</td>
                                                     <td class="text-right">{{ $tmp5[3] }}</td>
                                                     <td class="text-right">
+                                                        @if(Auth::user()->role == 0 || Auth::user()->role == 1)
                                                         <button class="btn btn-warning btn-xs editItem" data-toggle="modal" data-target="#modalEditItem" data-id="{{ $tmp5[4] }}" title="Edit item"><i class="fa fa-pencil"></i> Edit</button>
                                                         <button class="btn btn-danger btn-xs delit" data-id="{{ $tmp5[4] }}"><i class="fa fa-trash"></i> Hapus</button>
                                                         <form action="{{ route('anggaran.item.destroy', ['id' => $tmp5[4]]) }}" method="post" id="it-{{ $tmp5[4] }}">
                                                             @csrf
                                                             {{ method_field('DELETE') }}
                                                         </form>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endif

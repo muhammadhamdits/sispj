@@ -44,8 +44,10 @@
                             <thead>
                                 <tr>
                                     <th class="text-left">No</th>
-                                    <th class="text-left">Name</th>
+                                    <th class="text-left">Nama</th>
                                     <th class="text-left">Username</th>
+                                    <th class="text-left">Role</th>
+                                    <th class="text-left">Organisasi</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -55,6 +57,8 @@
                                     <td class="text-left">{{ $loop->iteration }}</td>
                                     <td class="text-left">{{ $user->name }}</td>
                                     <td class="text-left">{{ $user->username }}</td>
+                                    <td class="text-left">{{ $user->role == 0 ? 'Admin' : ($user->role == 1 ? 'Admin Organisasi' : 'Operator') }}</td>
+                                    <td class="text-center">{{ $user->role == 0 ? '-' : $user->organisasi->nama }}</td>
                                     <td>
                                         <a href="{{ route('admin.user.show', $user->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> View</a>
                                         <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>

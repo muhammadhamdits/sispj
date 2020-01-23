@@ -14,11 +14,15 @@
             <!-- TABBED CONTENT -->
             <div class="custom-tabs-line tabs-line-bottom left-aligned">
                 <ul class="nav" role="tablist">
-                    <li class="{{ isset($_GET['tabName']) ? '' : 'active' }}"><a href="#tab-organisasi" role="tab" data-toggle="tab">Organisasi</a></li>
-                    <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'urusan' ? 'active' : '' : '' }}"><a href="#tab-urusan" role="tab" data-toggle="tab">Urusan</a></li>
+                    <li class="{{ isset($_GET['tabName']) ? '' : 'active' }}"><a href="#tab-urusan" role="tab" data-toggle="tab">Urusan</a></li>
+                    @if(Auth::user()->role == 0)
+                    <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'organisasi' ? 'active' : '' : '' }}"><a href="#tab-organisasi" role="tab" data-toggle="tab">Organisasi</a></li>
+                    @endif
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'program' ? 'active' : '' : '' }}"><a href="#tab-program" role="tab" data-toggle="tab">Program</a></li>                    
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'kegiatan' ? 'active' : '' : '' }}"><a href="#tab-kegiatan" role="tab" data-toggle="tab">Kegiatan</a></li>
+                    @if(Auth::user()->role == 0)
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'periode' ? 'active' : '' : '' }}"><a href="#tab-periode" role="tab" data-toggle="tab">Periode</a></li>
+                    @endif
                 </ul>
             </div>
             @if(session('status'))
@@ -41,45 +45,8 @@
                 </div>
             @endif
             <div class="tab-content">
-                <!-- Konten tab organisasi -->
-                <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? '' : 'active' }}" id="tab-organisasi">
-                    <div class="text-right">
-                        <a class="fab update-pro btn-success" href="{{ route('admin.organisasi.create') }}" title="Tambah data organisasi"><i class="fa fa-plus"> </i> <span> Tambah Data</span></a>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table project-table text-center" id="tabel-organisasi">
-                            <thead>
-                                <tr>
-                                    <th class="text-left">No</th>
-                                    <th class="text-left">Kode Organisasi</th>
-                                    <th class="text-left">Nama Organisasi</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($data->organisasi as $organisasi)
-                                    <tr>
-                                        <td class="text-left">{{ $loop->iteration }}</td>
-                                        <td class="text-left">{{ $organisasi->kode }}</td>
-                                        <td class="text-left">{{ $organisasi->nama }}</td>
-                                        <td>
-                                            <a href="{{ route('admin.organisasi.show', $organisasi->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> Lihat</a>
-                                            <a href="{{ route('admin.organisasi.edit', $organisasi->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-                                            <form style="display: inline" method="POST" id="data-{{ '1'.$organisasi->id }}" action="{{ route('admin.organisasi.destroy', $organisasi->id) }}">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-                                            </form>
-                                            <button class="btn btn-danger btn-xs" onclick="remove({{ '1'.$organisasi->id }})"><i class="fa fa-trash"></i> Hapus</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
                 <!--  Konten tab urusan -->
-                <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'urusan' ? 'active' : '' : '' }}" id="tab-urusan">
+                <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? '' : 'active' }}" id="tab-urusan">
                     <div class="text-right">
                         <a class="fab btn-success update-pro" href="{{ route('admin.urusan.create') }}" title="Tambah data urusan"><i class="fa fa-plus"></i> <span> Tambah Data</span></a>
                     </div>
@@ -114,7 +81,44 @@
                         </table>
                     </div>
                 </div>
-
+                @if(Auth::user()->role == 0)
+                <!-- Konten tab organisasi -->
+                <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'organisasi' ? 'active' : '' : '' }}" id="tab-organisasi">
+                    <div class="text-right">
+                        <a class="fab update-pro btn-success" href="{{ route('admin.organisasi.create') }}" title="Tambah data organisasi"><i class="fa fa-plus"> </i> <span> Tambah Data</span></a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table project-table text-center" id="tabel-organisasi">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">No</th>
+                                    <th class="text-left">Kode Organisasi</th>
+                                    <th class="text-left">Nama Organisasi</th>
+                                    <th class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($data->organisasi as $organisasi)
+                                    <tr>
+                                        <td class="text-left">{{ $loop->iteration }}</td>
+                                        <td class="text-left">{{ $organisasi->kode }}</td>
+                                        <td class="text-left">{{ $organisasi->nama }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.organisasi.show', $organisasi->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"></i> Lihat</a>
+                                            <a href="{{ route('admin.organisasi.edit', $organisasi->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"></i> Edit</a>
+                                            <form style="display: inline" method="POST" id="data-{{ '1'.$organisasi->id }}" action="{{ route('admin.organisasi.destroy', $organisasi->id) }}">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                            </form>
+                                            <button class="btn btn-danger btn-xs" onclick="remove({{ '1'.$organisasi->id }})"><i class="fa fa-trash"></i> Hapus</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                @endif
                 <!--  Konten tab program -->
                 <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'program' ? 'active' : '' : '' }}" id="tab-program">
                     <div class="text-right">
@@ -192,7 +196,7 @@
                         </table>
                     </div>
                 </div>
-
+                @if(Auth::user()->role == 0)
                 <!-- Konten tab periode -->
                 <div class="tab-pane fade in row {{ isset($_GET['tabName']) ? $_GET['tabName'] == 'periode' ? 'active' : '' : '' }}" id="tab-periode">
                     <div class="text-right">
@@ -241,6 +245,7 @@
                         </table>
                     </div>
                 </div>
+                @endif
                 <!-- Akhir konten masing-masing tab -->
             </div>
             <!-- END TABBED CONTENT -->
