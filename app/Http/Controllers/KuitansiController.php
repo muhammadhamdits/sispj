@@ -11,7 +11,9 @@ class KuitansiController extends Controller
 {
     public function index()
     {
-        //
+        $data = \App\Periode::where('status', '=', 1)->first();
+        $kuitansis = Kuitansi::all();
+        return view('kuitansi/index', compact('data', 'kuitansis'));
     }
 
     public function create()
@@ -41,14 +43,14 @@ class KuitansiController extends Controller
                 $detailKuitansi->save();
             }
         }
-
+        $this->show($kuitansi);
         $pdf = PDF::loadview('anggaran/kuitansi', ['kuitansi' => $kuitansi]);
     	return view('anggaran/kuitansi', ['kuitansi' => $kuitansi]);
     }
 
     public function show(Kuitansi $kuitansi)
     {
-        //
+        return view('kuitansi/show', compact('kuitansi'));
     }
 
     public function edit(Kuitansi $kuitansi)
@@ -64,5 +66,11 @@ class KuitansiController extends Controller
     public function destroy(Kuitansi $kuitansi)
     {
         //
+    }
+
+    public function cetak(Kuitansi $kuitansi)
+    {
+        $pdf = PDF::loadview('anggaran/kuitansi', compact('kuitansi'));
+    	return view('anggaran/kuitansi', compact('kuitansi'));
     }
 }

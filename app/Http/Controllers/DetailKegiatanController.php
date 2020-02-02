@@ -23,7 +23,16 @@ class DetailKegiatanController extends Controller
     public function index()
     {
         $data = Periode::where('status', 1)->first();
-        $kegiatans = Kegiatan::all();
+        if(\Auth::user()->role != 0){
+            $programs = \Auth::user()->organisasi->program;
+            foreach($programs as $program){
+                foreach($program->kegiatan as $kegiatan){
+                    $kegiatans[] = $kegiatan;
+                }
+            }
+        }else{
+            $kegiatans = Kegiatan::all();
+        }
         return view('anggaran/index', ['data' => $data, 'kegiatans' => $kegiatans]);
     }
 
@@ -59,18 +68,24 @@ class DetailKegiatanController extends Controller
                 }
             }
         }
-        
+        // dd($data);
         return view('anggaran/show', ['kegiatan' => $kegiatan, 'uraians' => $uraians, 'data' => $data, 'items' => $items]);
     }
 
-    public function rekap()
+    public function rekap($id)
     {
-        return view('anggaran/rekap');
+        $kegiatan = Kegiatan::findOrFail($id);
+        $data = $this->getTableData($id);
+        // dd($data);
+        return view('anggaran/rekap', compact('kegiatan', 'data'));
     }
-
-    public function print()
+    
+    public function print($id)
     {
-        return view('anggaran/print');
+        $kegiatan = Kegiatan::findOrFail($id);
+        $data = $this->getTableData($id);
+        // dd($data);
+        return view('anggaran/print', compact('kegiatan', 'data'));
     }
 
     public function edit(DetailKegiatan $detailKegiatan)
@@ -110,5 +125,29 @@ class DetailKegiatanController extends Controller
             $output .= "<option value='$d->id'>$d->nama</option>";
         }
         echo($output);
+    }
+
+    public function getTableData($id)
+    {
+        $kegiatan = Kegiatan::findOrFail($id);
+        $data = [];
+        foreach($kegiatan->sub4Uraian as $d){
+            $detail = DetailKegiatan::where([['kegiatan_id', '=', $id], ['sub4_uraian_id', '=', $d->id]])->first();
+            $jumlah0 = 0;
+            $jumlah1 = 0;
+            
+            foreach($detail->detailItem as $detailItem){
+                if($detailItem->status == 0){
+                    $data[$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'-'.$d->sub3Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'.'.$d->rekening.'-'.$detail->id.'-'.$d->nama][0][] = $detailItem->item->nama.'-'.$detailItem->volume.'-'.$detailItem->item->satuan.'-'.$detailItem->harga_satuan.'-'.$detailItem->id;
+                    $jumlah0 += $detailItem->harga_satuan*$detailItem->volume;
+                } else{
+                    $data[$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'-'.$d->sub3Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'.'.$d->rekening.'-'.$detail->id.'-'.$d->nama][1][] = $detailItem->item->nama.'-'.$detailItem->volume.'-'.$detailItem->item->satuan.'-'.$detailItem->harga_satuan.'-'.$detailItem->id;
+                    $jumlah1 += $detailItem->harga_satuan*$detailItem->volume;
+                }
+            }
+            $data[$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'-'.$d->sub3Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'.'.$d->rekening.'-'.$detail->id.'-'.$d->nama][0][] = $jumlah0;
+            $data[$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->subUraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'-'.$d->sub3Uraian->sub2Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'-'.$d->sub3Uraian->nama][$d->sub3Uraian->sub2Uraian->subUraian->uraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->subUraian->rekening.'.'.$d->sub3Uraian->sub2Uraian->rekening.'.'.$d->sub3Uraian->rekening.'.'.$d->rekening.'-'.$detail->id.'-'.$d->nama][1][] = $jumlah1;
+        }
+        return $data;
     }
 }

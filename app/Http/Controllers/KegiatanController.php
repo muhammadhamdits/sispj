@@ -22,7 +22,15 @@ class KegiatanController extends Controller
     public function create()
     {
         $data = Periode::where('status', 1)->first();
-        $programs = Program::all();
+        if(\Auth::user()->role != 0){
+            if(\Auth::user()->organisasi->program->isEmpty()){
+                $programs = [];
+            }else{
+                $programs = \Auth::user()->organisasi->program;
+            }
+        }else{
+            $programs = Program::all();
+        }
 
         return view('data_master.utama.kegiatan.create', ['data' => $data, 'programs' => $programs]);
     }

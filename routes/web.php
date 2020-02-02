@@ -149,6 +149,9 @@ Route::group(['middleware' => ['role:0,1,2']], function () {
     
     // Route for kuitansi
     Route::post('/kuitansi', 'KuitansiController@store')->name('kuitansi.print');
+    Route::get('/kuitansi', 'KuitansiController@index')->name('kuitansi.index');
+    Route::get('/kuitansi/{kuitansi}/print', 'KuitansiController@cetak')->name('kuitansi.cetak');
+    Route::get('/kuitansi/{kuitansi}', 'KuitansiController@show')->name('kuitansi.show');
 });
 
 

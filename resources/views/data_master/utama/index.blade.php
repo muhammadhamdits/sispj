@@ -17,11 +17,10 @@
                     <li class="{{ isset($_GET['tabName']) ? '' : 'active' }}"><a href="#tab-urusan" role="tab" data-toggle="tab">Urusan</a></li>
                     @if(Auth::user()->role == 0)
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'organisasi' ? 'active' : '' : '' }}"><a href="#tab-organisasi" role="tab" data-toggle="tab">Organisasi</a></li>
-                    @endif
+                    <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'periode' ? 'active' : '' : '' }}"><a href="#tab-periode" role="tab" data-toggle="tab">Periode</a></li>
+                    @else
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'program' ? 'active' : '' : '' }}"><a href="#tab-program" role="tab" data-toggle="tab">Program</a></li>                    
                     <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'kegiatan' ? 'active' : '' : '' }}"><a href="#tab-kegiatan" role="tab" data-toggle="tab">Kegiatan</a></li>
-                    @if(Auth::user()->role == 0)
-                    <li class="{{ isset($_GET['tabName']) ? $_GET['tabName'] == 'periode' ? 'active' : '' : '' }}"><a href="#tab-periode" role="tab" data-toggle="tab">Periode</a></li>
                     @endif
                 </ul>
             </div>
@@ -135,23 +134,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($programs as $program)
-                                @if($program->urusan->periode->status == 1 && $program->organisasi->periode->status == 1)
-                                <tr>
-                                    <td class="text-left">{{ $loop->iteration }}</td>
-                                    <td class="text-left">{{ $program->urusan->kode.".".$program->organisasi->kode.".".$program->kode }}</td>
-                                    <td class="text-left">{{ $program->nama }}</td>
-                                    <td>
-                                        <a href="{{ route('admin.program.show', $program->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"> Lihat</i></a>
-                                        <a href="{{ route('admin.program.edit', $program->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"> Edit</i></a>
-                                        <form style="display: inline" method="POST" id="data-{{ '3'.$program->id }}" action="{{ route('admin.program.destroy', $program->id) }}">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-                                        </form>
-                                        <button onclick="remove({{ '3'.$program->id }})" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</button>
-                                    </td>
-                                </tr>
+                                @if(\Auth::user()->role != 0)
+                                    <?php
+                                        if(\Auth::user()->organisasi->program->isEmpty()){
+                                            $programs = [];
+                                        }else{
+                                            $programs = \Auth::user()->organisasi->program;
+                                        }
+                                    ?>
                                 @endif
+
+                                @foreach($programs as $program)
+                                    @if($program->urusan->periode->status == 1 && $program->organisasi->periode->status == 1)
+                                    <tr>
+                                        <td class="text-left">{{ $loop->iteration }}</td>
+                                        <td class="text-left">{{ $program->urusan->kode.".".$program->organisasi->kode.".".$program->kode }}</td>
+                                        <td class="text-left">{{ $program->nama }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.program.show', $program->id) }}" class="btn btn-success btn-xs"><i class="fa fa-eye"> Lihat</i></a>
+                                            <a href="{{ route('admin.program.edit', $program->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-pencil"> Edit</i></a>
+                                            <form style="display: inline" method="POST" id="data-{{ '3'.$program->id }}" action="{{ route('admin.program.destroy', $program->id) }}">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                            </form>
+                                            <button onclick="remove({{ '3'.$program->id }})" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</button>
+                                        </td>
+                                    </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
@@ -174,8 +183,24 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            @if(\Auth::user()->role != 0)
+                                <?php
+                                    if(\Auth::user()->organisasi->program->isEmpty()){
+                                        $kegiatans = [];
+                                    }else{
+                                        $kegiatans = [];
+                                        $programs = \Auth::user()->organisasi->program;
+                                        foreach($programs as $program){
+                                            foreach($program->kegiatan as $kegiatan){
+                                                $kegiatans[] = $kegiatan;
+                                            }
+                                        }
+                                    }
+                                ?>
+                            @endif
+                            
                             @foreach($kegiatans as $kegiatan)
-                            @if($kegiatan->program->urusan->periode->status == 1 && $program->organisasi->periode->status == 1)
+                            @if($kegiatan->program->urusan->periode->status == 1 && $kegiatan->program->organisasi->periode->status == 1)
                                 <tr>
                                     <td class="text-left">{{ $loop->iteration }}</td>
                                     <td class="text-left">{{ $kegiatan->program->urusan->kode.".".$kegiatan->program->organisasi->kode.".".$kegiatan->program->kode.".".$kegiatan->kode }}</td>

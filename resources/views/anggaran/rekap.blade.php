@@ -21,6 +21,11 @@
     tfoot td{
         border: none !important;
     }
+    .tbody td{
+        border-bottom: none !important;
+        border-top: none !important;
+        padding-left: 1%
+    }
 </style>
 <div class="main">
     <!-- OVERVIEW -->
@@ -163,41 +168,226 @@
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>5.2</td>
-                            <td>BELANJA LANGSUNG</td>
+                    <tbody class="tbody">
+                        <?php
+                            $sum0 = 0;
+                            $sum1 = 0;
+                        ?>
+                        @foreach($data as $key => $value)
+                        <?php
+                            $tmp = explode('-',$key);
+                            $total0 = 0;
+                            $total1 = 0;
+                        ?>
+                        <tr id="{{ $tmp[0] }}">
+                            <td class="text-left">{{ current($tmp) }}</td>
+                            <td class="text-left" style="padding-left: 0.5%">{{ end($tmp) }}</td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>226.061.200,00</td>
+                            <td class="text-right"></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>96.521.200,00</td>
-                            <td>(129.240.000,00)</td>
+                            <td class="text-right">96.521.200,00</td>
+                            <td class="text-right">(129.240.000,00)</td>
                             <td>(57)</td>
                         </tr>
+                            @foreach($value as $key1 => $value1)
+                            <?php
+                                $tmp1 = explode('-',$key1);
+                                $total10 = 0;
+                                $total11 = 0;
+                            ?>
+                            <tr id="{{ $tmp1[0] }}">
+                                <td class="text-left">{{ current($tmp1) }}</td>
+                                <td class="text-left" style="padding-left: 0.5%">{{ end($tmp1) }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-right">96.521.200,00</td>
+                                <td class="text-right">(129.240.000,00)</td>
+                                <td>(57)</td>
+                            </tr>
+                                @foreach($value1 as $key2 => $value2)
+                                <?php
+                                    $tmp2 = explode('-',$key2);
+                                    $total20 = 0;
+                                    $total21 = 0;
+                                ?>
+                                <tr id="{{ $tmp2[0] }}">
+                                    <td class="text-left">{{ current($tmp2) }}</td>
+                                    <td class="text-left" style="padding-left: 0.5%">{{ end($tmp2) }}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right">96.521.200,00</td>
+                                    <td class="text-right">(129.240.000,00)</td>
+                                    <td>(57)</td>
+                                </tr>
+                                    @foreach($value2 as $key3 => $value3)
+                                    <?php
+                                        $tmp3 = explode('-',$key3);
+                                        $total30 = 0;
+                                        $total31 = 0;
+                                    ?>
+                                    <tr id="{{ $tmp3[0] }}">
+                                        <td class="text-left">{{ current($tmp3) }}</td>
+                                        <td class="text-left" style="padding-left: 0.5%">{{ end($tmp3) }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right">96.521.200,00</td>
+                                        <td class="text-right">(129.240.000,00)</td>
+                                        <td>(57)</td>
+                                    </tr>
+                                        @foreach($value3 as $key4 => $value4)
+                                        <?php
+                                            $tmp4 = explode('-',$key4);
+                                            $total30 += end($value4[0]);
+                                            $total20 += end($value4[0]);
+                                            $total10 += end($value4[0]);
+                                            $total0 += end($value4[0]);
+                                            $sum0 += end($value4[0]);
+                                            $total31 += end($value4[1]);
+                                            $total21 += end($value4[1]);
+                                            $total11 += end($value4[1]);
+                                            $total1 += end($value4[1]);
+                                            $sum1 += end($value4[1]);
+                                        ?>
+                                        <tr>
+                                            <td class="text-left">{{ current($tmp4) }}</td>
+                                            <td class="text-left" style="padding-left: 0.5%">{{ end($tmp4) }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-right">{{ number_format(end($value4[0]), '2', ',', '.') }}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-right">{{ number_format(end($value4[1]), '2', ',', '.') }}</td>
+                                            <td class="text-right">{{ number_format(end($value4[0])-end($value4[1]), '2', ',', '.') }}</td>
+                                            <td>
+                                            @if(end($value4[0]) != 0)
+                                            {{ ((end($value4[0])-end($value4[1]))/end($value4[0]))*100 }}
+                                            @else
+                                            {{ '-' }}
+                                            @endif
+                                            </td>
+                                        </tr>
+                                            <?php
+                                                $indeks = 0;
+                                            ?>
+                                            @foreach($value4[0] as $key5 => $value5)
+                                            <?php
+                                                // dd($value5);
+                                            ?>
+                                            @if($key5 != count($value4[0])-1)
+                                                <?php
+                                                $tmp5 = explode('-',$value5);
+                                                $tmp6 = explode('-',$value4[1][$indeks]);
+                                                $jumlah0 = $tmp5[1]*$tmp5[3];
+                                                $jumlah1 = $tmp6[1]*$tmp6[3];
+                                                $selisih = $jumlah0-$jumlah1;
+                                                if($jumlah0 != 0){
+                                                    $persen = ($selisih/$jumlah0)*100;
+                                                } else{
+                                                    $persen = '-';
+                                                }
+                                                ?>
+                                                <tr class="6">
+                                                    <td></td>
+                                                    <td class="text-left" style="padding-left: 1.25%">{{ $tmp5[0] }}</td>
+                                                    <td class="text-right">{{ $tmp5[1] }}</td>
+                                                    <td class="text-right">{{ $tmp5[2] }}</td>
+                                                    <td class="text-right">{{ $tmp5[3] }}</td>
+                                                    <td class="text-right">{{ number_format($jumlah0, '2', ',', '.') }}</td>
+                                                    <td class="text-right">{{ $tmp6[1] }}</td>
+                                                    <td class="text-right">{{ $tmp6[2] }}</td>
+                                                    <td class="text-right">{{ $tmp6[3] }}</td>
+                                                    <td class="text-right">{{ number_format($jumlah1, '2', ',', '.') }}</td>
+                                                    <td class="text-right">{{ number_format($selisih, '2', ',', '.') }}</td>
+                                                    <td>{{ $persen }}</td>
+                                                </tr>
+                                                <?php
+                                                    $indeks += 1;
+                                                ?>
+                                            @endif
+                                            @endforeach
+                                        @endforeach
+                                        <script>
+                                            var tmp3 = document.getElementById('{{ $tmp3[0] }}').children;
+                                            tmp3.item(5).innerHTML = "{{ number_format($total30, '2', ',', '.') }}";
+                                            tmp3.item(9).innerHTML = "{{ number_format($total31, '2', ',', '.') }}";
+                                            tmp3.item(10).innerHTML = "{{ number_format($total30-$total31, '2', ',', '.') }}";
+                                            @if($total30 != 0)
+                                            tmp3.item(11).innerHTML = "{{ (($total30-$total31)/$total30)*100 }}";
+                                            @endif
+                                        </script>
+                                        <?php
 
-                        <tr>
+                                        ?>
+                                    @endforeach
+                                    <script>
+                                        var tmp2 = document.getElementById('{{ $tmp2[0] }}').children;
+                                        tmp2.item(5).innerHTML = "{{ number_format($total20, '2', ',', '.') }}";
+                                        tmp2.item(9).innerHTML = "{{ number_format($total21, '2', ',', '.') }}";
+                                        tmp2.item(10).innerHTML = "{{ number_format($total20-$total21, '2', ',', '.') }}";
+                                        @if($total20 != 0)
+                                        tmp2.item(11).innerHTML = "{{ (($total20-$total21)/$total20)*100 }}";
+                                        @endif
+                                    </script>
+                                @endforeach
+                                <script>
+                                    var tmp1 = document.getElementById('{{ $tmp1[0] }}').children;
+                                    tmp1.item(5).innerHTML = "{{ number_format($total10, '2', ',', '.') }}";
+                                    tmp1.item(9).innerHTML = "{{ number_format($total11, '2', ',', '.') }}";
+                                    tmp1.item(10).innerHTML = "{{ number_format($total10-$total11, '2', ',', '.') }}";
+                                    @if($total10 != 0)
+                                    tmp1.item(11).innerHTML = "{{ (($total10-$total11)/$total10)*100 }}";
+                                    @endif
+                                </script>
+                            @endforeach
+                            <script>
+                                var tmp = document.getElementById('{{ $tmp[0] }}').children;
+                                tmp.item(5).innerHTML = "{{ number_format($total0, '2', ',', '.') }}";
+                                tmp.item(9).innerHTML = "{{ number_format($total1, '2', ',', '.') }}";
+                                tmp.item(10).innerHTML = "{{ number_format($total0-$total1, '2', ',', '.') }}";
+                                @if($total0 != 0)
+                                tmp.item(11).innerHTML = "{{ (($total0-$total1)/$total0)*100 }}";
+                                @endif
+                            </script>
+                        @endforeach
+                        <tr style="border: 1px solid black">
                             <td colspan="5">Jumlah</td>
-                            <td>226.061.200,00</td>
+                            <td class="text-right">{{ number_format($sum0, '2', ',', '.') }}</td>
                             <td colspan="3"></td>
-                            <td>96.821.200,00</td>
-                            <td>(129.240.000,00)</td>
-                            <td>(57)</td>
+                            <td class="text-right">{{ number_format($sum1, '2', ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($sum0-$sum1, '2', ',', '.') }}</td>
+                            <td>
+                            @if($sum0 != 0)
+                            {{ (($sum0-$sum1)/$sum0)*100 }}
+                            @endif
+                            </td>
                         </tr>
                     </tbody>
 
                     <tfoot>
                         <tr>
                             <td colspan="9"></td>
-                            <td colspan="2">Padang</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="9"></td>
-                            <td colspan="2"><b>Pengguna Anggaran</b></td>
+                            <td colspan="2"><br> Padang <br> <b>Pengguna Anggaran</b></td>
                             <td></td>
                         </tr>
                         <tr>
@@ -207,22 +397,11 @@
                         </tr>
                         <tr>
                             <td colspan="9"></td>
-                            <td colspan="2"><b><u>Suardi</u></b></td>
+                            <td colspan="2"><b><u>Suardi</u></b><br>NIP. </td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td colspan="9"></td>
-                            <td colspan="2">NIP</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="12" class="text-left" style="padding-left: 10px">Keterangan </td>
-                        </tr>
-                        <tr>
-                            <td colspan="12" class="text-left" style="padding-left: 10px">Tanggal Pembahasan</td>
-                        </tr>
-                        <tr>
-                            <td colspan="12" class="text-left" style="padding-left: 10px">Catatan Hasil Pembahasan</td>
+                            <td colspan="12" class="text-left" style="padding-left: 10px">Keterangan <br> Tanggal Pembahasan <br> Catatan Hasil Pembahasan</td>
                         </tr>
 
                         <tr>

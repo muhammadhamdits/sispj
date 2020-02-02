@@ -139,7 +139,7 @@
                         <div class="modal-header">
                             <h4 class="modal-title" id="modalCetakKuitansiLabel">Cetak kuitansi</h4>
                         </div>
-                        <form action="{{ route('kuitansi.print') }}" method="post">
+                        <form action="{{ route('kuitansi.print') }}" target="_blank" method="post">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
@@ -172,7 +172,7 @@
                         <div class="modal-footer">
                             <input type="hidden" name="detail_kegiatan_id" id="detail_kegiatan_id2">
                             <button type="reset" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Cetak</button>
+                            <button type="submit" class="btn btn-primary" target="_blank"><i class="fa fa-print"></i> Cetak</button>
                         </div>
                         </form>
                     </div>
@@ -317,6 +317,7 @@
                                             @foreach($value4 as $value5)
                                             @if($value5 != '')
                                                 <?php
+                                                // dd($value4);
                                                 $tmp5 = explode('-',$value5);
                                                 ?>
                                                 <tr class="6">

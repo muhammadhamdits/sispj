@@ -43,6 +43,7 @@
                         <div class="invalid-feedback text-danger">{{ $message = "Pilih urusan terlebih dahulu!" }}</div>
                     @enderror
                 </div>
+                @if(\Auth::user()->role == 0)
                 <div class="form-group">
                     <label for="organisasi_id">Organisasi : </label>
                     <select name="organisasi_id" id="organisasi_id" class="form-control @error('organisasi_id') is-invalid @enderror">
@@ -56,6 +57,9 @@
                         <div class="invalid-feedback text-danger">{{ $message = "Pilih organisasi terlebih dahulu!" }}</div>
                     @enderror
                 </div>
+                @else
+                <input type="hidden" name="organisasi_id" value="{{ \Auth::user()->organisasi->id }}">
+                @endif
                 <div class="form-group">
                     <label for="kode">Kode Program : </label>
                     <input class="form-control @error('kode') is-invalid @enderror" name="kode" placeholder="Masukkan kode program..." type="text" value="{{ old('kode') }}" id="kode">

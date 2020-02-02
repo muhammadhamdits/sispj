@@ -121,6 +121,10 @@
 		$('#tabel-sub3uraian').DataTable();
 		$('#tabel-sub4uraian').DataTable();
 		$('#tabel-item').DataTable();
+		$('#tabel-kuitansi').DataTable();
+		$('#tabel-detailItem').DataTable({
+			"paging" : false
+		});
 		$('#tabel-anggaran').DataTable({
 			"paging": false
 		});
