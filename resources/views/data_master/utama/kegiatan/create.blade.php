@@ -61,6 +61,48 @@
                         <div class="invalid-feedback text-danger">{{ $message = "Isi nama kegiatan terlebih dahulu!" }}</div>
                     @enderror
                 </div>
+
+                <div class="form-group">
+                    <label for="lokasi">Lokasi Kegiatan : </label>
+                    <input class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" placeholder="Masukkan lokasi kegiatan..." type="text" id="lokasi" value="{{ old('lokasi') }}">
+
+                    @error('lokasi')
+                        <div class="invalid-feedback text-danger">{{ $message = "Isi lokasi kegiatan terlebih dahulu!" }}</div>
+                    @enderror
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="capaian_tok">Capaian Kegiatan (Tolok Ukur Kinerja) : </label>
+                        <input class="form-control" name="capaian_tok" placeholder="Masukkan tolok ukur kinerja capaian kegiatan..." type="text" id="capaian_tok" value="{{ old('capaian_tok') }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="capaian_tk">Capaian Kegiatan (Target Kinerja) : </label>
+                        <input class="form-control" name="capaian_tk" placeholder="Masukkan target kinerja capaian kegiatan..." type="text" id="capaian_tk" value="{{ old('capaian_tk') }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="keluaran_tok">Keluaran Kegiatan (Tolok Ukur Kinerja) : </label>
+                        <input class="form-control" name="keluaran_tok" placeholder="Masukkan tolok ukur kinerja keluaran kegiatan..." type="text" id="keluaran_tok" value="{{ old('keluaran_tok') }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="keluaran_tk">Keluaran Kegiatan (Target Kinerja) : </label>
+                        <input class="form-control" name="keluaran_tk" placeholder="Masukkan target kinerja keluaran kegiatan..." type="text" id="keluaran_tk" value="{{ old('keluaran_tk') }}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="hasil_tok">Hasil Kegiatan (Tolok Ukur Kinerja) : </label>
+                        <input class="form-control" name="hasil_tok" placeholder="Masukkan tolok ukur kinerja Hasil kegiatan..." type="text" id="hasil_tok" value="{{ old('hasil_tok') }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="hasil_tk">Hasil Kegiatan (Target Kinerja) : </label>
+                        <input class="form-control" name="hasil_tk" placeholder="Masukkan target kinerja Hasil kegiatan..." type="text" id="hasil_tk" value="{{ old('hasil_tk') }}">
+                    </div>
+                </div>
                 <br>
                 <div class="form-group">
                     <input type="hidden" name="periode_id" value="{{ $data->id }}">

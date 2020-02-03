@@ -30,6 +30,10 @@
                 <label for="nama">Nama Kegiatan : </label>
                 <input class="form-control transparent" disabled value="{{ $kegiatan->nama }}">
             </div>
+            <div class="form-group">
+                <label for="nama">Lokasi Kegiatan : </label>
+                <input class="form-control transparent" disabled value="{{ $kegiatan->lokasi }}">
+            </div>
             
             <br>
         </div>

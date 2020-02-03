@@ -43,12 +43,12 @@
                     <tr>
                         <td width="20%">Urusan Pemerintahan</td>
                         <td>:</td>
-                        <td>1.02.10 - Komunikasi dan Informatika</td>
+                        <td>{{ $kegiatan->program->urusan->kode }} - {{ $kegiatan->program->urusan->nama }}</td>
                     </tr>
                     <tr>
                         <td>Organisasi</td>
                         <td>:</td>
-                        <td>1.02.10.01 - Dinas Komunikasi dan Informatika</td>
+                        <td>{{ $kegiatan->program->organisasi->kode }} - {{ $kegiatan->program->organisasi->nama }}</td>
                     </tr>
                 </table>
             </div>
@@ -56,19 +56,19 @@
 
                 <table width="100%">
                     <tr>
-                        <td>Program</td>
+                        <td width="20%">Program</td>
                         <td>:</td>
-                        <td>1.02.10.15 - Program Pengembangan Komunikasi, Informasi, dan Media Massa</td>
+                        <td>{{ $kegiatan->program->urusan->kode.".".$kegiatan->program->kode }} - {{ $kegiatan->program->nama }}</td>
                     </tr>
                     <tr>
                         <td>Kegiatan</td>
                         <td>:</td>
-                        <td>1.02.10.15.37 - Penyediaan Jasa Pelayanan Informasi Publik</td>
+                        <td>{{ $kegiatan->program->urusan->kode.".".$kegiatan->program->kode.".".$kegiatan->kode }} - {{ $kegiatan->nama }}</td>
                     </tr>
                     <tr>
                         <td>Lokasi Kegiatan</td>
                         <td>:</td>
-                        <td>Kota Padang</td>
+                        <td>{{ $kegiatan->lokasi }}</td>
                     </tr>
                 </table>
 
@@ -87,31 +87,31 @@
                     </tr>
                     <tr class="text-left">
                         <td>Capaian Program</td>
-                        <td>Tercapainya capaian kinerja pelayanan informasi publik</td>
-                        <td>Tercapainya capaian kinerja pelayanan informasi publik</td>
-                        <td>2 Aplikasi</td>
-                        <td>2 Aplikasi</td>
+                        <td>{{ $kegiatan->capaian_tok }}</td>
+                        <td>{{ $kegiatan->capaian_tok }}</td>
+                        <td>{{ $kegiatan->capaian_tk }}</td>
+                        <td>{{ $kegiatan->capaian_tk }}</td>
                     </tr>
                     <tr class="text-left">
                         <td>Masukan</td>
                         <td>Jumlah Dana</td>
                         <td>Jumlah Dana</td>
-                        <td class="text-right">Rp 220.061.200,00</td>
-                        <td class="text-right">Rp 220.061.200,00</td>
+                        <td class="text-right" id="pagu">Rp 220.061.200,00</td>
+                        <td class="text-right" id="pagu_p">Rp 220.061.200,00</td>
                     </tr>
                     <tr class="text-left">
                         <td>Keluaran</td>
-                        <td>Tersedianya pelayanan informasi kepada publik</td>
-                        <td>Tersedianya pelayanan informasi kepada publik</td>
-                        <td>2 Aplikasi</td>
-                        <td>2 Aplikasi</td>
+                        <td>{{ $kegiatan->keluaran_tok }}</td>
+                        <td>{{ $kegiatan->keluaran_tok }}</td>
+                        <td>{{ $kegiatan->keluaran_tk }}</td>
+                        <td>{{ $kegiatan->keluaran_tk }}</td>
                     </tr>
                     <tr class="text-left">
                         <td>Hasil</td>
-                        <td>Peningkatan kualitas pelayanan pemerintah kepada masyarakat</td>
-                        <td>Peningkatan kualitas pelayanan pemerintah kepada masyarakat</td>
-                        <td>80%</td>
-                        <td>80%</td>
+                        <td>{{ $kegiatan->hasil_tok }}</td>
+                        <td>{{ $kegiatan->hasil_tok }}</td>
+                        <td>{{ $kegiatan->hasil_tk }}</td>
+                        <td>{{ $kegiatan->hasil_tk }}</td>
                     </tr>
                     <tr class="text-left">
                         <td colspan="5">Kelompok Sasaran Kegiatan</td>
@@ -382,6 +382,10 @@
                             @endif
                             </td>
                         </tr>
+                        <script>
+                            document.getElementById('pagu').innerHTML = "Rp {{ number_format($sum0, '2', ',', '.') }}";
+                            document.getElementById('pagu_p').innerHTML = "Rp {{ number_format($sum1, '2', ',', '.') }}";
+                        </script>
                     </tbody>
 
                     <tfoot>

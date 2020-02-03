@@ -18,6 +18,13 @@ class CreateKegiatansTable extends Migration
             $table->string('kode');
             $table->string('nama');
             $table->bigInteger('program_id')->unsigned()->index();
+            $table->string('lokasi');
+            $table->string('capaian_tok')->nullable();
+            $table->string('capaian_tk')->nullable();
+            $table->string('keluaran_tok')->nullable();
+            $table->string('keluaran_tk')->nullable();
+            $table->string('hasil_tok')->nullable();
+            $table->string('hasil_tk')->nullable();
             $table->unique(['kode', 'program_id']);
             $table->foreign('program_id')->references('id')->on('programs');
             $table->timestamps();

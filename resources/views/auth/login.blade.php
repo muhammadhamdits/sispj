@@ -7,7 +7,7 @@
             <div class="left">
                 <div class="content">
                     <div class="header">
-                        <div class="logo text-center"><img src="assets/img/logo-dark.png" alt="Klorofil Logo"></div>
+                        <div class="logo text-center"><img src="assets/img/logo-kota-padang.png" width="100" alt="Klorofil Logo"></div>
                         <p class="lead">Login to your account</p>
                     </div>
                     <form class="form-auth-small" method="POST" action="{{ route('login') }}">
@@ -21,10 +21,10 @@
                             <input class="form-control" placeholder="Type your password here......" type="password" name="password" required>
                         </div>
                         <div class="form-group clearfix">
-                            <label class="fancy-checkbox element-left">
+                            <!-- <label class="fancy-checkbox element-left">
                                 <input type="checkbox">
                                 <span>Remember me</span>
-                            </label>
+                            </label> -->
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('LOGIN') }}</button>
                         <!-- <div class="bottom">
@@ -36,7 +36,7 @@
             <div class="right">
                 <div class="overlay"></div>
                 <div class="content text">
-                    <h1 class="heading">Free Bootstrap dashboard template</h1>
+                    <h1 class="heading">Sistem Informasi Surat Pertanggungjawaban</h1>
                     <p>by The Develovers</p>
                 </div>
             </div>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kegiatan extends Model
 {
-    protected $fillable = ['kode', 'nama', 'program_id'];
+    protected $fillable = ['kode', 'nama', 'program_id', 'lokasi', 'capaian_tok', 'capaian_tk', 'keluaran_tok', 'keluaran_tk', 'hasil_tok', 'hasil_tk'];
 
     public function detailKegiatan()
     {

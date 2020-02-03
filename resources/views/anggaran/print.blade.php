@@ -76,28 +76,26 @@
             </tr>
         </table>
     </div>
-
     <div class="border">
 
         <table width="100%">
             <tr>
                 <td width="20%">Program</td>
                 <td>:</td>
-                <td>{{ $kegiatan->program->urusan->kode.".".$kegiatan->program->organisasi->kode.".".$kegiatan->program->kode }} - {{ $kegiatan->program->nama }}</td>
+                <td>{{ $kegiatan->program->urusan->kode.".".$kegiatan->program->kode }} - {{ $kegiatan->program->nama }}</td>
             </tr>
             <tr>
                 <td>Kegiatan</td>
                 <td>:</td>
-                <td>{{ $kegiatan->program->urusan->kode.".".$kegiatan->program->organisasi->kode.".".$kegiatan->program->kode.".".$kegiatan->kode }} - {{ $kegiatan->nama }}</td>
+                <td>{{ $kegiatan->program->urusan->kode.".".$kegiatan->program->kode.".".$kegiatan->kode }} - {{ $kegiatan->nama }}</td>
             </tr>
             <tr>
                 <td>Lokasi Kegiatan</td>
                 <td>:</td>
-                <td>Kota Padang</td>
+                <td>{{ $kegiatan->lokasi }}</td>
             </tr>
         </table>
 
-        <br>
         <h5 class="text-center"><b>Perubahan Indikator & Tolok Ukur Kinerja Belanja Langsung</b></h5>
         <table class="text-center tabel-border" width="100%">
             <tr>
@@ -113,37 +111,37 @@
             </tr>
             <tr class="text-left">
                 <td>Capaian Program</td>
-                <td>Tercapainya capaian kinerja pelayanan informasi publik</td>
-                <td>Tercapainya capaian kinerja pelayanan informasi publik</td>
-                <td>2 Aplikasi</td>
-                <td>2 Aplikasi</td>
+                <td>{{ $kegiatan->capaian_tok }}</td>
+                <td>{{ $kegiatan->capaian_tok }}</td>
+                <td>{{ $kegiatan->capaian_tk }}</td>
+                <td>{{ $kegiatan->capaian_tk }}</td>
             </tr>
             <tr class="text-left">
                 <td>Masukan</td>
                 <td>Jumlah Dana</td>
                 <td>Jumlah Dana</td>
-                <td class="text-right">Rp 220.061.200,00</td>
-                <td class="text-right">Rp 220.061.200,00</td>
+                <td class="text-right" id="pagu">Rp 220.061.200,00</td>
+                <td class="text-right" id="pagu_p">Rp 220.061.200,00</td>
             </tr>
             <tr class="text-left">
                 <td>Keluaran</td>
-                <td>Tersedianya pelayanan informasi kepada publik</td>
-                <td>Tersedianya pelayanan informasi kepada publik</td>
-                <td>2 Aplikasi</td>
-                <td>2 Aplikasi</td>
+                <td>{{ $kegiatan->keluaran_tok }}</td>
+                <td>{{ $kegiatan->keluaran_tok }}</td>
+                <td>{{ $kegiatan->keluaran_tk }}</td>
+                <td>{{ $kegiatan->keluaran_tk }}</td>
             </tr>
             <tr class="text-left">
                 <td>Hasil</td>
-                <td>Peningkatan kualitas pelayanan pemerintah kepada masyarakat</td>
-                <td>Peningkatan kualitas pelayanan pemerintah kepada masyarakat</td>
-                <td>80%</td>
-                <td>80%</td>
+                <td>{{ $kegiatan->hasil_tok }}</td>
+                <td>{{ $kegiatan->hasil_tok }}</td>
+                <td>{{ $kegiatan->hasil_tk }}</td>
+                <td>{{ $kegiatan->hasil_tk }}</td>
             </tr>
             <tr class="text-left">
                 <td colspan="5">Kelompok Sasaran Kegiatan</td>
             </tr>
         </table>
-        <br>
+
         <h5 class="text-center"><b>Rincian Perubahan Anggaran Belanja Langsung Program dan Per Kegiatan Satuan Kerja Perangkat Daerah</b></h5>
 
     </div>

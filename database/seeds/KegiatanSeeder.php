@@ -16,6 +16,7 @@ class KegiatanSeeder extends Seeder
             'kode' => '37',
             'nama' => 'Workshop',
             'program_id' => 1,
+            'lokasi' => 'Kota Padang',
         ]);
 
         $kegiatan->save();

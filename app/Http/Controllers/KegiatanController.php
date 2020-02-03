@@ -44,10 +44,12 @@ class KegiatanController extends Controller
         ]);
 
         try {
+            // dd($request->all());
             $kegiatan = Kegiatan::create($request->all());
             $kegiatan->save();
             return redirect()->route('admin.utama.index', ['tabName' => 'kegiatan'])->with('status', 'Data Kegiatan '.$kegiatan->nama.' Berhasil Ditambahkan!');
         } catch (\Throwable $th) {
+            dd($th);
             return redirect()->route('admin.kegiatan.create')->with('danger', 'Data dengan kode '.$request->kode.' sudah ada!');
         }
         
